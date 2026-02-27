@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Philip Kwong</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #F5F2EC;
+    --ink: #1A1A18;
+    --mid: #6B6B65;
+    --accent: #C8A96E;
+    --light-rule: #E0DDD6;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 28px 60px;
+    background: var(--cream);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-color: var(--light-rule); }
+  .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--mid); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: flex-end; padding: 0 60px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-eyebrow { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+  .hero-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(56px, 8vw, 110px); font-weight: 300; line-height: 1.0; letter-spacing: -0.01em; max-width: 900px; margin-bottom: 40px; }
+  .hero-headline em { font-style: italic; color: var(--mid); }
+  .hero-sub { font-size: 16px; color: var(--mid); max-width: 480px; line-height: 1.7; margin-bottom: 48px; }
+  .hero-cta { display: inline-block; padding: 16px 40px; background: var(--ink); color: var(--cream); text-decoration: none; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s, transform 0.2s; }
+  .hero-cta:hover { background: var(--accent); transform: translateY(-1px); }
+  .hero-rule { position: absolute; right: 60px; top: 50%; transform: translateY(-50%); writing-mode: vertical-rl; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--light-rule); }
+
+  .section-rule { height: 1px; background: var(--light-rule); margin: 0 60px; }
+  section { padding: 100px 60px; }
+  .section-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 60px; display: flex; align-items: center; gap: 16px; }
+  .section-label::after { content: ''; display: block; height: 1px; width: 40px; background: var(--accent); }
+
+  .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--light-rule); border: 1px solid var(--light-rule); }
+  .service-item { background: var(--cream); padding: 52px 48px; transition: background 0.2s; }
+  .service-item:hover { background: #EFECE4; }
+  .service-number { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: var(--accent); margin-bottom: 20px; letter-spacing: 0.1em; }
+  .service-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 16px; line-height: 1.2; }
+  .service-desc { font-size: 14px; color: var(--mid); line-height: 1.8; }
+
+  .industries-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+  .industries-intro { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; line-height: 1.3; }
+  .industries-intro em { font-style: italic; color: var(--mid); }
+  .industry-row { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--light-rule); transition: padding-left 0.2s; }
+  .industry-row:hover { padding-left: 8px; }
+  .industry-row:first-child { border-top: 1px solid var(--light-rule); }
+  .industry-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; }
+  .industry-detail { font-size: 12px; color: var(--mid); letter-spacing: 0.06em; text-align: right; }
+
+  .credentials-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+  .credentials-col h3 { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--light-rule); }
+  .client-list { display: flex; flex-direction: column; gap: 14px; list-style: none; }
+  .client-list li { font-size: 15px; color: var(--ink); padding-left: 16px; position: relative; }
+  .client-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-size: 12px; }
+  .standards-list { display: flex; flex-direction: column; gap: 20px; list-style: none; }
+  .standards-list li { display: flex; flex-direction: column; gap: 4px; }
+  .std-title { font-size: 14px; font-weight: 500; }
+  .std-role { font-size: 12px; color: var(--mid); }
+
+  .about-strip { background: var(--ink); color: var(--cream); padding: 100px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-quote { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3vw, 42px); font-weight: 300; line-height: 1.3; font-style: italic; }
+  .about-body { font-size: 15px; color: rgba(245,242,236,0.7); line-height: 1.9; }
+  .about-body p + p { margin-top: 20px; }
+
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-intro h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 56px); font-weight: 300; line-height: 1.15; margin-bottom: 24px; }
+  .contact-intro p { font-size: 15px; color: var(--mid); line-height: 1.8; margin-bottom: 32px; }
+  .contact-linkedin { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 4px; transition: color 0.2s; }
+  .contact-linkedin:hover { color: var(--accent); }
+  .contact-form { display: flex; flex-direction: column; gap: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); }
+  .form-group input, .form-group textarea, .form-group select { background: transparent; border: none; border-bottom: 1px solid var(--light-rule); padding: 12px 0; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--ink); outline: none; transition: border-color 0.2s; appearance: none; }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--ink); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-submit { margin-top: 8px; padding: 16px 40px; background: var(--ink); color: var(--cream); border: none; font-family: 'DM Sans', sans-serif; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; align-self: flex-start; transition: background 0.2s, transform 0.2s; }
+  .form-submit:hover { background: var(--accent); transform: translateY(-1px); }
+
+  footer { padding: 40px 60px; border-top: 1px solid var(--light-rule); display: flex; justify-content: space-between; align-items: center; }
+  footer .foot-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; }
+  footer .foot-copy { font-size: 12px; color: var(--mid); }
+
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; } .nav-links { display: none; }
+    .hero { padding: 0 24px 60px; } section { padding: 60px 24px; }
+    .section-rule { margin: 0 24px; } .services-grid { grid-template-columns: 1fr; }
+    .industries-layout, .credentials-layout, .about-strip, .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+    .about-strip { padding: 60px 24px; } footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24px; }
+    .hero-rule { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-name">Philip Kwong</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#credentials">Credentials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Compliance & Operations Consultant</div>
+  <h1 class="hero-headline">Where <em>regulation</em><br>meets reality.</h1>
+  <p class="hero-sub">I help companies in emerging and heavily regulated industries get operationally compliant — and stay that way. From facility design to fire codes, standards bodies to go-to-market, I've done the work across industries where the cost of getting it wrong is high.</p>
+  <a href="#contact" class="hero-cta">Start a Conversation</a>
+  <span class="hero-rule">Emerging & Regulated Industries</span>
+</section>
+
+<div class="section-rule"></div>
+
+<section id="services">
+  <div class="section-label">What I Do</div>
+  <div class="services-grid fade-in">
+    <div class="service-item">
+      <div class="service-number">01</div>
+      <h3 class="service-title">Regulatory Compliance & Health and Safety</h3>
+      <p class="service-desc">Health and safety compliance, fire code navigation, SOP development, and municipal rezoning strategy. I bring the operational rigour that regulated industries demand — from initial facility design through to inspection-ready execution.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-number">02</div>
+      <h3 class="service-title">Operations & Facility Development</h3>
+      <p class="service-desc">Floorplan design, equipment sourcing and installation, process methodology, and extraction systems. I've built and optimized operations for some of Canada's largest licensed producers and emerging market companies.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-number">03</div>
+      <h3 class="service-title">Standards & Regulatory Affairs</h3>
+      <p class="service-desc">I've sat on the committees that write the rules — ISO, NFPA, UL, ANSI. I help companies understand, prepare for, and navigate the standards that govern their industry before those standards become barriers to entry.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-number">04</div>
+      <h3 class="service-title">Go-to-Market & Commercialization</h3>
+      <p class="service-desc">Market entry strategy, product development, and commercialization planning for companies operating in complex, first-mover markets. I've built go-to-market plans for startups through to publicly traded companies.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<section id="industries">
+  <div class="section-label">Industries</div>
+  <div class="industries-layout fade-in">
+    <div class="industries-intro">
+      Deep experience across industries where <em>compliance isn't optional</em> and operational mistakes have real consequences.
+    </div>
+    <div>
+      <div class="industry-row"><span class="industry-name">Emerging Regulated Markets</span><span class="industry-detail">Compliance · Operations · Strategy</span></div>
+      <div class="industry-row"><span class="industry-name">Technology & Platforms</span><span class="industry-detail">Product Dev · Go-to-Market</span></div>
+      <div class="industry-row"><span class="industry-name">Mining & Resources</span><span class="industry-detail">Operations · Public Markets</span></div>
+      <div class="industry-row"><span class="industry-name">Health & Safety Certification</span><span class="industry-detail">Standards · Regulatory Affairs</span></div>
+      <div class="industry-row"><span class="industry-name">Blockchain & Digital Assets</span><span class="industry-detail">Strategy · Public Company</span></div>
+      <div class="industry-row"><span class="industry-name">Hospitality & Entertainment</span><span class="industry-detail">Operations · Management</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<section id="credentials">
+  <div class="section-label">Selected Work</div>
+  <div class="credentials-layout fade-in">
+    <div class="credentials-col">
+      <h3>Consulting Clients</h3>
+      <ul class="client-list">
+        <li>Aurora Cannabis <span style="color:var(--mid);font-size:12px;">— TSX/NASDAQ: ACB</span></li>
+        <li>Organigram Holdings <span style="color:var(--mid);font-size:12px;">— TSX/NASDAQ: OGI</span></li>
+        <li>The Valens Company <span style="color:var(--mid);font-size:12px;">— Cannabis Manufacturing</span></li>
+        <li>HEXO Corp <span style="color:var(--mid);font-size:12px;">— Cannabis Distribution</span></li>
+        <li>Underwriters Laboratories <span style="color:var(--mid);font-size:12px;">— Go-to-Market Strategy</span></li>
+        <li>Embark Health <span style="color:var(--mid);font-size:12px;">— Compliance & Rezoning</span></li>
+        <li>Cannmart / Lifeist Wellness</li>
+        <li>Adastra Labs</li>
+      </ul>
+    </div>
+    <div class="credentials-col">
+      <h3>Standards & Regulatory Bodies</h3>
+      <ul class="standards-list">
+        <li><span class="std-title">NFPA 420</span><span class="std-role">Principal Member — Fire Protection Standards</span></li>
+        <li><span class="std-title">ISO IWA 37 — International Cannabis Workshop</span><span class="std-role">Vice Convener, Group 1 — 20+ Country Committee</span></li>
+        <li><span class="std-title">ANSI/CAN/UL/ULC 1389</span><span class="std-role">Standards Technical Panel Member</span></li>
+        <li><span class="std-title">UL Canada TG 4400-2</span><span class="std-role">Chair — Cannabis Oil Extraction Safety</span></li>
+        <li><span class="std-title">Health Canada Cannabis Act</span><span class="std-role">Round Table Participant & White Paper Contributor</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="about-strip fade-in">
+  <div class="about-quote">"I've worked in industries that didn't have a playbook yet. That's where I do my best work."</div>
+  <div class="about-body">
+    <p>I'm a Vancouver-based compliance and operations consultant with over a decade of experience helping companies navigate the early, high-stakes chapters of emerging industries.</p>
+    <p>I've built compliant facilities, chaired international standards committees, guided publicly traded companies through regulatory hurdles, and helped founders turn ambitious ideas into operational realities.</p>
+    <p>My value isn't just knowing the rules — it's having helped write some of them.</p>
+  </div>
+</div>
+
+<section id="contact">
+  <div class="section-label">Get in Touch</div>
+  <div class="contact-layout fade-in">
+    <div class="contact-intro">
+      <h2>Let's talk about what you're building.</h2>
+      <p>Whether you're navigating a compliance challenge, building out an operations function, or entering a new regulated market — I'd like to hear about it.</p>
+      <a href="https://linkedin.com/in/philipkwong" class="contact-linkedin" target="_blank">View LinkedIn Profile →</a>
+    </div>
+    <form class="contact-form">
+      <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your name"></div>
+      <div class="form-group"><label>Company</label><input type="text" placeholder="Your company"></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+      <div class="form-group">
+        <label>What can I help with?</label>
+        <select>
+          <option value="" disabled selected>Select a service area</option>
+          <option>Regulatory Compliance & Health and Safety</option>
+          <option>Operations & Facility Development</option>
+          <option>Standards & Regulatory Affairs</option>
+          <option>Go-to-Market & Commercialization</option>
+          <option>Other / Not Sure Yet</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Tell me about what you're working on..."></textarea></div>
+      <button type="submit" class="form-submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-name">Philip Kwong</div>
+  <div class="foot-copy">Compliance & Operations · Emerging & Regulated Industries · Vancouver, Canada</div>
+  <div class="foot-copy">© 2025</div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 20); });
+  const faders = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+  }, { threshold: 0.1 });
+  faders.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
