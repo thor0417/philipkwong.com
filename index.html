@@ -4,352 +4,383 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Philip Kwong — Compliance & Operations Consultant</title>
-<meta name="description" content="Philip Kwong is a Bangkok-based compliance and operations consultant working with companies in complex, regulated, and emerging industries.">
+<meta name="description" content="Philip Kwong. Compliance and operations consultant. Bangkok based.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --cream: #F4F1EB;
-    --ink: #111110;
-    --mid: #64635E;
-    --accent: #B8924A;
-    --rule: #DEDAD2;
-    --hover-bg: #EDEAE2;
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #F4F1EB;
+  --ink: #111110;
+  --mid: #64635E;
+  --accent: #B8924A;
+  --rule: #DEDAD2;
+  --hover: #EDEAE2;
+  --pad: 48px;
+  --pad-mobile: 24px;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
 
-    /* TYPOGRAPHY SCALE — single source of truth */
-    --text-xs: 11px;       /* metadata, tags */
-    --text-sm: 13px;       /* labels, captions */
-    --text-body: 15px;     /* all body copy */
-    --text-md: 18px;       /* list items, sub-items */
-    --text-lg: 22px;       /* section label display */
-    --letter-label: 0.16em;
-  }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--cream);
-    color: var(--ink);
-    font-family: "DM Sans", sans-serif;
-    font-weight: 300;
-    font-size: var(--text-body);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 22px var(--pad);
+  background: var(--cream);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+nav.scrolled { border-color: var(--rule); box-shadow: 0 2px 20px rgba(0,0,0,0.04); }
+.nav-name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 19px; font-weight: 500; letter-spacing: 0.04em;
+}
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--mid);
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  transition: color 0.2s; position: relative;
+}
+.nav-links a::after {
+  content: ""; position: absolute; bottom: -3px; left: 0; right: 0;
+  height: 1px; background: var(--accent); transform: scaleX(0);
+  transition: transform 0.3s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a:hover::after { transform: scaleX(1); }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 26px 64px;
-    background: var(--cream);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.4s, box-shadow 0.4s;
-  }
-  nav.scrolled { border-color: var(--rule); box-shadow: 0 2px 24px rgba(0,0,0,0.04); }
-  .nav-name {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 20px; font-weight: 500; letter-spacing: 0.04em;
-  }
-  .nav-links { display: flex; gap: 44px; list-style: none; }
-  .nav-links a {
-    text-decoration: none; color: var(--mid);
-    font-size: var(--text-sm); letter-spacing: var(--letter-label); text-transform: uppercase;
-    transition: color 0.2s; position: relative;
-  }
-  .nav-links a::after {
-    content: ""; position: absolute; bottom: -3px; left: 0; right: 0;
-    height: 1px; background: var(--accent); transform: scaleX(0);
-    transition: transform 0.3s;
-  }
-  .nav-links a:hover { color: var(--ink); }
-  .nav-links a:hover::after { transform: scaleX(1); }
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  flex-direction: column; justify-content: center; gap: 5px;
+  width: 32px; height: 32px; cursor: pointer;
+  background: none; border: none; padding: 4px;
+}
+.hamburger span {
+  display: block; height: 1.5px; background: var(--ink);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-  /* ── HERO ── */
+/* MOBILE MENU OVERLAY */
+.mobile-menu {
+  display: none;
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--cream); z-index: 199;
+  flex-direction: column; justify-content: center; align-items: center;
+  gap: 40px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 36px; font-weight: 300;
+  text-decoration: none; color: var(--ink);
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--accent); }
+
+/* SHARED */
+.section-rule { height: 1px; background: var(--rule); margin: 0 var(--pad); }
+section { padding: 100px var(--pad); }
+.section-label {
+  font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent); font-weight: 400;
+  margin-bottom: 56px;
+  display: flex; align-items: center; gap: 16px;
+}
+.section-label::after { content: ""; display: block; height: 1px; width: 40px; background: var(--accent); }
+.col-header {
+  font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--mid); font-weight: 400;
+  margin-bottom: 28px; padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: end;
+  padding: 120px var(--pad) 80px;
+  gap: 60px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute; top: 0; right: 0;
+  width: 50%; height: 100%;
+  background: linear-gradient(135deg, #EDEAE2 0%, #E4E0D6 100%);
+  z-index: 0;
+}
+.hero-content { position: relative; z-index: 1; }
+.hero-eyebrow {
+  font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 28px;
+  display: flex; align-items: center; gap: 14px;
+}
+.hero-eyebrow::before { content: ""; display: block; width: 28px; height: 1px; background: var(--accent); }
+.hero-headline {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(44px, 5vw, 80px);
+  font-weight: 300; line-height: 1.05;
+  letter-spacing: 0.01em;
+  margin-bottom: 32px;
+}
+.hero-headline em { font-style: italic; color: var(--mid); }
+.hero-sub {
+  font-size: 15px; color: var(--mid);
+  max-width: 380px; line-height: 1.75;
+  margin-bottom: 48px;
+}
+.hero-cta {
+  display: inline-block; padding: 14px 32px;
+  background: var(--ink); color: var(--cream);
+  text-decoration: none;
+  font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  transition: background 0.25s, transform 0.2s;
+}
+.hero-cta:hover { background: var(--accent); transform: translateY(-2px); }
+.hero-image-wrap {
+  position: relative; z-index: 1;
+  display: flex; align-items: flex-end; justify-content: center; height: 100%;
+}
+.hero-image-wrap img {
+  width: 100%; max-width: 440px; height: 560px;
+  object-fit: cover; object-position: center top;
+  display: block;
+}
+
+/* SERVICES */
+.services-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule);
+}
+.service-item {
+  background: var(--cream); padding: 44px 40px;
+  transition: background 0.25s;
+  position: relative; overflow: hidden;
+}
+.service-item::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--accent); transform: scaleX(0);
+  transition: transform 0.3s; transform-origin: left;
+}
+.service-item:hover { background: var(--hover); }
+.service-item:hover::before { transform: scaleX(1); }
+.service-number { font-size: 12px; color: var(--accent); margin-bottom: 18px; letter-spacing: 0.1em; }
+.service-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 24px; font-weight: 500; margin-bottom: 14px; line-height: 1.2;
+}
+.service-desc { font-size: 14px; color: var(--mid); line-height: 1.8; }
+
+/* INDUSTRIES */
+.industry-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 0; border-bottom: 1px solid var(--rule);
+  transition: padding-left 0.25s; cursor: default;
+}
+.industry-row:first-child { border-top: 1px solid var(--rule); }
+.industry-row:hover { padding-left: 10px; }
+.industry-name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 26px; font-weight: 400;
+}
+.industry-tag {
+  font-size: 11px; color: var(--mid);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  text-align: right; white-space: nowrap; margin-left: 20px;
+}
+
+/* CREDENTIALS */
+.credentials-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; }
+.standards-list { list-style: none; }
+.standards-list li {
+  padding: 20px 0; border-bottom: 1px solid var(--rule);
+  display: flex; flex-direction: column; gap: 5px;
+  transition: padding-left 0.2s;
+}
+.standards-list li:first-child { border-top: 1px solid var(--rule); }
+.standards-list li:hover { padding-left: 8px; }
+.std-title { font-size: 15px; font-weight: 500; }
+.std-role { font-size: 13px; color: var(--mid); line-height: 1.5; }
+
+.industry-cards {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+}
+.industry-card {
+  background: var(--cream); padding: 24px 22px;
+  transition: background 0.2s; position: relative; overflow: hidden;
+}
+.industry-card::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--accent); transform: scaleX(0);
+  transition: transform 0.3s; transform-origin: left;
+}
+.industry-card:hover { background: var(--hover); }
+.industry-card:hover::before { transform: scaleX(1); }
+.industry-card-name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 16px; font-weight: 500; line-height: 1.3; margin-bottom: 5px;
+}
+.industry-card-tag {
+  font-size: 10px; color: var(--mid);
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+
+/* ABOUT */
+.about-strip {
+  background: var(--ink); color: var(--cream);
+  padding: 100px var(--pad);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  position: relative; overflow: hidden;
+}
+.about-strip::before {
+  content: "PK"; position: absolute; right: -10px; bottom: -50px;
+  font-family: "Cormorant Garamond", serif; font-size: 280px; font-weight: 300;
+  color: rgba(255,255,255,0.03); line-height: 1; pointer-events: none;
+}
+.stats-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2px; background: rgba(255,255,255,0.07);
+}
+.stat-block {
+  padding: 36px 28px; background: rgba(255,255,255,0.04);
+  transition: background 0.25s;
+}
+.stat-block:hover { background: rgba(255,255,255,0.08); }
+.stat-number {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 54px; font-weight: 300; line-height: 1;
+  color: var(--accent); margin-bottom: 8px;
+}
+.stat-label {
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(244,241,235,0.45); line-height: 1.5;
+}
+.about-body { font-size: 15px; color: rgba(244,241,235,0.6); line-height: 1.85; }
+.about-body p + p { margin-top: 20px; }
+
+/* CONTACT */
+.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.contact-intro h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(30px, 3.5vw, 48px); font-weight: 300; line-height: 1.15;
+  letter-spacing: 0.01em; margin-bottom: 20px;
+}
+.contact-intro p { font-size: 15px; color: var(--mid); line-height: 1.75; margin-bottom: 32px; }
+.contact-linkedin {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+  border-bottom: 1px solid var(--accent); padding-bottom: 4px;
+  transition: color 0.2s;
+}
+.contact-linkedin:hover { color: var(--accent); }
+.contact-form { display: flex; flex-direction: column; gap: 24px; }
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-group label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid); }
+.form-group input, .form-group textarea, .form-group select {
+  background: transparent; border: none; border-bottom: 1px solid var(--rule);
+  padding: 10px 0; font-family: "DM Sans", sans-serif;
+  font-size: 15px; color: var(--ink); outline: none;
+  transition: border-color 0.2s; appearance: none;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--ink); }
+.form-group textarea { resize: vertical; min-height: 90px; }
+.form-submit {
+  padding: 14px 32px; background: var(--ink); color: var(--cream); border: none;
+  font-family: "DM Sans", sans-serif; font-size: 12px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  cursor: pointer; align-self: flex-start;
+  transition: background 0.25s, transform 0.2s;
+}
+.form-submit:hover { background: var(--accent); transform: translateY(-2px); }
+
+/* FOOTER */
+footer {
+  padding: 32px var(--pad); border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.foot-name { font-family: "Cormorant Garamond", serif; font-size: 17px; font-weight: 500; }
+.foot-mid { font-size: 12px; color: var(--mid); }
+.foot-copy { font-size: 12px; color: var(--mid); }
+
+/* ANIMATIONS */
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  :root { --pad: var(--pad-mobile); }
+
+  nav { padding: 18px var(--pad-mobile); }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  /* HERO — stack vertically, image first on mobile */
   .hero {
-    min-height: 100vh;
-    display: grid; grid-template-columns: 1fr 1fr;
-    align-items: end;
-    padding: 120px 64px 80px; gap: 60px;
-    position: relative; overflow: hidden;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    padding: 80px var(--pad-mobile) 48px;
+    gap: 0; min-height: auto;
   }
-  .hero::before {
-    content: "";
-    position: absolute; top: 0; right: 0;
-    width: 50%; height: 100%;
-    background: linear-gradient(135deg, #EDEAE2 0%, #E4E0D6 100%);
-    z-index: 0;
-  }
-  .hero-content { position: relative; z-index: 1; }
-  .hero-eyebrow {
-    font-size: var(--text-sm);
-    letter-spacing: var(--letter-label); text-transform: uppercase;
-    color: var(--accent); margin-bottom: 32px;
-    display: flex; align-items: center; gap: 14px;
-  }
-  .hero-eyebrow::before { content: ""; display: block; width: 28px; height: 1px; background: var(--accent); }
-  .hero-headline {
-    font-family: "Cormorant Garamond", serif;
-    font-size: clamp(48px, 5.5vw, 84px);
-    font-weight: 300; line-height: 1.05;
-    letter-spacing: 0.01em;   /* fix FL collision */
-    margin-bottom: 36px;
-    word-spacing: 0.02em;
-  }
-  .hero-headline em { font-style: italic; color: var(--mid); }
-  .hero-sub {
-    font-size: var(--text-body); color: var(--mid);
-    max-width: 400px; line-height: 1.8;
-    margin-bottom: 52px;
-  }
-  .hero-cta {
-    display: inline-block;
-    padding: 14px 32px;
-    background: var(--ink); color: var(--cream);
-    text-decoration: none;
-    font-size: var(--text-sm); letter-spacing: var(--letter-label); text-transform: uppercase;
-    transition: background 0.25s, transform 0.2s;
-  }
-  .hero-cta:hover { background: var(--accent); transform: translateY(-2px); }
-  .hero-image-wrap {
-    position: relative; z-index: 1;
-    display: flex; align-items: flex-end; justify-content: center; height: 100%;
-  }
-  .hero-image-wrap img {
-    width: 100%; max-width: 460px; height: 580px;
-    object-fit: cover; object-position: center top;
-    display: block; filter: contrast(1.05);
-  }
+  .hero::before { display: none; }
+  .hero-content { order: 2; padding-top: 36px; }
+  .hero-image-wrap { order: 1; height: 320px; justify-content: flex-start; }
+  .hero-image-wrap img { max-width: 100%; height: 320px; object-position: center 15%; }
+  .hero-headline { font-size: 42px; }
+  .hero-sub { max-width: 100%; font-size: 15px; }
 
-  /* ── SHARED SECTION ELEMENTS ── */
-  .section-rule { height: 1px; background: var(--rule); margin: 0 64px; }
-  section { padding: 110px 64px; }
+  section { padding: 64px var(--pad-mobile); }
+  .section-rule { margin: 0 var(--pad-mobile); }
+  .section-label { margin-bottom: 40px; }
 
-  /* Section label — consistent across ALL sections */
-  .section-label {
-    font-size: var(--text-sm);
-    letter-spacing: var(--letter-label);
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 400;
-    margin-bottom: 64px;
-    display: flex; align-items: center; gap: 16px;
-  }
-  .section-label::after { content: ""; display: block; height: 1px; width: 40px; background: var(--accent); }
+  /* SERVICES — single column, tighter padding */
+  .services-grid { grid-template-columns: 1fr; }
+  .service-item { padding: 32px 28px; }
+  .service-title { font-size: 22px; }
 
-  /* Column headers inside sections — consistent */
-  .col-header {
-    font-size: var(--text-sm);
-    letter-spacing: var(--letter-label);
-    text-transform: uppercase;
-    color: var(--mid);
-    font-weight: 400;
-    margin-bottom: 32px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--rule);
-  }
+  /* INDUSTRIES — stack tag below name */
+  .industry-row { flex-direction: column; align-items: flex-start; gap: 6px; padding: 20px 0; }
+  .industry-name { font-size: 22px; }
+  .industry-tag { margin-left: 0; text-align: left; }
 
-  /* ── SERVICES ── */
-  .services-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr);
-    gap: 1px; background: var(--rule);
-    border: 1px solid var(--rule);
-    box-shadow: 0 4px 40px rgba(0,0,0,0.05);
-  }
-  .service-item {
-    background: var(--cream); padding: 52px 48px;
-    transition: background 0.25s;
-    position: relative; overflow: hidden;
-  }
-  .service-item::before {
-    content: ""; position: absolute;
-    top: 0; left: 0; right: 0; height: 2px;
-    background: var(--accent); transform: scaleX(0);
-    transition: transform 0.3s; transform-origin: left;
-  }
-  .service-item:hover { background: var(--hover-bg); }
-  .service-item:hover::before { transform: scaleX(1); }
-  .service-number {
-    font-family: "Cormorant Garamond", serif;
-    font-size: var(--text-sm); color: var(--accent);
-    margin-bottom: 20px; letter-spacing: 0.12em;
-  }
-  .service-title {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 26px; font-weight: 500;
-    margin-bottom: 16px; line-height: 1.2;
-  }
-  .service-desc {
-    font-size: var(--text-body); color: var(--mid); line-height: 1.85;
-  }
+  /* CREDENTIALS — stack columns */
+  .credentials-layout { grid-template-columns: 1fr; gap: 48px; }
+  .industry-cards { grid-template-columns: 1fr 1fr; }
+  .industry-card { padding: 18px 16px; }
+  .industry-card-name { font-size: 14px; }
 
-  /* ── INDUSTRIES ── */
-  .industries-full { display: flex; flex-direction: column; }
-  .industry-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 28px 0; border-bottom: 1px solid var(--rule);
-    transition: padding-left 0.25s; cursor: default;
-  }
-  .industry-row:first-child { border-top: 1px solid var(--rule); }
-  .industry-row:hover { padding-left: 12px; }
-  .industry-name {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 28px; font-weight: 400;
-  }
-  .industry-tag {
-    font-size: var(--text-xs); color: var(--mid);
-    letter-spacing: 0.1em; text-transform: uppercase; text-align: right;
-  }
+  /* ABOUT */
+  .about-strip { grid-template-columns: 1fr; gap: 40px; padding: 64px var(--pad-mobile); }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat-block { padding: 28px 20px; }
+  .stat-number { font-size: 44px; }
+  .stat-label { font-size: 10px; }
+  .about-body { font-size: 14px; }
 
-  /* ── CREDENTIALS ── */
-  .credentials-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+  /* CONTACT */
+  .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+  .contact-intro h2 { font-size: 30px; }
 
-  .standards-list { list-style: none; display: flex; flex-direction: column; }
-  .standards-list li {
-    padding: 22px 0; border-bottom: 1px solid var(--rule);
-    display: flex; flex-direction: column; gap: 6px;
-    transition: padding-left 0.2s;
-  }
-  .standards-list li:first-child { border-top: 1px solid var(--rule); }
-  .standards-list li:hover { padding-left: 8px; }
-  .std-title { font-size: var(--text-md); font-weight: 500; }
-  .std-role { font-size: var(--text-body); color: var(--mid); line-height: 1.6; }
-
-  /* Industry cards grid — Option B */
-  .industry-cards {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-    background: var(--rule); border: 1px solid var(--rule);
-  }
-  .industry-card {
-    background: var(--cream); padding: 28px 28px;
-    transition: background 0.2s;
-    position: relative; overflow: hidden;
-  }
-  .industry-card::before {
-    content: ""; position: absolute;
-    top: 0; left: 0; right: 0; height: 2px;
-    background: var(--accent); transform: scaleX(0);
-    transition: transform 0.3s; transform-origin: left;
-  }
-  .industry-card:hover { background: var(--hover-bg); }
-  .industry-card:hover::before { transform: scaleX(1); }
-  .industry-card-name {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 18px; font-weight: 500;
-    line-height: 1.3; margin-bottom: 6px;
-  }
-  .industry-card-tag {
-    font-size: var(--text-xs); color: var(--mid);
-    letter-spacing: 0.1em; text-transform: uppercase;
-  }
-
-  /* ── ABOUT ── */
-  .about-strip {
-    background: var(--ink); color: var(--cream);
-    padding: 110px 64px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center;
-    position: relative; overflow: hidden;
-  }
-  .about-strip::before {
-    content: "PK";
-    position: absolute; right: -20px; bottom: -60px;
-    font-family: "Cormorant Garamond", serif;
-    font-size: 320px; font-weight: 300;
-    color: rgba(255,255,255,0.03);
-    line-height: 1; pointer-events: none; user-select: none;
-  }
-  .stats-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
-    background: rgba(255,255,255,0.06);
-  }
-  .stat-block {
-    padding: 40px 32px;
-    background: rgba(255,255,255,0.04);
-    transition: background 0.25s;
-  }
-  .stat-block:hover { background: rgba(255,255,255,0.08); }
-  .stat-number {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 60px; font-weight: 300; line-height: 1;
-    color: var(--accent); margin-bottom: 10px;
-  }
-  .stat-label {
-    font-size: var(--text-xs); letter-spacing: 0.12em; text-transform: uppercase;
-    color: rgba(244,241,235,0.5); line-height: 1.6;
-  }
-  .about-body { font-size: var(--text-body); color: rgba(244,241,235,0.65); line-height: 1.9; }
-  .about-body p + p { margin-top: 22px; }
-
-  /* ── CONTACT ── */
-  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
-  .contact-intro h2 {
-    font-family: "Cormorant Garamond", serif;
-    font-size: clamp(34px, 3.5vw, 52px); font-weight: 300; line-height: 1.15;
-    letter-spacing: 0.01em;
-    margin-bottom: 24px;
-  }
-  .contact-intro p {
-    font-size: var(--text-body); color: var(--mid); line-height: 1.8; margin-bottom: 36px;
-  }
-  .contact-linkedin {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: var(--text-sm); letter-spacing: var(--letter-label); text-transform: uppercase;
-    color: var(--ink); text-decoration: none;
-    border-bottom: 1px solid var(--accent); padding-bottom: 5px;
-    transition: color 0.2s;
-  }
-  .contact-linkedin:hover { color: var(--accent); }
-  .contact-form { display: flex; flex-direction: column; gap: 28px; }
-  .form-group { display: flex; flex-direction: column; gap: 8px; }
-  .form-group label {
-    font-size: var(--text-xs); letter-spacing: var(--letter-label); text-transform: uppercase; color: var(--mid);
-  }
-  .form-group input, .form-group textarea, .form-group select {
-    background: transparent; border: none;
-    border-bottom: 1px solid var(--rule);
-    padding: 12px 0;
-    font-family: "DM Sans", sans-serif; font-size: var(--text-body); color: var(--ink);
-    outline: none; transition: border-color 0.2s; appearance: none;
-  }
-  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--ink); }
-  .form-group textarea { resize: vertical; min-height: 100px; }
-  .form-submit {
-    padding: 14px 32px;
-    background: var(--ink); color: var(--cream); border: none;
-    font-family: "DM Sans", sans-serif;
-    font-size: var(--text-sm); letter-spacing: var(--letter-label); text-transform: uppercase;
-    cursor: pointer; align-self: flex-start;
-    transition: background 0.25s, transform 0.2s;
-  }
-  .form-submit:hover { background: var(--accent); transform: translateY(-2px); }
-
-  /* ── FOOTER ── */
-  footer {
-    padding: 36px 64px; border-top: 1px solid var(--rule);
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .foot-name { font-family: "Cormorant Garamond", serif; font-size: 18px; font-weight: 500; }
-  .foot-mid { font-size: var(--text-sm); color: var(--mid); letter-spacing: 0.06em; }
-  .foot-copy { font-size: var(--text-sm); color: var(--mid); }
-
-  /* ── ANIMATIONS ── */
-  .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-  /* ── MOBILE ── */
-  @media (max-width: 900px) {
-    nav { padding: 20px 24px; } .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
-    .hero::before { display: none; }
-    .hero-image-wrap { margin-top: 40px; }
-    .hero-image-wrap img { max-width: 100%; height: 420px; }
-    section { padding: 72px 24px; } .section-rule { margin: 0 24px; }
-    .services-grid { grid-template-columns: 1fr; }
-    .credentials-layout { grid-template-columns: 1fr; gap: 48px; }
-    .about-strip { grid-template-columns: 1fr; gap: 48px; padding: 72px 24px; }
-    .stats-grid { grid-template-columns: 1fr 1fr; }
-    .contact-layout { grid-template-columns: 1fr; gap: 48px; }
-    footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24px; }
-    .industry-cards { grid-template-columns: 1fr; }
-  }
+  /* FOOTER */
+  footer { flex-direction: column; gap: 8px; text-align: center; padding: 28px var(--pad-mobile); }
+}
 </style>
 </head>
 <body>
@@ -362,14 +393,24 @@
     <li><a href="#credentials">Credentials</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#services" class="menu-link">Services</a>
+  <a href="#industries" class="menu-link">Industries</a>
+  <a href="#credentials" class="menu-link">Credentials</a>
+  <a href="#contact" class="menu-link">Contact</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
     <div class="hero-eyebrow">Compliance &amp; Operations Consultant</div>
-    <h1 class="hero-headline">Where Structure<br><em>Outperforms</em><br>Speculation.</h1>
-    <p class="hero-sub">I help companies get operationally compliant and build the foundations to stay that way.</p>
+    <h1 class="hero-headline">There Are<br><em>No</em><br>Shortcuts.</h1>
+    <p class="hero-sub">Compliance and operations consulting for companies operating in complex, regulated, and emerging industries.</p>
     <a href="#contact" class="hero-cta">Start a Conversation</a>
   </div>
   <div class="hero-image-wrap">
@@ -386,22 +427,22 @@
     <div class="service-item">
       <div class="service-number">01</div>
       <h3 class="service-title">Regulatory Compliance</h3>
-      <p class="service-desc">Navigating regulatory environments that are complex, evolving, and unforgiving. I help companies understand what is required, build systems to meet it, and maintain compliance as the rules change around them.</p>
+      <p class="service-desc">Complex, evolving regulatory environments with real consequences for getting it wrong. I help companies understand what is required, build systems to meet it, and keep pace as the rules shift.</p>
     </div>
     <div class="service-item">
       <div class="service-number">02</div>
       <h3 class="service-title">Health &amp; Safety Standards</h3>
-      <p class="service-desc">From standards development to on-the-ground implementation, I bring technical depth and practical experience. I have contributed to the frameworks that govern some of North America's most demanding operating environments and know what good looks like.</p>
+      <p class="service-desc">Technical depth backed by direct standards experience. I have contributed to the frameworks that govern some of North America's most demanding operating environments, at both the development and implementation level.</p>
     </div>
     <div class="service-item">
       <div class="service-number">03</div>
       <h3 class="service-title">Operations &amp; Project Management</h3>
-      <p class="service-desc">Complex projects in regulated environments require more than a timeline. I manage end-to-end delivery where compliance, stakeholder coordination, and execution all have to move together without gaps.</p>
+      <p class="service-desc">End-to-end project delivery in environments where compliance, stakeholder coordination, and execution have to move in lockstep. I have built and run operations across multiple regulated industries.</p>
     </div>
     <div class="service-item">
       <div class="service-number">04</div>
       <h3 class="service-title">Documentation &amp; Commercialization</h3>
-      <p class="service-desc">SOPs, technical submissions, white papers, standards contributions, go-to-market documentation. I translate complex regulatory and operational requirements into clear, professional deliverables that move projects forward and hold up to scrutiny.</p>
+      <p class="service-desc">SOPs, technical submissions, white papers, go-to-market documentation. Complex requirements translated into clear, professional deliverables that hold up to regulatory scrutiny.</p>
     </div>
   </div>
 </section>
@@ -411,7 +452,7 @@
 <!-- INDUSTRIES -->
 <section id="industries">
   <div class="section-label">Industries</div>
-  <div class="industries-full fade-up">
+  <div class="fade-up">
     <div class="industry-row"><span class="industry-name">Emerging Regulated Markets</span><span class="industry-tag">Compliance · Operations · Standards</span></div>
     <div class="industry-row"><span class="industry-name">Technology &amp; Platforms</span><span class="industry-tag">Product Dev · Go-to-Market</span></div>
     <div class="industry-row"><span class="industry-name">Mining &amp; Resources</span><span class="industry-tag">Advisory · Public Markets</span></div>
@@ -427,62 +468,26 @@
 <section id="credentials">
   <div class="section-label">Selected Work</div>
   <div class="credentials-layout fade-up">
-    <div class="credentials-col">
+    <div>
       <div class="col-header">Standards Bodies &amp; Regulatory Roles</div>
       <ul class="standards-list">
-        <li>
-          <span class="std-title">NFPA 420</span>
-          <span class="std-role">Principal Member, Fire Protection Standards Committee</span>
-        </li>
-        <li>
-          <span class="std-title">ISO IWA 37</span>
-          <span class="std-role">Vice Convener, Group 1. International working group spanning 20+ countries</span>
-        </li>
-        <li>
-          <span class="std-title">ANSI / CAN / UL / ULC 1389</span>
-          <span class="std-role">Standards Technical Panel Member</span>
-        </li>
-        <li>
-          <span class="std-title">UL Canada TG 4400-2</span>
-          <span class="std-role">Chair, Technical Guide Development</span>
-        </li>
+        <li><span class="std-title">NFPA 420</span><span class="std-role">Principal Member, Fire Protection Standards Committee</span></li>
+        <li><span class="std-title">ISO IWA 37</span><span class="std-role">Vice Convener, Group 1. International working group spanning 20+ countries</span></li>
+        <li><span class="std-title">ANSI / CAN / UL / ULC 1389</span><span class="std-role">Standards Technical Panel Member</span></li>
+        <li><span class="std-title">UL Canada TG 4400-2</span><span class="std-role">Chair, Technical Guide Development</span></li>
       </ul>
     </div>
-    <div class="credentials-col">
+    <div>
       <div class="col-header">Industry Experience</div>
       <div class="industry-cards">
-        <div class="industry-card">
-          <div class="industry-card-name">Licensed Cannabis Production</div>
-          <div class="industry-card-tag">Compliance · Operations</div>
-        </div>
-        <div class="industry-card">
-          <div class="industry-card-name">Pharmaceutical</div>
-          <div class="industry-card-tag">Regulatory · Advisory</div>
-        </div>
-        <div class="industry-card">
-          <div class="industry-card-name">Extraction Equipment</div>
-          <div class="industry-card-tag">Market Development</div>
-        </div>
-        <div class="industry-card">
-          <div class="industry-card-name">Testing &amp; Certification</div>
-          <div class="industry-card-tag">Standards · Strategy</div>
-        </div>
-        <div class="industry-card">
-          <div class="industry-card-name">Mining &amp; Public Markets</div>
-          <div class="industry-card-tag">Advisory · Operations</div>
-        </div>
-        <div class="industry-card">
-          <div class="industry-card-name">Blockchain &amp; Digital Assets</div>
-          <div class="industry-card-tag">Advisory · Public Company</div>
-        </div>
-        <div class="industry-card">
-          <div class="industry-card-name">Technology &amp; Platforms</div>
-          <div class="industry-card-tag">Product Dev · Go-to-Market</div>
-        </div>
-        <div class="industry-card">
-          <div class="industry-card-name">Hospitality &amp; Entertainment</div>
-          <div class="industry-card-tag">Operations · Management</div>
-        </div>
+        <div class="industry-card"><div class="industry-card-name">Licensed Cannabis Production</div><div class="industry-card-tag">Compliance · Operations</div></div>
+        <div class="industry-card"><div class="industry-card-name">Regulated Health Products</div><div class="industry-card-tag">Regulatory · Advisory</div></div>
+        <div class="industry-card"><div class="industry-card-name">Extraction Equipment</div><div class="industry-card-tag">Market Development</div></div>
+        <div class="industry-card"><div class="industry-card-name">Testing &amp; Certification</div><div class="industry-card-tag">Standards · Strategy</div></div>
+        <div class="industry-card"><div class="industry-card-name">Mining &amp; Public Markets</div><div class="industry-card-tag">Advisory · Operations</div></div>
+        <div class="industry-card"><div class="industry-card-name">Blockchain &amp; Digital Assets</div><div class="industry-card-tag">Advisory · Public Company</div></div>
+        <div class="industry-card"><div class="industry-card-name">Technology &amp; Platforms</div><div class="industry-card-tag">Product Dev · Go-to-Market</div></div>
+        <div class="industry-card"><div class="industry-card-name">Hospitality &amp; Entertainment</div><div class="industry-card-tag">Operations · Management</div></div>
       </div>
     </div>
   </div>
@@ -491,27 +496,15 @@
 <!-- ABOUT -->
 <div class="about-strip fade-up">
   <div class="stats-grid">
-    <div class="stat-block">
-      <div class="stat-number">10+</div>
-      <div class="stat-label">Years in Regulated Industries</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-number">4</div>
-      <div class="stat-label">International Standards Bodies</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-number">20+</div>
-      <div class="stat-label">Countries, ISO Committee</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-number">8+</div>
-      <div class="stat-label">Industries Served</div>
-    </div>
+    <div class="stat-block"><div class="stat-number">8+</div><div class="stat-label">Years in Regulated Industries</div></div>
+    <div class="stat-block"><div class="stat-number">4</div><div class="stat-label">International Standards Bodies</div></div>
+    <div class="stat-block"><div class="stat-number">20+</div><div class="stat-label">Countries, ISO Committee</div></div>
+    <div class="stat-block"><div class="stat-number">8+</div><div class="stat-label">Industries Served</div></div>
   </div>
   <div class="about-body">
-    <p>I am a compliance and operations consultant originally from Vancouver, now based in Bangkok, with over a decade of experience working inside some of North America's most complex and closely watched industries.</p>
-    <p>I have contributed to international standards, guided publicly traded companies through regulatory processes, built operations from the ground up, and helped organizations navigate the moments that define whether they succeed or stall.</p>
-    <p>My value is not just knowing the landscape. It is having helped shape it.</p>
+    <p>Compliance and operations consultant, originally from Vancouver, now based in Bangkok. Over a decade working inside regulated industries in North America and internationally.</p>
+    <p>Contributed to international standards, worked with publicly traded companies on regulatory matters, and built operations across multiple sectors from the ground up.</p>
+    <p>The experience is in the work, not the pitch.</p>
   </div>
 </div>
 
@@ -520,8 +513,8 @@
   <div class="section-label">Get in Touch</div>
   <div class="contact-layout fade-up">
     <div class="contact-intro">
-      <h2>Let's talk about what you're building.</h2>
-      <p>Whether you are navigating a compliance challenge, standing up an operations function, or entering a new market, I would like to hear about it.</p>
+      <h2>Let's talk.</h2>
+      <p>If you have a compliance challenge, an operational problem, or a market you are trying to enter, get in touch.</p>
       <a href="https://www.linkedin.com/in/phil-kwong-b8ba1735b" class="contact-linkedin" target="_blank">View LinkedIn Profile &rarr;</a>
     </div>
     <form class="contact-form">
@@ -536,10 +529,10 @@
           <option>Health &amp; Safety Standards</option>
           <option>Operations &amp; Project Management</option>
           <option>Documentation &amp; Commercialization</option>
-          <option>Other / Not Sure Yet</option>
+          <option>Other</option>
         </select>
       </div>
-      <div class="form-group"><label>Message</label><textarea placeholder="Tell me about what you are working on..."></textarea></div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Tell me what you are working on."></textarea></div>
       <button type="submit" class="form-submit">Send Message</button>
     </form>
   </div>
@@ -552,12 +545,35 @@
 </footer>
 
 <script>
+  // Nav scroll
   const navbar = document.getElementById("navbar");
-  window.addEventListener("scroll", () => { navbar.classList.toggle("scrolled", window.scrollY > 20); });
+  window.addEventListener("scroll", () => {
+    navbar.classList.toggle("scrolled", window.scrollY > 20);
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobile-menu");
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("open");
+    mobileMenu.classList.toggle("open");
+    document.body.style.overflow = mobileMenu.classList.contains("open") ? "hidden" : "";
+  });
+  document.querySelectorAll(".menu-link").forEach(link => {
+    link.addEventListener("click", () => {
+      hamburger.classList.remove("open");
+      mobileMenu.classList.remove("open");
+      document.body.style.overflow = "";
+    });
+  });
+
+  // Fade in
   const faders = document.querySelectorAll(".fade-up");
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); } });
-  }, { threshold: 0.08 });
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.07 });
   faders.forEach(el => observer.observe(el));
 </script>
 </body>
