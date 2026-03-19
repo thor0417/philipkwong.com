@@ -15,8 +15,8 @@
   --gray: #6B6B6B;
   --light: #F5F5F5;
   --rule: #E8E8E8;
-  --blue: #0055FF;
-  --blue-light: #E8EEFF;
+  --blue: #D94F00;
+  --blue-light: #FFF0E8;
 }
 html { scroll-behavior: smooth; }
 body {
@@ -335,7 +335,7 @@ section { padding: 120px 56px; }
 .about-bio p + p { margin-top: 24px; }
 .about-tagline {
   font-family: "Syne", sans-serif;
-  font-size: 48px; font-weight: 800;
+  font-size: clamp(36px, 4vw, 64px); font-weight: 800;
   line-height: 1.0; letter-spacing: -0.03em;
   margin-top: 48px;
 }
@@ -408,6 +408,16 @@ footer {
 }
 .foot-mid { font-size: 12px; color: var(--gray); }
 .foot-copy { font-size: 12px; color: var(--gray); }
+
+
+#industries { position: relative; overflow: hidden; }
+.stats-strip { position: relative; overflow: hidden; }
+#industries::after, .stats-strip::after {
+  content: "";
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  opacity: 0.035;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4t5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c8TV1mAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvEOwtAAAFVklEQVR4XpWWB67c2BUFb3g557T/hRo9/WUMZHlgr4Bg8Z4qQgQJlHI4A8SzFVrapvmTF9O7dmYRFZ60YiBhJRCgh1FYhiLAmdvX0CzTOpNE77ME0Zty/nWWzchDtiqrmQDeuv3powQ5ta2eN0FY0InkqDD73lT9c9lEzwUNqgFHs9VQce3TVClFCQrSTfOiYkVJQBmpbq2L6iZavPnAPcoU0dSw0SUTqz/GtrGuXfbyyBniKykOWQWGqwwma1jtBjzJ7pOgQJR6YnR1bFRsTnJyZIR+yI1IVIIqFHzPobmFICyRpxM3LnX6C1KBHS6ukjcVA0Tj7E77qHMNOPd6KFiOXnU0XkHZqMiLqRfCJlbCRQR9EJIaJOJmgECRsRBCnf7wRfbH6DELd7VEdznIHEfKCeHBSbqMmF9wEMhkAoiFhEGHiJFLlpDIExU6n");
+}
 
 /* ANIMATIONS */
 .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -484,7 +494,7 @@ footer {
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-tag">Compliance &amp; Operations Consultant</div>
+  <div class="hero-tag" style="opacity:1;transform:none">Compliance &amp; Operations Consultant</div>
   <h1 class="hero-headline reveal">
     There Are<br><span class="blue">No</span><br>Shortcuts.
   </h1>
@@ -629,7 +639,7 @@ footer {
       <p>Compliance and operations consultant specializing in emerging and regulated industries across North America. I have built operational frameworks, advised publicly traded and private companies, and participated in international regulatory and standards bodies.</p>
       <p>Originally from Vancouver. Based in Bangkok.</p>
     </div>
-    <div class="about-tagline">The experience<br>is in the <span class="blue">work.</span></div>
+    <div style="width:80px;height:6px;background:var(--black);margin-top:48px;"></div>
   </div>
 </div>
 
