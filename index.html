@@ -73,7 +73,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .srow:hover::before{transform:scaleY(1);}
 .srow:hover .sarr{color:var(--o);transform:translateX(4px);}
 .snum2{font-size:12px;color:var(--o);font-weight:700;letter-spacing:.05em;flex-shrink:0;width:48px;}
-.sname{font-size:clamp(28px,3.8vw,52px);font-weight:700;letter-spacing:-.02em;padding:24px 0;flex:1;}
+.sname{font-size:clamp(24px,2.8vw,40px);font-weight:700;letter-spacing:-.02em;padding:24px 0;flex:1;}
 .sarr{font-size:20px;color:var(--r);transition:color .2s,transform .2s;}
 
 /* INDUSTRIES */
@@ -95,7 +95,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .wrow::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--o);transform:scaleY(0);transition:transform .3s;transform-origin:top;}
 .wrow:hover{background:#F5F5F5;padding-left:calc(var(--p) + 12px);}
 .wrow:hover::before{transform:scaleY(1);}
-.wname{font-size:clamp(24px,3vw,40px);font-weight:700;letter-spacing:-.02em;}
+.wname{font-size:clamp(24px,2.8vw,40px);font-weight:700;letter-spacing:-.02em;}
 .wrow.pos .wname{color:var(--o);}
 .wtag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--g);font-family:sans-serif;flex-shrink:0;margin-left:20px;}
 .wrow.pos .wtag{color:rgba(211,79,0,.5);}
@@ -104,9 +104,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .abt{border-bottom:1px solid var(--r);}
 .agrid{display:grid;grid-template-columns:1fr 1fr;min-height:400px;}
 .aleft{padding:64px var(--p);border-right:1px solid var(--r);display:flex;flex-direction:column;justify-content:center;}
-.atxt{font-size:18px;line-height:1.75;font-weight:300;font-family:sans-serif;color:var(--b);max-width:500px;}
+.atxt{font-size:20px;line-height:1.8;font-weight:300;font-family:sans-serif;color:var(--b);}
 .aright{padding:64px var(--p);display:flex;flex-direction:column;justify-content:center;}
-.aloc{font-size:clamp(52px,6.5vw,96px);font-weight:800;line-height:.9;letter-spacing:-.04em;}
+.aloc{font-size:clamp(40px,5vw,72px);font-weight:800;line-height:.9;letter-spacing:-.04em;}
 .aloc .o{color:var(--o);}
 .alocb{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--g);font-family:sans-serif;margin-top:20px;}
 
@@ -254,7 +254,7 @@ footer{padding:24px var(--p);display:flex;justify-content:space-between;align-it
     </div>
     <div class="aright rv d1">
       <div class="aloc">Vancouver<br><span class="o">&amp;</span><br>Bangkok.</div>
-      <div class="alocb">Based in Bangkok · Originally from Vancouver</div>
+      
     </div>
   </div>
 </div>
