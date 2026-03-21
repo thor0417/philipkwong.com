@@ -72,14 +72,41 @@ body{background:var(--w);color:var(--b);font-family:'BC','Arial Narrow',sans-ser
 @media(max-width:768px) {
   .hero-clock {
     flex-direction: row;
-    gap: 28px;
+    gap: 32px;
     border-left: none;
-    border-top: 1px solid var(--r);
     padding-left: 0;
-    padding-top: 24px;
-    margin-top: 24px;
+    padding-right: 0;
+    height: auto;
+    margin-top: 28px;
   }
-  .hero-clock .clock-time { font-size: 32px; }
+  .hero-clock .clock-time { font-size: 28px; }
+  .hero-clock .clock-date { display: none; }
+}
+
+
+.hero-clock-mobile {
+  display: none;
+  flex-direction: row;
+  gap: 28px;
+  padding-left: 32px;
+  margin-top: 20px;
+}
+.hero-clock-mobile .clock-time {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--b);
+}
+.hero-clock-mobile .clock-city {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--o);
+  font-family: sans-serif;
+}
+@media(max-width:768px) {
+  .hero-clock { display: none !important; }
+  .hero-clock-mobile { display: flex; }
 }
 
 /* SCROLL CLIP EFFECT */
@@ -283,7 +310,19 @@ footer{padding:24px var(--p);display:flex;justify-content:space-between;align-it
 <!-- HERO -->
 <section class="hero">
   <div style="flex:1;display:grid;grid-template-columns:1fr auto;gap:0;align-items:center;">
-    <h1 style="padding-left:32px;">There Are<br><span class="o">No</span><br>Shortcuts.</h1>
+    <div style="display:flex;flex-direction:column;">
+      <h1 style="padding-left:32px;">There Are<br><span class="o">No</span><br>Shortcuts.</h1>
+      <div class="hero-clock-mobile">
+        <div class="clock-item" style="flex-direction:row;align-items:baseline;gap:12px;">
+          <span class="clock-city" style="font-size:10px;">VAN</span>
+          <span class="clock-time" id="van-time-m">--<span class="colon">:</span>--</span>
+        </div>
+        <div class="clock-item" style="flex-direction:row;align-items:baseline;gap:12px;">
+          <span class="clock-city" style="font-size:10px;">BKK</span>
+          <span class="clock-time" id="bkk-time-m">--<span class="colon">:</span>--</span>
+        </div>
+      </div>
+    </div>
     <div class="hero-clock">
       <div class="clock-item">
         <div class="clock-city">Vancouver</div>
@@ -428,6 +467,11 @@ document.querySelectorAll(".rv").forEach(el=>obs.observe(el));
     if (be) be.innerHTML = parseTime(bkkStr);
     if (vd) vd.textContent = vanDate;
     if (bd) bd.textContent = bkkDate;
+    
+    const vm = document.getElementById('van-time-m');
+    const bm = document.getElementById('bkk-time-m');
+    if (vm) vm.innerHTML = parseTime(vanStr);
+    if (bm) bm.innerHTML = parseTime(bkkStr);
   }
   updateClocks();
   setInterval(updateClocks, 1000);
