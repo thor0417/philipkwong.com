@@ -27,6 +27,52 @@ body{background:var(--w);color:var(--b);font-family:'BC','Arial Narrow',sans-ser
 
 
 
+
+.hero-clock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+  padding-left: 40px;
+  padding-right: 8px;
+  border-left: 1px solid var(--r);
+  height: 100%;
+}
+.clock-item { display: flex; flex-direction: column; gap: 6px; }
+.clock-city {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--g);
+  font-family: sans-serif;
+}
+.clock-time {
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--b);
+  font-variant-numeric: tabular-nums;
+}
+.clock-time .colon {
+  color: var(--o);
+  animation: blink 1s step-end infinite;
+}
+.clock-date {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--g);
+  font-family: sans-serif;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@media(max-width:768px) {
+  .hero-clock { display: none; }
+}
+
 /* SCROLL CLIP EFFECT */
 .svc, .ind, .wk, .abt, .ctc {
   position: relative;
@@ -227,8 +273,20 @@ footer{padding:24px var(--p);display:flex;justify-content:space-between;align-it
 
 <!-- HERO -->
 <section class="hero">
-  <div style="flex:1;display:flex;align-items:center;">
-    <h1>There Are<br><span class="o">No</span><br>Shortcuts.</h1>
+  <div style="flex:1;display:grid;grid-template-columns:1fr auto;gap:0;align-items:center;">
+    <h1 style="padding-left:32px;">There Are<br><span class="o">No</span><br>Shortcuts.</h1>
+    <div class="hero-clock">
+      <div class="clock-item">
+        <div class="clock-city">Vancouver</div>
+        <div class="clock-time" id="van-time">00<span class="colon">:</span>00</div>
+        <div class="clock-date" id="van-date"></div>
+      </div>
+      <div class="clock-item">
+        <div class="clock-city">Bangkok</div>
+        <div class="clock-time" id="bkk-time">00<span class="colon">:</span>00</div>
+        <div class="clock-date" id="bkk-date"></div>
+      </div>
+    </div>
   </div>
   <div class="hero-bot">
     <div>
