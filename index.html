@@ -70,7 +70,16 @@ body{background:var(--w);color:var(--b);font-family:'BC','Arial Narrow',sans-ser
   50% { opacity: 0; }
 }
 @media(max-width:768px) {
-  .hero-clock { display: none; }
+  .hero-clock {
+    flex-direction: row;
+    gap: 28px;
+    border-left: none;
+    border-top: 1px solid var(--r);
+    padding-left: 0;
+    padding-top: 24px;
+    margin-top: 24px;
+  }
+  .hero-clock .clock-time { font-size: 32px; }
 }
 
 /* SCROLL CLIP EFFECT */
@@ -278,12 +287,12 @@ footer{padding:24px var(--p);display:flex;justify-content:space-between;align-it
     <div class="hero-clock">
       <div class="clock-item">
         <div class="clock-city">Vancouver</div>
-        <div class="clock-time" id="van-time">00<span class="colon">:</span>00</div>
+        <div class="clock-time" id="van-time">--<span class="colon">:</span>--</div>
         <div class="clock-date" id="van-date"></div>
       </div>
       <div class="clock-item">
         <div class="clock-city">Bangkok</div>
-        <div class="clock-time" id="bkk-time">00<span class="colon">:</span>00</div>
+        <div class="clock-time" id="bkk-time">--<span class="colon">:</span>--</div>
         <div class="clock-date" id="bkk-date"></div>
       </div>
     </div>
@@ -393,6 +402,35 @@ hbg.addEventListener("click",()=>{hbg.classList.toggle("open");mm.classList.togg
 document.querySelectorAll(".ml").forEach(l=>l.addEventListener("click",()=>{hbg.classList.remove("open");mm.classList.remove("open");document.body.style.overflow="";}));
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");obs.unobserve(e.target);}});},{threshold:.08});
 document.querySelectorAll(".rv").forEach(el=>obs.observe(el));
+
+  // Live clocks
+  function updateClocks() {
+    const now = new Date();
+    const vanStr = now.toLocaleString('en-US', {timeZone:'America/Vancouver', hour:'2-digit', minute:'2-digit', hour12:false});
+    const bkkStr = now.toLocaleString('en-US', {timeZone:'Asia/Bangkok', hour:'2-digit', minute:'2-digit', hour12:false});
+    const vanDate = now.toLocaleString('en-US', {timeZone:'America/Vancouver', weekday:'short', month:'short', day:'numeric'});
+    const bkkDate = now.toLocaleString('en-US', {timeZone:'Asia/Bangkok', weekday:'short', month:'short', day:'numeric'});
+    
+    function parseTime(str) {
+      const colon = str.indexOf(':');
+      let h = str.substring(0, colon).trim();
+      let m = str.substring(colon+1, colon+3).trim();
+      if (h === '24') h = '00';
+      return h.padStart(2,'0') + '<span class="colon">:</span>' + m.padStart(2,'0');
+    }
+    
+    const ve = document.getElementById('van-time');
+    const be = document.getElementById('bkk-time');
+    const vd = document.getElementById('van-date');
+    const bd = document.getElementById('bkk-date');
+    
+    if (ve) ve.innerHTML = parseTime(vanStr);
+    if (be) be.innerHTML = parseTime(bkkStr);
+    if (vd) vd.textContent = vanDate;
+    if (bd) bd.textContent = bkkDate;
+  }
+  updateClocks();
+  setInterval(updateClocks, 1000);
 </script>
 </body>
 </html>
