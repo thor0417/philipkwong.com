@@ -25,6 +25,19 @@
 html{scroll-behavior:smooth;}
 body{background:var(--w);color:var(--b);font-family:'BC','Arial Narrow',sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 
+
+
+/* SCROLL CLIP EFFECT */
+.svc, .ind, .wk, .abt, .ctc {
+  position: relative;
+  z-index: 2;
+  border-radius: 0;
+}
+.hero {
+  position: relative;
+  z-index: 1;
+}
+
 /* REVEAL */
 .rv{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
 .rv.on{opacity:1;transform:none;}
@@ -104,7 +117,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .abt{border-bottom:1px solid var(--r);}
 .agrid{display:grid;grid-template-columns:1fr 1fr;min-height:400px;}
 .aleft{padding:64px var(--p);border-right:1px solid var(--r);display:flex;flex-direction:column;justify-content:center;}
-.atxt{font-size:20px;line-height:1.8;font-weight:300;font-family:sans-serif;color:var(--b);}
+.atxt{font-size:17px;line-height:1.85;font-weight:300;font-family:sans-serif;color:var(--b);}
 .aright{padding:64px var(--p);display:flex;flex-direction:column;justify-content:center;}
 .aloc{font-size:clamp(40px,5vw,72px);font-weight:800;line-height:.9;letter-spacing:-.04em;}
 .aloc .o{color:var(--o);}
@@ -116,7 +129,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .cleft{padding:72px var(--p);border-right:1px solid #222;display:flex;flex-direction:column;justify-content:space-between;}
 .ch{font-size:clamp(72px,9vw,130px);font-weight:800;line-height:.9;letter-spacing:-.04em;color:var(--w);}
 .ch .o{color:var(--o);}
-.clink{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--w);text-decoration:none;border-bottom:2px solid var(--o);padding-bottom:3px;font-family:sans-serif;transition:color .2s;}
+.clink{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--w);text-decoration:none;border-bottom:2px solid var(--o);padding-bottom:3px;font-family:sans-serif;transition:color .2s;margin-top:32px;}
 .clink:hover{color:var(--o);}
 .cright{padding:72px var(--p);}
 .cform{display:flex;flex-direction:column;gap:28px;}
@@ -136,40 +149,61 @@ footer{padding:24px var(--p);display:flex;justify-content:space-between;align-it
 .fc{font-size:12px;color:rgba(255,255,255,.2);font-family:sans-serif;}
 
 /* MOBILE */
-@media(max-width:900px){
-  :root{--p:24px;}
+@media(max-width:768px){
+  :root{--p:20px;}
+
+  /* NAV */
   .nright{display:none;}
   .hbg{display:flex;}
-  
-  .hero{padding:88px var(--p) 48px;}
-  .hero h1{font-size:clamp(56px,16vw,96px);}
-  .hero-bot{grid-template-columns:1fr;gap:32px;}
+
+  /* HERO */
+  .hero{padding:72px var(--p) 40px;min-height:100svh;}
+  .hero h1{font-size:clamp(52px,14vw,80px);letter-spacing:-.03em;margin-top:24px;}
+  .hero-bot{grid-template-columns:1fr;gap:28px;margin-top:40px;padding-top:32px;}
   .hero-right{justify-content:flex-start;}
-  .stats{gap:32px;}
-  .snum{font-size:40px;}
-  .hcta{max-width:100%;}
+  .stats{gap:24px;flex-wrap:wrap;}
+  .snum{font-size:36px;}
+  .slbl{font-size:9px;}
+  .hcta{max-width:100%;padding:14px 20px;font-size:11px;}
+  .hero-sub{font-size:14px;}
 
-  .igrid{grid-template-columns:1fr 1fr;}
-  .icell{padding:28px 24px;}
-  .iname{font-size:17px;}
+  /* SERVICES */
+  .sh{padding:20px var(--p);}
+  .srow{padding:0 var(--p);}
+  .srow:hover{padding-left:calc(var(--p) + 10px);}
+  .sname{font-size:22px;padding:18px 0;}
+  .snum2{width:36px;font-size:11px;}
+  .sarr{font-size:16px;}
 
-  .sname{font-size:clamp(22px,6vw,36px);padding:20px 0;}
+  /* INDUSTRIES */
+  .igrid{grid-template-columns:1fr 1fr;gap:1px;}
+  .icell{padding:24px 20px;}
+  .iname{font-size:16px;}
+  .itag{font-size:9px;}
 
-  .wname{font-size:clamp(20px,5vw,32px);}
+  /* SELECTED WORK */
+  .wrow{padding:18px var(--p);}
+  .wrow:hover{padding-left:calc(var(--p) + 10px);}
+  .wname{font-size:20px;}
   .wtag{display:none;}
 
+  /* ABOUT */
   .agrid{grid-template-columns:1fr;}
-  .aleft{border-right:none;border-bottom:1px solid var(--r);padding:56px var(--p);}
-  .aright{padding:56px var(--p);}
-  .atxt{font-size:16px;}
-  .aloc{font-size:clamp(48px,12vw,72px);}
+  .aleft{border-right:none;border-bottom:1px solid var(--r);padding:48px var(--p);}
+  .aright{padding:48px var(--p);}
+  .atxt{font-size:15px;line-height:1.8;}
+  .aloc{font-size:clamp(40px,10vw,56px);line-height:.92;}
 
+  /* CONTACT */
   .cgrid{grid-template-columns:1fr;}
-  .cleft{border-right:none;border-bottom:1px solid #222;padding:56px var(--p);}
-  .cright{padding:56px var(--p);}
-  .ch{font-size:clamp(64px,16vw,96px);}
+  .cleft{border-right:none;border-bottom:1px solid #222;padding:48px var(--p);}
+  .cright{padding:48px var(--p);}
+  .ch{font-size:clamp(48px,11vw,72px);}
+  .cform{gap:22px;}
+  .csub{width:100%;text-align:center;padding:14px 20px;}
 
-  footer{flex-direction:column;gap:8px;text-align:center;padding:24px;}
+  /* FOOTER */
+  footer{flex-direction:column;gap:8px;text-align:center;padding:20px;}
 }
 </style>
 </head>
@@ -216,8 +250,9 @@ footer{padding:24px var(--p);display:flex;justify-content:space-between;align-it
   <div class="sh"><span class="sn">01</span><span class="st">What I Do</span></div>
   <div class="srow rv"><span class="snum2">01</span><span class="sname">Regulatory Compliance</span><span class="sarr">→</span></div>
   <div class="srow rv d1"><span class="snum2">02</span><span class="sname">Health &amp; Safety Standards</span><span class="sarr">→</span></div>
-  <div class="srow rv d2"><span class="snum2">03</span><span class="sname">Operations &amp; Project Management</span><span class="sarr">→</span></div>
-  <div class="srow rv d3"><span class="snum2">04</span><span class="sname">Documentation &amp; Commercialization</span><span class="sarr">→</span></div>
+  <div class="srow rv d2"><span class="snum2">03</span><span class="sname">Corporate Strategy</span><span class="sarr">→</span></div>
+  <div class="srow rv d3"><span class="snum2">04</span><span class="sname">Go-to-Market Development</span><span class="sarr">→</span></div>
+  <div class="srow rv d3"><span class="snum2">05</span><span class="sname">Documentation &amp; Commercialization</span><span class="sarr">→</span></div>
 </div>
 
 <!-- INDUSTRIES -->
@@ -250,7 +285,7 @@ footer{padding:24px var(--p);display:flex;justify-content:space-between;align-it
   <div class="sh rv"><span class="sn">03</span><span class="st">About</span></div>
   <div class="agrid">
     <div class="aleft rv">
-      <p class="atxt">Compliance and operations consultant specializing in emerging and regulated industries across North America. I have built operational frameworks, advised publicly traded and private companies, and participated in international regulatory and standards bodies.</p>
+      <p class="atxt">I run a Canadian consulting practice with operations in Bangkok. I work with founders, operators, and leadership teams across private and public companies to enter new markets, build compliant operations, and execute effectively.<br><br>The focus is straightforward: clear strategy and work that gets implemented.<br><br>Work spans regulatory frameworks through to go-to-market execution. I remain hands-on from the first conversation through to the final deliverable.</p>
     </div>
     <div class="aright rv d1">
       <div class="aloc">Vancouver<br><span class="o">&amp;</span><br>Bangkok.</div>
@@ -276,7 +311,8 @@ footer{padding:24px var(--p);display:flex;justify-content:space-between;align-it
             <option value="" disabled selected>Select a service</option>
             <option>Regulatory Compliance</option>
             <option>Health &amp; Safety Standards</option>
-            <option>Operations &amp; Project Management</option>
+            <option>Corporate Strategy</option>
+            <option>Go-to-Market Development</option>
             <option>Documentation &amp; Commercialization</option>
             <option>Other</option>
           </select>
