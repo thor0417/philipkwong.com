@@ -109,6 +109,10 @@ body{background:var(--w);color:var(--b);font-family:'BC','Arial Narrow',sans-ser
   .hero-clock-mobile { display: flex; }
 }
 
+
+/* PARALLAX */
+.parallax-el { will-change: transform; }
+
 /* SCROLL CLIP EFFECT */
 .svc, .ind, .wk, .abt, .ctc {
   position: relative;
@@ -391,7 +395,7 @@ footer{padding:24px var(--p);display:flex;justify-content:space-between;align-it
   <div class="sh rv"><span class="sn">03</span><span class="st">About</span></div>
   <div class="agrid">
     <div class="aleft rv">
-      <p class="atxt">I run a Canadian consulting practice with operations in Bangkok. I work with founders, operators, and leadership teams across private and public companies to enter new markets, build compliant operations, and execute effectively.<br><br>The focus is straightforward: clear strategy and work that gets implemented.<br><br>Work spans regulatory frameworks through to go-to-market execution. I remain hands-on from the first conversation through to the final deliverable.</p>
+      <p class="atxt">I run a consulting practice with operations in Bangkok. I work with founders, operators, and leadership teams across private and public companies to enter new markets, build compliant operations, and execute effectively.<br><br>The focus is straightforward: clear strategy and work that gets implemented.<br><br>Work spans regulatory frameworks through to go-to-market execution. I remain hands-on from the first conversation through to the final deliverable.</p>
     </div>
     <div class="aright rv d1">
       <div class="aloc">Vancouver<br><span class="o">&amp;</span><br>Bangkok.</div>
@@ -475,6 +479,34 @@ document.querySelectorAll(".rv").forEach(el=>obs.observe(el));
   }
   updateClocks();
   setInterval(updateClocks, 1000);
+
+  // Parallax scroll effect
+  const parallaxItems = [
+    { selector: '.hero h1', speed: -0.15 },
+    { selector: '.hero-bot', speed: -0.08 },
+    { selector: '.hero-clock', speed: -0.1 },
+    { selector: '.hero-clock-mobile', speed: -0.1 },
+  ];
+
+  let ticking = false;
+  function applyParallax() {
+    const scrollY = window.scrollY;
+    parallaxItems.forEach(item => {
+      const els = document.querySelectorAll(item.selector);
+      els.forEach(el => {
+        el.style.transform = `translateY(${scrollY * item.speed}px)`;
+      });
+    });
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(applyParallax);
+      ticking = true;
+    }
+  }, { passive: true });
+
 </script>
 </body>
 </html>
