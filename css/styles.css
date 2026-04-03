@@ -1,12 +1,13 @@
 /* ============================================================
    PHILIP KWONG — THE DIGITAL ARTIFACT v2.0
-   Design System | Full Architectural Reset
+   Design System | Complete Build
    ============================================================ */
 
+/* 1. FONT DEFINITIONS - Strict Weight Mapping */
 @font-face {
   font-family: 'Dharma Gothic E';
   src: url('../assets/fonts/DharmaGothicE_Heavy_R.woff') format('woff');
-  font-weight: 900;
+  font-weight: 900; /* HEAVY weight for headlines */
   font-style: normal;
   font-display: swap;
 }
@@ -14,7 +15,7 @@
 @font-face {
   font-family: 'Dharma Gothic E';
   src: url('../assets/fonts/DharmaGothicE_Bold_R.woff') format('woff');
-  font-weight: 700;
+  font-weight: 700; /* BOLD weight for sub-headers */
   font-style: normal;
   font-display: swap;
 }
@@ -27,6 +28,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'DM Mono';
+  src: url('../assets/fonts/DMMono-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Color: The Burnt Orange Palette */
   --bg-primary:      #FFFFFF;
@@ -34,30 +43,24 @@
   --accent:          #B34700; /* Burnt Orange */
   --bg-dark:         #111111;
   --border-light:    #E5E5E5;
-  --border-dark:     #333333;
 
-  /* Typography: The Architectural Stack */
-  --font-display: 'Dharma Gothic E', sans-serif;
-  --font-body:    'DM Mono', monospace;
-
-  /* Scale: Aggressive Adobe Tension */
-  --text-display-2xl: 16vw;            
-  --text-display-xl:  clamp(4rem, 10vw, 8rem);  
-  --text-display-md:  clamp(1.5rem, 3vw, 2.5rem); 
-  --text-body-md:     1rem;
+  /* Typography Scale */
+  --text-display-2xl: 17vw;            
+  --text-display-xl:  8vw;  
+  --text-display-md:  4vw; 
   --text-metadata:    12px;
 
   /* Leading & Tracking */
-  --leading-display:  0.85;             
+  --leading-display:  0.82;             
   --leading-body:     1.6;
-  --tracking-display: -0.05em;         
+  --tracking-display: -0.06em;         
   --tracking-mono:    0.25em;          
 
-  /* The 15vw Editorial Spine */
-  --grid-margin: 15vw;
+  /* The Editorial Spine */
+  --grid-margin: 8vw;
 }
 
-/* 1. RESET & BASE */
+/* 2. CORE RESET */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0; padding: 0;
@@ -67,17 +70,17 @@
 body {
   background-color: var(--bg-primary);
   color: var(--text-main);
-  font-family: var(--font-body);
+  font-family: 'DM Mono', monospace;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-/* 2. NAVIGATION (Glass Blur & PHILIP KWONG) */
+/* 3. NAVIGATION (PHILIP KWONG + GLASS) */
 .site-nav {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 100;
-  height: 4rem;
+  z-index: 1000;
+  height: 5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -88,34 +91,39 @@ body {
 }
 
 .site-nav__wordmark {
-  font-family: var(--font-body);
+  font-family: 'DM Mono', monospace;
   font-weight: 500;
   font-size: var(--text-metadata);
   letter-spacing: var(--tracking-mono);
   text-transform: uppercase;
 }
 
-/* 3. HERO HEADLINE (No Brackets, No PK) */
+/* 4. HERO (ADOBE TENSION) */
 #hero {
   padding-top: 15vh;
   padding-inline: var(--grid-margin);
-  min-height: 80vh;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .hero-headline {
-  font-family: var(--font-display);
-  font-weight: 900;
+  font-family: 'Dharma Gothic E', sans-serif;
+  font-weight: 900; /* Explicitly Heavy */
   font-size: var(--text-display-2xl);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
-  text-transform: none; /* Sentence Case */
+  white-space: nowrap; /* Prevent bullshit wrapping */
+  text-transform: none;
+  display: block;
 }
 
-.accent-text {
-  color: var(--accent); /* The Burnt Orange "No" */
+.hero-headline span.orange {
+  color: var(--accent);
 }
 
-/* 4. SECTIONS & GRID */
+/* 5. SECTIONS */
 .section {
   padding-block: 15vh;
   padding-inline: var(--grid-margin);
@@ -123,68 +131,64 @@ body {
 }
 
 .section-label {
-  font-family: var(--font-body);
+  font-family: 'DM Mono', monospace;
   font-size: var(--text-metadata);
   letter-spacing: var(--tracking-mono);
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   display: block;
 }
 
-/* The About Split Column */
+/* Split Column About */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 10vw;
 }
 
 .about-location {
-  font-family: var(--font-display);
+  font-family: 'Dharma Gothic E', sans-serif;
   font-weight: 700;
-  font-size: var(--text-display-md);
-  line-height: 1;
+  font-size: var(--text-display-xl);
+  line-height: 0.9;
 }
 
-/* The Work Ledger */
+.about-body {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 50ch;
+}
+
+/* Work Ledger */
 .work-item {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding-block: 1.5rem;
+  padding-block: 2rem;
   border-bottom: 0.5px solid var(--border-light);
 }
 
 .work-item__client {
-  font-family: var(--font-display);
+  font-family: 'Dharma Gothic E', sans-serif;
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 3rem;
+  letter-spacing: -0.02em;
 }
 
 .work-item__role {
-  font-family: var(--font-body);
-  font-size: var(--text-metadata);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
   color: var(--accent);
 }
 
-/* 5. CONTACT (The 25vh Gap) */
+/* 6. CONTACT */
 #contact {
-  margin-top: 25vh;
+  margin-top: 25vh; /* Massive tension gap */
   background: var(--bg-dark);
   color: #FFF;
   padding-block: 15vh;
   padding-inline: var(--grid-margin);
-}
-
-.contact-form input, .contact-form textarea {
-  width: 100%;
-  background: transparent;
-  border: none;
-  border-bottom: 0.5px solid var(--border-dark);
-  color: white;
-  padding: 1rem 0;
-  margin-bottom: 2rem;
-  font-family: var(--font-body);
 }
