@@ -911,4 +911,60 @@ svg {
   .work-grid .work-category {
     margin-bottom: 0;
   }
+<<<<<<< HEAD:css/styles.css.css
 }
+=======
+
+  /* ------------------------------------------------------------
+     UTILITY — Shared helpers used across sections
+     ------------------------------------------------------------ */
+
+  /* Section label — appears above every section title */
+  .section-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: var(--text-body-xs);
+    letter-spacing: var(--tracking-registry);
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: var(--space-4);
+  }
+
+  /* Section title — Dharma Gothic display, left-anchored */
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: var(--text-display-xl);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    margin-bottom: var(--space-12);
+  }
+
+  /* Hairline divider — horizontal rule replacement */
+  .divider {
+    display: block;
+    width: 100%;
+    height: 0;
+    border: none;
+    border-top: var(--border-hairline);
+    margin-block: var(--space-8);
+  }
+
+  .divider--dark {
+    border-top: var(--border-hairline-dark);
+  }
+
+  /* Visually hidden — accessible label utility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+>>>>>>> 6bb589eb9b8ff4a5bb01b09ed29325e2127d3f3c:css/styles.css
