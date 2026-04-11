@@ -196,7 +196,7 @@ img, svg { display: block; max-width: 100%; }
 .t-hero {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: var(--text-hero);       /* 16vw */
+  font-size: clamp(4rem, 16vw, 10rem);
   line-height: var(--leading-hero);  /* 0.82 */
   letter-spacing: var(--tracking-hero); /* -0.05em */
 }
