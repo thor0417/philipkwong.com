@@ -1,6 +1,6 @@
 /* ============================================================
    PHILIP KWONG — THE DIGITAL ARTIFACT
-   css/styles.css — System v2.0
+   css/styles.css — System v2.1
    Mobile-first: 320px base → 768px → 1280px
    ============================================================ */
 
@@ -9,7 +9,7 @@
    ------------------------------------------------------------ */
 @font-face {
   font-family: 'Dharma Gothic E';
-  src: url('../assets/fonts/DharmaGothicE_Heavy_R.woff') format('woff');
+  src: url('assets/fonts/DharmaGothicE_Heavy_R.woff') format('woff');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -17,7 +17,7 @@
 
 @font-face {
   font-family: 'Dharma Gothic E';
-  src: url('../assets/fonts/DharmaGothicE_ExBold_R.woff') format('woff');
+  src: url('assets/fonts/DharmaGothicE_ExBold_R.woff') format('woff');
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -25,7 +25,7 @@
 
 @font-face {
   font-family: 'Dharma Gothic E';
-  src: url('../assets/fonts/DharmaGothicE_Bold_R.woff') format('woff');
+  src: url('assets/fonts/DharmaGothicE_Bold_R.woff') format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -33,7 +33,7 @@
 
 @font-face {
   font-family: 'DM Mono';
-  src: url('../assets/fonts/DMMono-Regular.ttf') format('truetype');
+  src: url('assets/fonts/DMMono-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -41,7 +41,7 @@
 
 @font-face {
   font-family: 'DM Mono';
-  src: url('../assets/fonts/DMMono-Medium.ttf') format('truetype');
+  src: url('assets/fonts/DMMono-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -51,43 +51,39 @@
    DESIGN TOKENS
    ------------------------------------------------------------ */
 :root {
-  /* Color */
-  --bg-primary:   #FFFFFF;
-  --text-main:    #0A0A0A;
-  --accent:       #D94F00;
-  --bg-dark:      #111111;
-  --border-light: #E5E5E5;
-  --border-dark:  #333333;
+  --bg-primary:    #FFFFFF;
+  --text-main:     #0A0A0A;
+  --accent:        #B34700;
+  --bg-dark:       #111111;
+  --border-light:  #E5E5E5;
+  --border-dark:   #333333;
 
   --border-hairline:      0.5px solid #E5E5E5;
   --border-hairline-dark: 0.5px solid #333333;
 
-  /* Typography */
   --font-display: 'Dharma Gothic E', sans-serif;
   --font-body:    'DM Mono', monospace;
 
-  /* Fluid display scale */
   --text-display-2xl: clamp(5rem, 15vw, 12rem);
   --text-display-xl:  clamp(3.5rem, 10vw, 8rem);
   --text-display-lg:  clamp(2rem, 5vw, 4.5rem);
   --text-display-md:  clamp(1.5rem, 3vw, 2.5rem);
 
-  /* Body scale */
   --text-body-lg: 1.125rem;
   --text-body-md: 1rem;
   --text-body-sm: 0.875rem;
   --text-body-xs: 0.75rem;
 
-  /* Tracking */
   --tracking-display: -0.03em;
-  --tracking-mono:     0.15em;  /* ALL CAPS DM Mono — nav, labels, metadata */
+  --tracking-hero:    -0.05em;
+  --tracking-mono:     0.15em;
+  --tracking-label:    0.25em;
   --tracking-body:     0.04em;
 
-  /* Leading */
   --leading-display: 0.92;
+  --leading-hero:    0.82;
   --leading-body:    1.6;
 
-  /* Spacing — 8pt grid */
   --space-1:  0.25rem;
   --space-2:  0.5rem;
   --space-4:  1rem;
@@ -98,18 +94,18 @@
   --space-24: 6rem;
   --space-32: 8rem;
 
-  /* Layout */
-  --page-inline: 8vw; /* unified horizontal page margin */
-  --grid-gap:    clamp(1rem, 2vw, 1.5rem);
+  --margin-left:  15vw;
+  --margin-right: 8vw;
+  --page-inline:  8vw;
+  --grid-gap:     clamp(1rem, 2vw, 1.5rem);
+  --text-hero:    16vw;
 
-  /* Koyo phantom numbers */
   --opacity-koyo: 0.04;
   --z-koyo:       0;
   --z-content:    1;
   --z-nav:        10;
   --z-grain:      9999;
 
-  /* Motion */
   --duration-base: 300ms;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -123,7 +119,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  border-radius: 0 !important; /* zero rounded corners — system-wide */
+  border-radius: 0 !important;
 }
 
 html {
@@ -145,8 +141,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Grain texture — SVG feTurbulence via filter fragment.
-   <filter id="grain-filter"> must exist in HTML <defs>. */
+/* Grain — SVG feTurbulence; <filter id="grain-filter"> in HTML <defs> */
 body::before {
   content: '';
   position: fixed;
@@ -158,27 +153,13 @@ body::before {
   background: transparent;
 }
 
-ul,
-ol {
-  list-style: none;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-img,
-svg {
-  display: block;
-  max-width: 100%;
-}
+ul, ol  { list-style: none; }
+a       { color: inherit; text-decoration: none; }
+img, svg { display: block; max-width: 100%; }
 
 /* ------------------------------------------------------------
    2. TYPOGRAPHY UTILITIES
    ------------------------------------------------------------ */
-
-/* Dharma Gothic E — all headers sentence case, never uppercase */
 .t-display-2xl {
   font-family: var(--font-display);
   font-weight: 900;
@@ -211,30 +192,34 @@ svg {
   letter-spacing: var(--tracking-display);
 }
 
-/* DM Mono body */
+/* Hero headline scale — used on h1 via class */
+.t-hero {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: var(--text-hero);       /* 16vw */
+  line-height: var(--leading-hero);  /* 0.82 */
+  letter-spacing: var(--tracking-hero); /* -0.05em */
+}
+
 .t-body-lg { font-size: var(--text-body-lg); line-height: var(--leading-body); }
 .t-body-md { font-size: var(--text-body-md); line-height: var(--leading-body); }
 .t-body-sm { font-size: var(--text-body-sm); line-height: var(--leading-body); }
 .t-body-xs { font-size: var(--text-body-xs); line-height: var(--leading-body); }
 
-/* ALL CAPS DM Mono label — nav, metadata, categories, registry */
 .t-label {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: var(--text-body-xs);
-  letter-spacing: var(--tracking-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   line-height: 1;
 }
 
-.t-accent {
-  color: var(--accent);
-}
+.t-accent { color: var(--accent); }
 
 /* ------------------------------------------------------------
    3. NAVIGATION
    ------------------------------------------------------------ */
-
 .site-nav {
   position: fixed;
   top: 0;
@@ -247,20 +232,21 @@ svg {
   padding-inline: var(--page-inline);
   height: 3.5rem; /* 56px = 8pt × 7 */
   border-bottom: var(--border-hairline);
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   transition:
     background-color var(--duration-base) var(--ease-out-expo),
-    border-color     var(--duration-base) var(--ease-out-expo);
+    border-color     var(--duration-base) var(--ease-out-expo),
+    color            var(--duration-base) var(--ease-out-expo);
 }
 
-/* PHILIP KWONG wordmark — DM Mono Medium 14px, 0.15em, ALL CAPS */
+/* PHILIP KWONG — DM Mono Medium 12px, 0.25em, ALL CAPS */
 .site-nav__wordmark {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 0.875rem; /* 14px fixed — nav is fixed-height */
-  letter-spacing: 0.15em;
+  font-size: 12px;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   line-height: 1;
   color: var(--text-main);
@@ -273,17 +259,14 @@ svg {
 }
 
 @media (min-width: 768px) {
-  .site-nav__links {
-    display: flex;
-  }
+  .site-nav__links { display: flex; }
 }
 
-/* Nav links — ALL CAPS, DM Mono Medium, 0.15em */
 .site-nav__link {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: var(--text-body-xs);
-  letter-spacing: var(--tracking-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--text-main);
   border-bottom: 0.5px solid transparent;
@@ -295,41 +278,53 @@ svg {
   border-bottom-color: var(--accent);
 }
 
-/* Fixed nav scroll offset */
-#hero,
-#services,
-#industries,
-#work,
-#about,
-#contact {
+/* Dark nav state — JS adds .is-dark when scrolled over dark sections */
+.site-nav.is-dark {
+  background: rgba(17, 17, 17, 0.85);
+  color: #FFFFFF;
+  border-color: #333333;
+}
+
+.site-nav.is-dark .site-nav__wordmark { color: #FFFFFF; }
+.site-nav.is-dark .site-nav__link     { color: #FFFFFF; }
+
+#hero, #services, #industries, #work, #about, #contact {
   scroll-margin-top: 3.5rem;
 }
 
 /* ------------------------------------------------------------
    4. SHARED SECTION SHELL
    ------------------------------------------------------------ */
-
 .section {
   position: relative;
   padding-block: var(--space-24);
   padding-inline: var(--page-inline);
   border-top: var(--border-hairline);
   overflow: hidden;
+  /* Scroll animation — JS adds .is-visible via IntersectionObserver */
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity   600ms var(--ease-out-expo),
+    transform 600ms var(--ease-out-expo);
 }
 
-/* Section label — ALL CAPS, DM Mono, accent */
+.section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .section-label {
   display: block;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: var(--text-body-xs);
-  letter-spacing: var(--tracking-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: var(--space-4);
 }
 
-/* Section title — Dharma Gothic E Heavy, sentence case */
 .section-title {
   font-family: var(--font-display);
   font-weight: 900;
@@ -354,10 +349,8 @@ svg {
 
 .sr-only {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
@@ -365,9 +358,8 @@ svg {
 }
 
 /* ------------------------------------------------------------
-   5. KOYO NUMBERS — Phantom architectural digits
+   5. KOYO NUMBERS
    ------------------------------------------------------------ */
-
 .koyo {
   position: absolute;
   font-family: var(--font-display);
@@ -383,34 +375,34 @@ svg {
   color: currentColor;
 }
 
-.koyo--top-right    { top: -0.15em;  right: -0.1em;  }
-.koyo--bottom-left  { bottom: -0.15em; left: -0.05em; }
+.koyo--top-right    { top: -0.15em;    right: -0.1em;  }
+.koyo--bottom-left  { bottom: -0.15em; left: -0.05em;  }
 .koyo--center-right { top: 50%; right: -0.1em; transform: translateY(-50%); }
 .koyo--bottom-right { bottom: -0.15em; right: -0.05em; }
 
-/* Explicit white on dark surfaces */
 #industries .koyo,
-#contact .koyo {
-  color: var(--bg-primary);
-}
+#contact .koyo { color: var(--bg-primary); }
 
 /* ------------------------------------------------------------
    6. HERO
    ------------------------------------------------------------ */
-
 #hero {
   position: relative;
   min-height: 100svh;
   padding-block: var(--space-16) var(--space-24);
-  padding-inline: var(--page-inline);
+  padding-left: var(--margin-left);
+  padding-right: var(--margin-right);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
   border-top: none;
+  /* Hero is always visible — override section animation */
+  opacity: 1;
+  transform: none;
+  transition: none;
 }
 
-/* VAN · BKK clock row */
 .hero-clock-row {
   display: flex;
   flex-direction: column;
@@ -428,36 +420,27 @@ svg {
   }
 }
 
-/* Middle dot · — Safety Orange, accent punctuation */
+/* Middle dot · — accent orange */
 .hero-clock-separator {
   display: none;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: var(--text-body-xs);
-  letter-spacing: var(--tracking-mono);
-  color: var(--accent); /* #D94F00 */
+  font-size: 10px;
+  letter-spacing: var(--tracking-label);
+  color: var(--accent);
   align-self: flex-end;
-  padding-bottom: 0.4em; /* optical alignment to clock time baseline */
+  padding-bottom: 0.4em; /* optical alignment to clock baseline */
 }
 
 @media (min-width: 768px) {
-  .hero-clock-separator {
-    display: block;
-  }
+  .hero-clock-separator { display: block; }
 }
 
-/* Hero headline — Dharma Gothic E Heavy, sentence case, no brackets */
 .hero-headline {
+  display: flex;
+  flex-direction: column;
   position: relative;
   z-index: var(--z-content);
-}
-
-.hero-headline h1 {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: var(--text-display-2xl);
-  line-height: var(--leading-display);
-  letter-spacing: var(--tracking-display);
 }
 
 .hero-subline {
@@ -472,7 +455,6 @@ svg {
   z-index: var(--z-content);
 }
 
-/* Registry metadata strip */
 .hero-meta {
   display: flex;
   flex-direction: column;
@@ -492,12 +474,11 @@ svg {
   }
 }
 
-/* Metadata items — ALL CAPS, DM Mono Medium, accent */
 .hero-meta__item {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: var(--text-body-xs);
-  letter-spacing: var(--tracking-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--accent);
 }
@@ -505,7 +486,6 @@ svg {
 /* ------------------------------------------------------------
    7. CLOCK CLUSTERS
    ------------------------------------------------------------ */
-
 .clock-cluster {
   display: flex;
   flex-direction: column;
@@ -516,32 +496,29 @@ svg {
     border-color     var(--duration-base) var(--ease-out-expo);
 }
 
-/* City label — ALL CAPS, DM Mono, accent */
 .clock-cluster__city {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: var(--text-body-xs);
-  letter-spacing: var(--tracking-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--accent);
 }
 
-/* Clock time — Dharma Gothic E Heavy */
 .clock-cluster__time {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(2rem, 5vw, 4rem);
   line-height: 1;
   letter-spacing: var(--tracking-display);
   transition: color var(--duration-base) var(--ease-out-expo);
 }
 
-/* DAY / NIGHT pill — hairline border only, no fill */
 .clock-cluster__status {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: var(--text-body-xs);
-  letter-spacing: var(--tracking-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   padding: var(--space-1) var(--space-2);
   border: var(--border-hairline);
@@ -551,7 +528,6 @@ svg {
     color        var(--duration-base) var(--ease-out-expo);
 }
 
-/* Night state — JS adds .is-night when hour outside 07:00–21:00 */
 .clock-cluster.is-night {
   background-color: var(--bg-dark);
   color: var(--bg-primary);
@@ -559,21 +535,16 @@ svg {
   border-left: 0.5px solid var(--border-dark);
 }
 
-.clock-cluster.is-night .clock-cluster__time {
-  color: var(--bg-primary);
-}
-
-.clock-cluster.is-night .clock-cluster__status {
-  border-color: var(--border-dark);
-  color: var(--bg-primary);
-}
+.clock-cluster.is-night .clock-cluster__time   { color: var(--bg-primary); }
+.clock-cluster.is-night .clock-cluster__status { border-color: var(--border-dark); color: var(--bg-primary); }
 
 /* ------------------------------------------------------------
-   8. SERVICES — Typographic list 01–05
+   8. SERVICES
    ------------------------------------------------------------ */
-
 #services {
   padding-block: var(--space-24) var(--space-32);
+  padding-left: var(--margin-left);
+  padding-right: var(--margin-right);
 }
 
 .service-list {
@@ -588,56 +559,83 @@ svg {
   border-bottom: var(--border-hairline);
   position: relative;
   z-index: var(--z-content);
+  /* Scroll animation */
+  opacity: 0;
+  transform: translateX(-10px);
+  transition:
+    opacity      400ms var(--ease-out-expo),
+    transform    400ms var(--ease-out-expo),
+    border-color 300ms;
+}
+
+.service-item.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.service-item:hover {
+  border-bottom-color: var(--accent);
+  transition: border-bottom-color 300ms;
 }
 
 @media (min-width: 768px) {
-  .service-item {
-    padding-block: var(--space-8);
-    gap: var(--space-8);
-  }
+  .service-item { padding-block: var(--space-8); gap: var(--space-8); }
 }
 
-/* Number — ALL CAPS, DM Mono, accent */
 .service-item__number {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: var(--text-body-xs);
-  letter-spacing: var(--tracking-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--accent);
-  min-width: 2.5rem; /* fixed: aligns all service titles on left spine */
+  min-width: 3rem;
   flex-shrink: 0;
+  transition: color 300ms;
 }
 
-/* Title — Dharma Gothic E ExBold, sentence case */
+.service-item:hover .service-item__number {
+  color: #0A0A0A;
+  transition: color 300ms;
+}
+
 .service-item__title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: var(--text-display-lg);
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
 }
 
 /* ------------------------------------------------------------
-   9. INDUSTRIES — Dark pivot
+   9. INDUSTRIES
    ------------------------------------------------------------ */
-
 #industries {
   background-color: var(--bg-dark);
   color: var(--bg-primary);
   padding-block: var(--space-24) var(--space-32);
-  padding-inline: var(--page-inline);
+  padding-left: var(--margin-left);
+  padding-right: var(--margin-right);
   position: relative;
   overflow: hidden;
   border-top: var(--border-hairline-dark);
 }
 
-#industries .section-label {
-  color: var(--accent);
+#industries .section-label { color: var(--accent); }
+#industries .section-title { color: var(--bg-primary); }
+
+.industry-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
 }
 
-#industries .section-title {
-  color: var(--bg-primary);
+@media (min-width: 768px) {
+  .industry-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1280px) {
+  .industry-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
 .industry-group {
@@ -649,53 +647,62 @@ svg {
   border-top: var(--border-hairline-dark);
 }
 
-/* Group label — ALL CAPS, DM Mono, accent */
 .industry-group__label {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: var(--text-body-xs);
-  letter-spacing: var(--tracking-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: var(--space-2);
+  transition: color 300ms;
 }
 
-/* Tags — Dharma Gothic E, sentence case, white on dark */
 .industry-group__tags {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: var(--text-display-md);
+  font-size: clamp(1rem, 2vw, 1.5rem);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
   color: var(--bg-primary);
+  transition: color 300ms;
+}
+
+.industry-group:hover .industry-group__label {
+  color: #FFFFFF;
+  transition: color 300ms;
+}
+
+.industry-group:hover .industry-group__tags {
+  color: var(--accent);
+  transition: color 300ms;
 }
 
 /* ------------------------------------------------------------
-   10. SELECTED WORK — Horizontal ledger layout
+   10. SELECTED WORK
    ------------------------------------------------------------ */
-
 #work {
   padding-block: var(--space-24) var(--space-32);
+  padding-left: var(--margin-left);
+  padding-right: var(--margin-right);
 }
 
 .work-category {
   margin-bottom: var(--space-12);
 }
 
-/* Category label — ALL CAPS, DM Mono, accent, hairline bottom */
 .work-category__label {
   display: block;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: var(--text-body-xs);
-  letter-spacing: var(--tracking-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--accent);
   padding-bottom: var(--space-4);
   border-bottom: var(--border-hairline);
 }
 
-/* Ledger row — client left, category right, 0.5px hairline bottom only */
 .work-item {
   display: flex;
   align-items: baseline;
@@ -705,72 +712,75 @@ svg {
   border-bottom: var(--border-hairline);
   position: relative;
   z-index: var(--z-content);
-  /* No background, no top/left/right border — strict ledger line */
+  /* Scroll animation */
+  opacity: 0;
+  transition: opacity 300ms var(--ease-out-expo);
 }
 
-/* Client name — Dharma Gothic E ExBold, sentence case, left */
+.work-item.is-visible { opacity: 1; }
+
 .work-item__client {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: var(--text-display-md);
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
+  transition: color 300ms;
 }
 
-/* Category — ALL CAPS, DM Mono, accent, right */
 .work-item__category {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: var(--text-body-xs);
-  letter-spacing: var(--tracking-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--accent);
   flex-shrink: 0;
   text-align: right;
+  transition: color 300ms;
 }
+
+.work-item:hover .work-item__client   { color: var(--accent); transition: color 300ms; }
+.work-item:hover .work-item__category { color: #0A0A0A;       transition: color 300ms; }
 
 /* ------------------------------------------------------------
    11. ABOUT
    ------------------------------------------------------------ */
-
 #about {
-  padding-block: var(--space-24) var(--space-32);
+  padding-block: var(--space-24) 25vh;
+  padding-left: var(--margin-left);
+  padding-right: var(--margin-right);
 }
 
 .about-body {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: var(--text-body-lg);
-  line-height: var(--leading-body);
+  font-size: 16px;
+  line-height: 1.6;
   letter-spacing: var(--tracking-body);
-  max-width: 65ch;
+  max-width: 55ch;
   position: relative;
   z-index: var(--z-content);
 }
 
-.about-body p + p {
-  margin-top: var(--space-6);
-}
+.about-body p + p { margin-top: var(--space-6); }
 
 /* ------------------------------------------------------------
-   12. CONTACT — Dark bookend + 3-field form
+   12. CONTACT
    ------------------------------------------------------------ */
-
 #contact {
   background-color: var(--bg-dark);
   color: var(--bg-primary);
   padding-block: var(--space-24) var(--space-32);
-  padding-inline: var(--page-inline);
+  padding-left: var(--margin-left);
+  padding-right: var(--margin-right);
   position: relative;
   overflow: hidden;
   border-top: var(--border-hairline-dark);
 }
 
-#contact .section-label {
-  color: var(--accent);
-}
+#contact .section-label { color: var(--accent); }
 
-/* Contact headline — Dharma Gothic E Heavy, sentence case, white */
 .contact-cta {
   font-family: var(--font-display);
   font-weight: 900;
@@ -781,7 +791,6 @@ svg {
   margin-bottom: var(--space-12);
 }
 
-/* 3-field form: Name, Company, Message */
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -797,22 +806,20 @@ svg {
   gap: var(--space-2);
 }
 
-/* Field label — ALL CAPS, DM Mono, accent */
 .contact-form__label {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: var(--text-body-xs);
-  letter-spacing: var(--tracking-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--accent);
 }
 
-/* Input / Textarea — bottom border only, no box, no background */
 .contact-form__input,
 .contact-form__textarea {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: var(--text-body-md);
+  font-size: 16px;
   letter-spacing: var(--tracking-body);
   color: var(--bg-primary);
   background: transparent;
@@ -823,7 +830,7 @@ svg {
   padding-block: var(--space-4);
   line-height: var(--leading-body);
   transition: border-color var(--duration-base) var(--ease-out-expo);
-  /* Remove browser autofill background */
+  /* Suppress browser autofill background */
   -webkit-box-shadow: 0 0 0 1000px var(--bg-dark) inset;
   -webkit-text-fill-color: var(--bg-primary);
 }
@@ -841,16 +848,15 @@ svg {
 
 .contact-form__textarea {
   resize: vertical;
-  min-height: 8rem; /* ~4 lines at default line-height */
+  min-height: 8rem;
 }
 
-/* Submit — text only, 0.5px border, no fill, no background */
 .contact-form__submit {
   align-self: flex-start;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: var(--text-body-xs);
-  letter-spacing: var(--tracking-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--bg-primary);
   background: transparent;
@@ -876,39 +882,24 @@ svg {
 /* ------------------------------------------------------------
    13. RESPONSIVE — 768px
    ------------------------------------------------------------ */
-
 @media (min-width: 768px) {
-  .section {
-    padding-block: var(--space-32);
-  }
-
-  #hero {
-    padding-block: var(--space-24) var(--space-32);
-  }
-
+  .section    { padding-block: var(--space-32); }
   #industries,
-  #contact {
-    padding-block: var(--space-32);
-  }
+  #contact    { padding-block: var(--space-32); }
+  #hero       { padding-block: var(--space-24) var(--space-32); }
 }
 
 /* ------------------------------------------------------------
    14. RESPONSIVE — 1280px
    ------------------------------------------------------------ */
-
 @media (min-width: 1280px) {
-  .section {
-    padding-block: var(--space-32);
-  }
+  .section { padding-block: var(--space-32); }
 
-  /* Work: two-column ledger grid at large breakpoint */
   .work-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0 var(--space-24);
   }
 
-  .work-grid .work-category {
-    margin-bottom: 0;
-  }
+  .work-grid .work-category { margin-bottom: 0; }
 }
