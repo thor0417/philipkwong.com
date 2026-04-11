@@ -1,6 +1,6 @@
 /* ============================================================
    PHILIP KWONG — THE DIGITAL ARTIFACT
-   css/styles.css — System v2.1
+   css/styles.css — System v2.2
    Mobile-first: 320px base → 768px → 1280px
    ============================================================ */
 
@@ -9,7 +9,7 @@
    ------------------------------------------------------------ */
 @font-face {
   font-family: 'Dharma Gothic E';
-  src: url('../assets/font//DharmaGothicE_Heavy_R.woff') format('woff');
+  src: url('../assets/font/DharmaGothicE_Heavy_R.woff') format('woff');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -17,7 +17,7 @@
 
 @font-face {
   font-family: 'Dharma Gothic E';
-  src: url('../assets/font//DharmaGothicE_ExBold_R.woff') format('woff');
+  src: url('../assets/font/DharmaGothicE_ExBold_R.woff') format('woff');
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -25,7 +25,7 @@
 
 @font-face {
   font-family: 'Dharma Gothic E';
-  src: url('../assets/font//DharmaGothicE_Bold_R.otf') format('opentype');
+  src: url('../assets/font/DharmaGothicE_Bold_R.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -33,7 +33,7 @@
 
 @font-face {
   font-family: 'DM Mono';
-  src: url('../assets/font//DMMono-Regular.ttf') format('truetype');
+  src: url('../assets/font/DMMono-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -41,7 +41,7 @@
 
 @font-face {
   font-family: 'DM Mono';
-  src: url('../assets/font//DMMono-Medium.ttf') format('truetype');
+  src: url('../assets/font/DMMono-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -51,7 +51,7 @@
    DESIGN TOKENS
    ------------------------------------------------------------ */
 :root {
-  --bg-primary:    #FFFFFF;
+  --bg-primary:    #F9F9F9;
   --text-main:     #0A0A0A;
   --accent:        #B34700;
   --bg-dark:       #111111;
@@ -75,13 +75,13 @@
   --text-body-xs: 0.75rem;
 
   --tracking-display: -0.03em;
-  --tracking-hero:    -0.05em;
+  --tracking-hero:    -0.04em;
   --tracking-mono:     0.15em;
   --tracking-label:    0.25em;
   --tracking-body:     0.04em;
 
   --leading-display: 0.92;
-  --leading-hero:    0.82;
+  --leading-hero:    0.85;
   --leading-body:    1.6;
 
   --space-1:  0.25rem;
@@ -171,7 +171,7 @@ img, svg { display: block; max-width: 100%; }
 .t-display-xl {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: var(--text-display-xl);
+  font-size: 11px;
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
 }
@@ -179,26 +179,27 @@ img, svg { display: block; max-width: 100%; }
 .t-display-lg {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: var(--text-display-lg);
-  line-height: var(--leading-display);
-  letter-spacing: var(--tracking-display);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
 }
 
 .t-display-md {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: var(--text-display-md);
-  line-height: var(--leading-display);
-  letter-spacing: var(--tracking-display);
+  font-size: clamp(1rem, 2vw, 1.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
 }
 
-/* Hero headline scale — used on h1 via class */
+/* Hero headline scale */
 .t-hero {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(4rem, 16vw, 10rem);
-  line-height: var(--leading-hero);  /* 0.82 */
-  letter-spacing: var(--tracking-hero); /* -0.05em */
+  font-size: clamp(4rem, 10vw, 8rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  display: block;
 }
 
 .t-body-lg { font-size: var(--text-body-lg); line-height: var(--leading-body); }
@@ -241,7 +242,6 @@ img, svg { display: block; max-width: 100%; }
     color            var(--duration-base) var(--ease-out-expo);
 }
 
-/* PHILIP KWONG — DM Mono Medium 12px, 0.25em, ALL CAPS */
 .site-nav__wordmark {
   font-family: var(--font-body);
   font-weight: 500;
@@ -278,7 +278,6 @@ img, svg { display: block; max-width: 100%; }
   border-bottom-color: var(--accent);
 }
 
-/* Dark nav state — JS adds .is-dark when scrolled over dark sections */
 .site-nav.is-dark {
   background: rgba(17, 17, 17, 0.85);
   color: #FFFFFF;
@@ -298,20 +297,9 @@ img, svg { display: block; max-width: 100%; }
 .section {
   position: relative;
   padding-block: var(--space-24);
-  padding-inline: var(--page-inline);
+  padding-inline: 5vw;
   border-top: var(--border-hairline);
   overflow: hidden;
-  /* Scroll animation — JS adds .is-visible via IntersectionObserver */
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity   600ms var(--ease-out-expo),
-    transform 600ms var(--ease-out-expo);
-}
-
-.section.is-visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .section-label {
@@ -328,7 +316,7 @@ img, svg { display: block; max-width: 100%; }
 .section-title {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: var(--text-display-xl);
+  font-size: 11px;
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
   margin-bottom: var(--space-12);
@@ -361,27 +349,8 @@ img, svg { display: block; max-width: 100%; }
    5. KOYO NUMBERS
    ------------------------------------------------------------ */
 .koyo {
-  position: absolute;
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(16rem, 40vw, 40rem);
-  line-height: 1;
-  letter-spacing: -0.05em;
-  opacity: var(--opacity-koyo);
-  z-index: var(--z-koyo);
-  pointer-events: none;
-  user-select: none;
-  white-space: nowrap;
-  color: currentColor;
+  display: none;
 }
-
-.koyo--top-right    { top: -0.15em;    right: -0.1em;  }
-.koyo--bottom-left  { bottom: -0.15em; left: -0.05em;  }
-.koyo--center-right { top: 50%; right: -0.1em; transform: translateY(-50%); }
-.koyo--bottom-right { bottom: -0.15em; right: -0.05em; }
-
-#industries .koyo,
-#contact .koyo { color: var(--bg-primary); }
 
 /* ------------------------------------------------------------
    6. HERO
@@ -390,17 +359,23 @@ img, svg { display: block; max-width: 100%; }
   position: relative;
   min-height: 100svh;
   padding-block: var(--space-16) var(--space-24);
-  padding-left: var(--margin-left);
-  padding-right: var(--margin-right);
+  padding-inline: 5vw;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
   border-top: none;
-  /* Hero is always visible — override section animation */
   opacity: 1;
   transform: none;
   transition: none;
+}
+
+.clock-engine {
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  align-items: flex-start;
+  margin-bottom: var(--space-12);
 }
 
 .hero-clock-row {
@@ -420,7 +395,6 @@ img, svg { display: block; max-width: 100%; }
   }
 }
 
-/* Middle dot · — accent orange */
 .hero-clock-separator {
   display: none;
   font-family: var(--font-body);
@@ -429,7 +403,7 @@ img, svg { display: block; max-width: 100%; }
   letter-spacing: var(--tracking-label);
   color: var(--accent);
   align-self: flex-end;
-  padding-bottom: 0.4em; /* optical alignment to clock baseline */
+  padding-bottom: 0.4em;
 }
 
 @media (min-width: 768px) {
@@ -543,8 +517,6 @@ img, svg { display: block; max-width: 100%; }
    ------------------------------------------------------------ */
 #services {
   padding-block: var(--space-24) var(--space-32);
-  padding-left: var(--margin-left);
-  padding-right: var(--margin-right);
 }
 
 .service-list {
@@ -559,18 +531,7 @@ img, svg { display: block; max-width: 100%; }
   border-bottom: var(--border-hairline);
   position: relative;
   z-index: var(--z-content);
-  /* Scroll animation */
-  opacity: 0;
-  transform: translateX(-10px);
-  transition:
-    opacity      400ms var(--ease-out-expo),
-    transform    400ms var(--ease-out-expo),
-    border-color 300ms;
-}
-
-.service-item.is-visible {
-  opacity: 1;
-  transform: translateX(0);
+  transition: border-color 300ms;
 }
 
 .service-item:hover {
@@ -586,10 +547,10 @@ img, svg { display: block; max-width: 100%; }
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 10px;
-  letter-spacing: var(--tracking-label);
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
-  min-width: 3rem;
+  min-width: 2rem;
   flex-shrink: 0;
   transition: color 300ms;
 }
@@ -601,10 +562,10 @@ img, svg { display: block; max-width: 100%; }
 
 .service-item__title {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(1.25rem, 2.5vw, 2rem);
-  line-height: var(--leading-display);
-  letter-spacing: var(--tracking-display);
+  font-weight: 700;
+  font-size: clamp(1rem, 2vw, 1.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
 }
 
 /* ------------------------------------------------------------
@@ -614,8 +575,7 @@ img, svg { display: block; max-width: 100%; }
   background-color: var(--bg-dark);
   color: var(--bg-primary);
   padding-block: var(--space-24) var(--space-32);
-  padding-left: var(--margin-left);
-  padding-right: var(--margin-right);
+  padding-inline: 5vw;
   position: relative;
   overflow: hidden;
   border-top: var(--border-hairline-dark);
@@ -660,10 +620,10 @@ img, svg { display: block; max-width: 100%; }
 
 .industry-group__tags {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(1rem, 2vw, 1.5rem);
-  line-height: var(--leading-display);
-  letter-spacing: var(--tracking-display);
+  font-weight: 700;
+  font-size: clamp(1rem, 2vw, 1.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
   color: var(--bg-primary);
   transition: color 300ms;
 }
@@ -683,8 +643,6 @@ img, svg { display: block; max-width: 100%; }
    ------------------------------------------------------------ */
 #work {
   padding-block: var(--space-24) var(--space-32);
-  padding-left: var(--margin-left);
-  padding-right: var(--margin-right);
 }
 
 .work-category {
@@ -703,6 +661,47 @@ img, svg { display: block; max-width: 100%; }
   border-bottom: var(--border-hairline);
 }
 
+/* Subsection headers */
+.work-subsection .section-title {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  margin-bottom: var(--space-4);
+  border-bottom: 0.5px solid var(--border-light);
+  padding-bottom: var(--space-4);
+}
+
+/* Work entry — client bold, descriptor below */
+.work-entry {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  border-bottom: 0.5px solid var(--border-light);
+}
+
+.work-entry__client {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1rem, 2vw, 1.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+
+.work-entry__descriptor {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 0.4rem;
+}
+
+/* Legacy work-item (ledger layout) — kept for backward compat */
 .work-item {
   display: flex;
   align-items: baseline;
@@ -712,12 +711,8 @@ img, svg { display: block; max-width: 100%; }
   border-bottom: var(--border-hairline);
   position: relative;
   z-index: var(--z-content);
-  /* Scroll animation */
-  opacity: 0;
-  transition: opacity 300ms var(--ease-out-expo);
+  transition: color 300ms;
 }
-
-.work-item.is-visible { opacity: 1; }
 
 .work-item__client {
   font-family: var(--font-display);
@@ -748,14 +743,19 @@ img, svg { display: block; max-width: 100%; }
    ------------------------------------------------------------ */
 #about {
   padding-block: var(--space-24) 25vh;
-  padding-left: var(--margin-left);
-  padding-right: var(--margin-right);
+}
+
+#about .grid {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  gap: var(--grid-gap);
+  align-items: start;
 }
 
 .about-body {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.6;
   letter-spacing: var(--tracking-body);
   max-width: 55ch;
@@ -772,8 +772,7 @@ img, svg { display: block; max-width: 100%; }
   background-color: var(--bg-dark);
   color: var(--bg-primary);
   padding-block: var(--space-24) var(--space-32);
-  padding-left: var(--margin-left);
-  padding-right: var(--margin-right);
+  padding-inline: 5vw;
   position: relative;
   overflow: hidden;
   border-top: var(--border-hairline-dark);
@@ -781,14 +780,20 @@ img, svg { display: block; max-width: 100%; }
 
 #contact .section-label { color: var(--accent); }
 
+#contact .contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
 .contact-cta {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: var(--text-display-xl);
-  line-height: var(--leading-display);
-  letter-spacing: var(--tracking-display);
-  color: var(--bg-primary);
-  margin-bottom: var(--space-12);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
 }
 
 .contact-form {
@@ -830,7 +835,6 @@ img, svg { display: block; max-width: 100%; }
   padding-block: var(--space-4);
   line-height: var(--leading-body);
   transition: border-color var(--duration-base) var(--ease-out-expo);
-  /* Suppress browser autofill background */
   -webkit-box-shadow: 0 0 0 1000px var(--bg-dark) inset;
   -webkit-text-fill-color: var(--bg-primary);
 }
