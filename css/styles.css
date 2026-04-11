@@ -9,7 +9,7 @@
    ------------------------------------------------------------ */
 @font-face {
   font-family: 'Dharma Gothic E';
-  src: url('assets/font/DharmaGothicE_Heavy_R.woff') format('woff');
+  src: url('../assets/font//DharmaGothicE_Heavy_R.woff') format('woff');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -17,7 +17,7 @@
 
 @font-face {
   font-family: 'Dharma Gothic E';
-  src: url('assets/font/DharmaGothicE_ExBold_R.woff') format('woff');
+  src: url('../assets/font//DharmaGothicE_ExBold_R.woff') format('woff');
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -25,7 +25,7 @@
 
 @font-face {
   font-family: 'Dharma Gothic E';
-  src: url('assets/font/DharmaGothicE_Bold_R.otf') format('opentype');
+  src: url('../assets/font//DharmaGothicE_Bold_R.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -33,7 +33,7 @@
 
 @font-face {
   font-family: 'DM Mono';
-  src: url('assets/font/DMMono-Regular.ttf') format('truetype');
+  src: url('../assets/font//DMMono-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -41,7 +41,7 @@
 
 @font-face {
   font-family: 'DM Mono';
-  src: url('assets/font/DMMono-Medium.ttf') format('truetype');
+  src: url('../assets/font//DMMono-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
