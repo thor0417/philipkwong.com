@@ -414,9 +414,9 @@ img, svg { display: block; max-width: 100%; }
   transition: none;
 }
 
-.hero-clock-row {
+.clock-engine {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: var(--space-6);
   margin-bottom: var(--space-12);
   position: relative;
@@ -424,7 +424,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 @media (min-width: 768px) {
-  .hero-clock-row {
+  .clock-engine {
     flex-direction: row;
     align-items: flex-end;
     gap: var(--space-12);
