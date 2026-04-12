@@ -762,9 +762,16 @@ img, svg { display: block; max-width: 100%; }
 #about .about-clock {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: var(--space-4);
   padding-top: var(--space-4);
   border-top: var(--border-hairline);
+}
+
+#about .about-clock .clock-cluster {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: var(--space-6);
 }
 
 #about .about-clock__label {
