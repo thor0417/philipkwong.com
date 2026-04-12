@@ -847,10 +847,6 @@ img, svg { display: block; max-width: 100%; }
   align-self: start;
   padding-top: 0.2em;
 }
-.about-locations .t-registry {
-  font-size: 11px;
-  letter-spacing: 0.08em;
-}
 
 /* ------------------------------------------------------------
    12. CONTACT
