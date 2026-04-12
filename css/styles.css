@@ -822,11 +822,11 @@ img, svg { display: block; max-width: 100%; }
 .about-body p + p { margin-top: var(--space-6); }
 
 .about-year {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(2rem, 4vw, 4rem);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
   line-height: 1;
-  letter-spacing: var(--tracking-display);
+  letter-spacing: 0.05em;
   color: var(--text-main);
 }
 
@@ -837,6 +837,7 @@ img, svg { display: block; max-width: 100%; }
   padding-block: var(--space-4);
   border-bottom: var(--border-hairline);
   gap: var(--space-8);
+  flex-wrap: nowrap;
 }
 
 .about-locations {
@@ -845,6 +846,10 @@ img, svg { display: block; max-width: 100%; }
   gap: var(--space-4);
   align-self: start;
   padding-top: 0.2em;
+}
+.about-locations .t-registry {
+  font-size: 11px;
+  letter-spacing: 0.08em;
 }
 
 /* ------------------------------------------------------------
