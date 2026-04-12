@@ -94,8 +94,6 @@
   --space-24: 6rem;
   --space-32: 8rem;
 
-  --margin-left:  15vw;
-  --margin-right: 8vw;
   --page-inline:  5vw;
   --grid-cols: 12;
   --grid-gutter: clamp(0.75rem, 1.5vw, 1.25rem);
@@ -257,7 +255,7 @@ img, svg { display: block; max-width: 100%; }
   align-items: center;
   justify-content: space-between;
   padding-inline: var(--page-inline);
-  height: 3.5rem; /* 56px = 8pt × 7 */
+  height: 4rem; /* 56px = 8pt × 7 */
   border-bottom: var(--border-hairline);
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(20px);
@@ -543,8 +541,7 @@ img, svg { display: block; max-width: 100%; }
    ------------------------------------------------------------ */
 #services {
   padding-block: var(--space-24) var(--space-32);
-  padding-left: var(--margin-left);
-  padding-right: var(--margin-right);
+  padding-inline: var(--grid-margin);
 }
 
 .service-list {
@@ -566,7 +563,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .service-item:hover {
-  border-bottom-color: var(--accent);
+  border-bottom-color: rgba(10, 10, 10, 0.5);
   transition: border-bottom-color 300ms;
 }
 
@@ -612,7 +609,7 @@ img, svg { display: block; max-width: 100%; }
   border-top: var(--border-hairline-dark);
 }
 
-#industries .section-label { color: var(--accent); }
+#industries .section-label { color: rgba(249, 249, 249, 0.4); }
 #industries .section-title { color: var(--bg-primary); }
 
 .industry-grid {
@@ -767,16 +764,12 @@ img, svg { display: block; max-width: 100%; }
   transition: color 300ms;
 }
 
-(leave empty)
-.(empty)
-
 /* ------------------------------------------------------------
    11. ABOUT
    ------------------------------------------------------------ */
 #about {
   padding-block: var(--space-24) 25vh;
-  padding-left: var(--margin-left);
-  padding-right: var(--margin-right);
+  padding-inline: var(--grid-margin);
 }
 
 .about-body {
