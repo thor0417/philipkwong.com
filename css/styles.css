@@ -661,31 +661,35 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .work-entry {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: baseline;
+  display: grid;
+  grid-template-columns: 1fr auto;
   gap: var(--space-8);
-  padding-block: var(--space-4);
+  align-items: baseline;
+  padding-block: var(--space-6);
   border-bottom: var(--border-hairline);
+  min-width: 0;
 }
 
 .work-entry__client {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1rem, 2vw, 1.75rem);
+  font-size: clamp(1.5rem, 3vw, 3.5rem);
   line-height: 0.95;
   letter-spacing: -0.02em;
   color: var(--text-main);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .work-entry__descriptor {
   font-family: var(--font-body);
-  font-weight: 400;
+  font-weight: 500;
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--text-main);
+  color: rgba(10, 10, 10, 0.4);
   text-align: right;
   flex-shrink: 0;
 }
@@ -705,7 +709,7 @@ img, svg { display: block; max-width: 100%; }
   font-size: 14px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: var(--accent);
+  color: rgba(10, 10, 10, 0.4);
   padding-bottom: var(--space-4);
   border-bottom: var(--border-hairline);
 }
