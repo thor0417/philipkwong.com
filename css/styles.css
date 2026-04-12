@@ -548,9 +548,8 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .service-item {
-  display: grid;
-  grid-template-columns: 2rem 1fr;
-  gap: var(--space-6);
+  display: flex;
+  justify-content: space-between;
   align-items: baseline;
   padding-block: var(--space-6);
   border-bottom: var(--border-hairline);
@@ -825,21 +824,19 @@ img, svg { display: block; max-width: 100%; }
 .about-year {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(4rem, 8vw, 7rem);
-  line-height: 0.9;
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1;
   letter-spacing: var(--tracking-display);
   color: var(--text-main);
-  margin-bottom: var(--space-4);
 }
 
-.about-year-label {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(10, 10, 10, 0.4);
-  margin-bottom: var(--space-8);
+.about-data-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-block: var(--space-4);
+  border-bottom: var(--border-hairline);
+  gap: var(--space-8);
 }
 
 .about-locations {
