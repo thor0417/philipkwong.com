@@ -536,7 +536,7 @@ img, svg { display: block; max-width: 100%; }
   display: none;
 }
 
-.clock-cluster.is-night .clock-cluster__time   { color: var(--bg-primary); }
+.clock-cluster.is-night .clock-cluster__time { color: var(--text-main); }
 
 /* ------------------------------------------------------------
    8. SERVICES
