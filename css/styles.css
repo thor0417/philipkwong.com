@@ -248,7 +248,7 @@ img, svg { display: block; max-width: 100%; }
   font-family: var(--font-body);
   font-weight: 400;
   font-size: 14px;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-main);
   display: block;
@@ -821,6 +821,34 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .about-body p + p { margin-top: var(--space-6); }
+
+.about-year {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(4rem, 8vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: var(--tracking-display);
+  color: var(--text-main);
+  margin-bottom: var(--space-4);
+}
+
+.about-year-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.4);
+  margin-bottom: var(--space-8);
+}
+
+.about-locations {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-self: start;
+  padding-top: 0.2em;
+}
 
 /* ------------------------------------------------------------
    12. CONTACT
