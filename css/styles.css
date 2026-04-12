@@ -51,7 +51,7 @@
    DESIGN TOKENS
    ------------------------------------------------------------ */
 :root {
-  --bg-primary:    #FFFFFF;
+  --bg-primary:    #F9F9F9;
   --text-main:     #0A0A0A;
   --accent:        #B34700;
   --bg-dark:       #111111;
@@ -75,7 +75,7 @@
   --text-body-xs: 0.75rem;
 
   --tracking-display: -0.03em;
-  --tracking-hero:    -0.05em;
+  --tracking-hero:    -0.04em;
   --tracking-mono:     0.15em;
   --tracking-label:    0.25em;
   --tracking-body:     0.04em;
@@ -539,15 +539,7 @@ img, svg { display: block; max-width: 100%; }
     color        var(--duration-base) var(--ease-out-expo);
 }
 
-.clock-cluster.is-night {
-  background-color: var(--bg-dark);
-  color: var(--bg-primary);
-  padding: var(--space-4);
-  border-left: 0.5px solid var(--border-dark);
-}
-
 .clock-cluster.is-night .clock-cluster__time   { color: var(--bg-primary); }
-.clock-cluster.is-night .clock-cluster__status { border-color: var(--border-dark); color: var(--bg-primary); }
 
 /* ------------------------------------------------------------
    8. SERVICES
