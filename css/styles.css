@@ -182,6 +182,7 @@ img, svg { display: block; max-width: 100%; }
   gap: var(--grid-gutter);
   padding-inline: var(--grid-margin);
   width: 100%;
+  align-items: end;
 }
 
 /* ------------------------------------------------------------
@@ -482,6 +483,7 @@ img, svg { display: block; max-width: 100%; }
   border-top: var(--border-hairline);
   position: relative;
   z-index: var(--z-content);
+  align-self: end;
 }
 
 @media (min-width: 768px) {
