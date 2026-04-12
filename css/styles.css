@@ -314,7 +314,7 @@ img, svg { display: block; max-width: 100%; }
   border-top: var(--border-hairline);
   overflow: hidden;
   /* Scroll animation — JS adds .is-visible via IntersectionObserver */
-  opacity: 0;
+  opacity: 1;
   transform: translateY(20px);
   transition:
     opacity   600ms var(--ease-out-expo),
@@ -707,7 +707,7 @@ img, svg { display: block; max-width: 100%; }
   position: relative;
   z-index: var(--z-content);
   /* Scroll animation */
-  opacity: 0;
+  opacity: 1;
   transition: opacity 300ms var(--ease-out-expo);
 }
 
