@@ -19,20 +19,26 @@
   }).filter(Boolean);
 
   function tickClocks() {
-    const now = new Date();
-    const vanTime = now.toLocaleTimeString('en-GB', { timeZone: 'America/Vancouver', hour: '2-digit', minute: '2-digit' });
-    const bkkTime = now.toLocaleTimeString('en-GB', { timeZone: 'Asia/Bangkok', hour: '2-digit', minute: '2-digit' });
-    const vanHour = parseInt(vanTime.slice(0, 2), 10);
-    const bkkHour = parseInt(bkkTime.slice(0, 2), 10);
+  const now = new Date();
+  const vanTime = now.toLocaleTimeString('en-GB', { timeZone: 'America/Vancouver', hour: '2-digit', minute: '2-digit' });
+  const bkkTime = now.toLocaleTimeString('en-GB', { timeZone: 'Asia/Bangkok', hour: '2-digit', minute: '2-digit' });
+  const vanHour = parseInt(vanTime.slice(0, 2), 10);
+  const bkkHour = parseInt(bkkTime.slice(0, 2), 10);
+
+  if (clockNodes[0]) {
     clockNodes[0].timeEl.textContent = vanTime;
     clockNodes[0].timeEl.setAttribute('datetime', now.toISOString());
-    clockNodes[0].statusEl.textContent = (vanHour >= 20 || vanHour < 6) ? 'NIGHT' : 'DAY';
+    if (clockNodes[0].statusEl) clockNodes[0].statusEl.textContent = (vanHour >= 20 || vanHour < 6) ? 'NIGHT' : 'DAY';
     clockNodes[0].cluster.classList.toggle('is-night', vanHour >= 20 || vanHour < 6);
+  }
+
+  if (clockNodes[1]) {
     clockNodes[1].timeEl.textContent = bkkTime;
     clockNodes[1].timeEl.setAttribute('datetime', now.toISOString());
-    clockNodes[1].statusEl.textContent = (bkkHour >= 20 || bkkHour < 6) ? 'NIGHT' : 'DAY';
+    if (clockNodes[1].statusEl) clockNodes[1].statusEl.textContent = (bkkHour >= 20 || bkkHour < 6) ? 'NIGHT' : 'DAY';
     clockNodes[1].cluster.classList.toggle('is-night', bkkHour >= 20 || bkkHour < 6);
   }
+}
 
   function initScrollObserver() {
     if (!("IntersectionObserver" in window)) {

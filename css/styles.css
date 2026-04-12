@@ -74,8 +74,8 @@
   --text-body-sm: 0.875rem;
   --text-body-xs: 0.75rem;
 
-  --tracking-display: -0.02em;
-  --tracking-hero:    -0.03em;
+  --tracking-display: -0.015em;
+  --tracking-hero:    -0.015em;
   --tracking-mono:     0.15em;
   --tracking-label:    0.25em;
   --tracking-body:     0.04em;
@@ -221,7 +221,7 @@ img, svg { display: block; max-width: 100%; }
 .t-label {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   line-height: 1;
@@ -232,7 +232,7 @@ img, svg { display: block; max-width: 100%; }
 .t-registry {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--text-main);
@@ -271,8 +271,8 @@ img, svg { display: block; max-width: 100%; }
 /* PHILIP KWONG — DM Mono Medium 12px, 0.25em, ALL CAPS */
 .site-nav__wordmark {
   font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 12px;
+  font-weight: 700;
+  font-size: 15px;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   line-height: 1;
@@ -292,7 +292,7 @@ img, svg { display: block; max-width: 100%; }
 .site-nav__link {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--text-main);
@@ -331,21 +331,13 @@ img, svg { display: block; max-width: 100%; }
   /* Scroll animation — JS adds .is-visible via IntersectionObserver */
   opacity: 1;
   transform: none;
-  transition:
-    opacity   600ms var(--ease-out-expo),
-    transform 600ms var(--ease-out-expo);
-}
-
-.section.is-visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .section-label {
   display: block;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: rgba(10, 10, 10, 0.4);
@@ -451,7 +443,7 @@ img, svg { display: block; max-width: 100%; }
   display: none;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: var(--tracking-label);
   color: var(--accent);
   align-self: flex-end;
@@ -502,7 +494,7 @@ img, svg { display: block; max-width: 100%; }
 .hero-meta__item {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--accent);
@@ -585,7 +577,7 @@ img, svg { display: block; max-width: 100%; }
 .service-item__number {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: rgba(10, 10, 10, 0.4);
@@ -649,7 +641,7 @@ img, svg { display: block; max-width: 100%; }
 .industry-group__label {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.5);
@@ -678,11 +670,11 @@ img, svg { display: block; max-width: 100%; }
 }
 .work-category-label {
   font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 11px;
+  font-weight: 700;
+  font-size: 16px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(10, 10, 10, 0.4);
+  color: #0A0A0A;
   padding-block: var(--space-4);
   border-bottom: var(--border-hairline);
   margin-bottom: var(--space-4);
@@ -730,7 +722,7 @@ img, svg { display: block; max-width: 100%; }
   display: block;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--accent);
@@ -766,7 +758,7 @@ img, svg { display: block; max-width: 100%; }
 .work-item__category {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--text-main);
@@ -775,8 +767,8 @@ img, svg { display: block; max-width: 100%; }
   transition: color 300ms;
 }
 
-.work-item:hover .work-item__client   { color: var(--accent); transition: color 300ms; }
-.work-item:hover .work-item__category { color: #0A0A0A;       transition: color 300ms; }
+(leave empty)
+.(empty)
 
 /* ------------------------------------------------------------
    11. ABOUT
@@ -814,7 +806,7 @@ img, svg { display: block; max-width: 100%; }
   border-top: var(--border-hairline-dark);
 }
 
-#contact .section-label { color: var(--accent); }
+#contact .section-label { color: rgba(249, 249, 249, 0.4); }
 
 .contact-cta {
   font-family: var(--font-display);
@@ -844,10 +836,10 @@ img, svg { display: block; max-width: 100%; }
 .contact-form__label {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: rgba(10, 10, 10, 0.4);
+  color: rgba(249, 249, 249, 0.4);
 }
 
 .contact-form__input,
@@ -890,7 +882,7 @@ img, svg { display: block; max-width: 100%; }
   align-self: flex-start;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--bg-primary);
