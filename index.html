@@ -25,16 +25,6 @@
 
     <section id="hero" class="section" aria-labelledby="hero-heading">
       <div class="grid-stage">
-        <div class="clock-engine" style="grid-column: 1 / 5">
-          <div class="clock-cluster" id="clock-van">
-            <span class="clock-cluster__city">Vancouver</span>
-            <time class="clock-cluster__time" datetime="">00:00</time>
-          </div>
-          <div class="clock-cluster" id="clock-bkk">
-            <span class="clock-cluster__city">Bangkok</span>
-            <time class="clock-cluster__time" datetime="">00:00</time>
-          </div>
-        </div>
         <h1 id="hero-heading" class="hero-headline t-hero" style="grid-column: 1 / 9">
           <span>There Are</span>
           <span><span class="t-accent">No</span></span>
@@ -172,8 +162,17 @@
           <p>The focus is straightforward: clear strategy and work that gets implemented.</p>
           <p>Work spans regulatory frameworks through to go-to-market execution. I remain hands-on from the first conversation through to the final deliverable.</p>
         </div>
-        <div class="about-location" style="grid-column: 7 / 13; align-self: start;">
-          <p class="t-display-lg">Vancouver <span class="t-accent">&amp;</span> Bangkok</p>
+        <div class="about-clock" style="grid-column: 7 / 13; align-self: start;">
+          <span class="t-registry"><strong>[CURRENT_LOCATIONS]</strong></span>
+          <span class="about-clock__label">Operations</span>
+          <div class="clock-cluster" id="clock-van">
+            <span class="clock-cluster__city">Vancouver</span>
+            <time class="clock-cluster__time" datetime="">00:00</time>
+          </div>
+          <div class="clock-cluster" id="clock-bkk">
+            <span class="clock-cluster__city">Bangkok</span>
+            <time class="clock-cluster__time" datetime="">00:00</time>
+          </div>
         </div>
       </div>
     </section>
@@ -202,6 +201,6 @@
 
   </main>
 
-<script src="js/main.js" defer></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>

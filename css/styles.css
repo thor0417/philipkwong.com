@@ -419,22 +419,7 @@ img, svg { display: block; max-width: 100%; }
   transition: none;
 }
 
-.clock-engine {
-  display: flex;
-  flex-direction: row;
-  gap: var(--space-6);
-  margin-bottom: var(--space-12);
-  position: relative;
-  z-index: var(--z-content);
-}
 
-@media (min-width: 768px) {
-  .clock-engine {
-    flex-direction: row;
-    align-items: flex-end;
-    gap: var(--space-12);
-  }
-}
 
 /* Middle dot · — accent orange */
 .hero-clock-separator {
@@ -540,7 +525,7 @@ img, svg { display: block; max-width: 100%; }
    8. SERVICES
    ------------------------------------------------------------ */
 #services {
-  padding-block: var(--space-24) var(--space-32);
+  padding-block: clamp(6rem, 12vw, 12rem) var(--space-16);
   padding-inline: var(--grid-margin);
 }
 
@@ -577,8 +562,8 @@ img, svg { display: block; max-width: 100%; }
   font-size: 14px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: rgba(10, 10, 10, 0.4);
-  min-width: 3rem;
+  color: rgba(10, 10, 10, 0.35);
+  min-width: 2rem;
   flex-shrink: 0;
   transition: color 300ms;
 }
@@ -591,7 +576,8 @@ img, svg { display: block; max-width: 100%; }
 .service-item__title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: var(--text-main);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
 }
@@ -746,7 +732,8 @@ img, svg { display: block; max-width: 100%; }
 .work-item__client {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: var(--text-main);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
   transition: color 300ms;
@@ -770,6 +757,24 @@ img, svg { display: block; max-width: 100%; }
 #about {
   padding-block: var(--space-24) 25vh;
   padding-inline: var(--grid-margin);
+}
+
+#about .about-clock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-top: var(--space-4);
+  border-top: var(--border-hairline);
+}
+
+#about .about-clock__label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.4);
+  margin-bottom: var(--space-2);
 }
 
 .about-body {
