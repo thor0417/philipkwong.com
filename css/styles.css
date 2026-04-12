@@ -74,8 +74,8 @@
   --text-body-sm: 0.875rem;
   --text-body-xs: 0.75rem;
 
-  --tracking-display: -0.015em;
-  --tracking-hero:    -0.015em;
+  --tracking-display: 0.01em;
+  --tracking-hero:    -0.01em;
   --tracking-mono:     0.15em;
   --tracking-label:    0.25em;
   --tracking-body:     0.04em;
@@ -613,7 +613,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .industry-group {
-  padding-block: var(--space-6);
+  padding-block: var(--space-4);
   border-bottom: var(--border-hairline-dark);
 }
 
@@ -633,9 +633,9 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .industry-group__tags {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(0.875rem, 1.5vw, 1.1rem);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
   color: var(--bg-primary);
@@ -765,13 +765,6 @@ img, svg { display: block; max-width: 100%; }
   gap: var(--space-4);
   padding-top: var(--space-4);
   border-top: var(--border-hairline);
-}
-
-#about .about-clock .clock-cluster {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  gap: var(--space-6);
 }
 
 #about .about-clock__label {
