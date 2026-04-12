@@ -555,20 +555,12 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .service-item {
-  display: flex;
-  align-items: baseline;
+  display: grid;
+  grid-template-columns: 2rem 1fr;
   gap: var(--space-6);
+  align-items: baseline;
   padding-block: var(--space-6);
   border-bottom: var(--border-hairline);
-  position: relative;
-  z-index: var(--z-content);
-  /* Scroll animation */
-  opacity: 0;
-  transform: translateX(-10px);
-  transition:
-    opacity      400ms var(--ease-out-expo),
-    transform    400ms var(--ease-out-expo),
-    border-color 300ms;
 }
 
 .service-item.is-visible {
