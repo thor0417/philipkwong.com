@@ -74,8 +74,8 @@
   --text-body-sm: 0.875rem;
   --text-body-xs: 0.75rem;
 
-  --tracking-display: -0.03em;
-  --tracking-hero:    -0.04em;
+  --tracking-display: -0.02em;
+  --tracking-hero:    -0.03em;
   --tracking-mono:     0.15em;
   --tracking-label:    0.25em;
   --tracking-body:     0.04em;
@@ -229,6 +229,21 @@ img, svg { display: block; max-width: 100%; }
 
 .t-accent { color: var(--accent); }
 
+.t-registry {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+.t-registry strong {
+  font-weight: 700;
+  color: var(--accent);
+}
+
 /* ------------------------------------------------------------
    3. NAVIGATION
    ------------------------------------------------------------ */
@@ -287,7 +302,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .site-nav__link:hover {
-  border-bottom-color: var(--accent);
+  border-bottom-color: var(--text-main);
 }
 
 /* Dark nav state — JS adds .is-dark when scrolled over dark sections */
@@ -315,7 +330,7 @@ img, svg { display: block; max-width: 100%; }
   overflow: hidden;
   /* Scroll animation — JS adds .is-visible via IntersectionObserver */
   opacity: 1;
-  transform: translateY(20px);
+  transform: none;
   transition:
     opacity   600ms var(--ease-out-expo),
     transform 600ms var(--ease-out-expo);
@@ -333,7 +348,7 @@ img, svg { display: block; max-width: 100%; }
   font-size: 10px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: var(--accent);
+  color: rgba(10, 10, 10, 0.4);
   margin-bottom: var(--space-4);
 }
 
@@ -509,34 +524,25 @@ img, svg { display: block; max-width: 100%; }
 
 .clock-cluster__city {
   font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 10px;
+  font-weight: 700;
+  font-size: 14px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--accent);
+  display: block;
 }
 
 .clock-cluster__time {
   font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 4vw, 3rem);
   line-height: 1;
   letter-spacing: var(--tracking-display);
-  transition: color var(--duration-base) var(--ease-out-expo);
+  color: var(--text-main);
 }
 
 .clock-cluster__status {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 10px;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  padding: var(--space-1) var(--space-2);
-  border: var(--border-hairline);
-  display: inline-block;
-  transition:
-    border-color var(--duration-base) var(--ease-out-expo),
-    color        var(--duration-base) var(--ease-out-expo);
+  display: none;
 }
 
 .clock-cluster.is-night .clock-cluster__time   { color: var(--bg-primary); }
@@ -583,7 +589,7 @@ img, svg { display: block; max-width: 100%; }
   font-size: 10px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: var(--accent);
+  color: rgba(10, 10, 10, 0.4);
   min-width: 3rem;
   flex-shrink: 0;
   transition: color 300ms;
@@ -647,7 +653,7 @@ img, svg { display: block; max-width: 100%; }
   font-size: 10px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: var(--accent);
+  color: rgba(10, 10, 10, 0.4);
   margin-bottom: var(--space-2);
   transition: color 300ms;
 }
@@ -668,7 +674,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .industry-group:hover .industry-group__tags {
-  color: var(--accent);
+  color: #FFFFFF;
   transition: color 300ms;
 }
 
@@ -728,7 +734,7 @@ img, svg { display: block; max-width: 100%; }
   font-size: 10px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--text-main);
   flex-shrink: 0;
   text-align: right;
   transition: color 300ms;
@@ -766,6 +772,7 @@ img, svg { display: block; max-width: 100%; }
   background-color: var(--bg-dark);
   color: var(--bg-primary);
   padding-block: var(--space-24) var(--space-32);
+  padding-block-start: clamp(6rem, 15vw, 14rem);
   padding-inline: var(--grid-margin);
   position: relative;
   overflow: hidden;
@@ -805,7 +812,7 @@ img, svg { display: block; max-width: 100%; }
   font-size: 10px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: var(--accent);
+  color: rgba(10, 10, 10, 0.4);
 }
 
 .contact-form__input,
@@ -863,8 +870,8 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .contact-form__submit:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--text-main);
+  color: var(--text-main);
 }
 
 .contact-form__submit:focus-visible {
