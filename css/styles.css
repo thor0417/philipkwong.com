@@ -590,7 +590,7 @@ img, svg { display: block; max-width: 100%; }
 .service-item__title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2rem, 4vw, 5rem);
+  font-size: clamp(1.5rem, 3vw, 3rem);
   color: var(--text-main);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
