@@ -1,6 +1,6 @@
 /* ============================================================
    PHILIP KWONG — THE DIGITAL ARTIFACT
-   css/styles.css — System v2.2
+   css/styles.css — System v2.1
    Mobile-first: 320px base → 768px → 1280px
    ============================================================ */
 
@@ -51,7 +51,7 @@
    DESIGN TOKENS
    ------------------------------------------------------------ */
 :root {
-  --bg-primary:    #F9F9F9;
+  --bg-primary:    #FFFFFF;
   --text-main:     #0A0A0A;
   --accent:        #B34700;
   --bg-dark:       #111111;
@@ -75,13 +75,13 @@
   --text-body-xs: 0.75rem;
 
   --tracking-display: -0.03em;
-  --tracking-hero:    -0.04em;
+  --tracking-hero:    -0.05em;
   --tracking-mono:     0.15em;
   --tracking-label:    0.25em;
   --tracking-body:     0.04em;
 
   --leading-display: 0.92;
-  --leading-hero:    0.85;
+  --leading-hero:    0.82;
   --leading-body:    1.6;
 
   --space-1:  0.25rem;
@@ -96,7 +96,11 @@
 
   --margin-left:  15vw;
   --margin-right: 8vw;
-  --page-inline:  8vw;
+  --page-inline:  5vw;
+  --grid-cols: 12;
+  --grid-gutter: clamp(0.75rem, 1.5vw, 1.25rem);
+  --grid-margin: 5vw;
+  --grid-template: repeat(12, 1fr);
   --grid-gap:     clamp(1rem, 2vw, 1.5rem);
   --text-hero:    16vw;
 
@@ -157,6 +161,14 @@ ul, ol  { list-style: none; }
 a       { color: inherit; text-decoration: none; }
 img, svg { display: block; max-width: 100%; }
 
+.grid-stage {
+  display: grid;
+  grid-template-columns: var(--grid-template);
+  gap: var(--grid-gutter);
+  padding-inline: var(--grid-margin);
+  width: 100%;
+}
+
 /* ------------------------------------------------------------
    2. TYPOGRAPHY UTILITIES
    ------------------------------------------------------------ */
@@ -171,7 +183,7 @@ img, svg { display: block; max-width: 100%; }
 .t-display-xl {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 11px;
+  font-size: var(--text-display-xl);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
 }
@@ -179,27 +191,26 @@ img, svg { display: block; max-width: 100%; }
 .t-display-lg {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  line-height: 0.92;
-  letter-spacing: -0.02em;
+  font-size: var(--text-display-lg);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
 }
 
 .t-display-md {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1rem, 2vw, 1.75rem);
-  line-height: 0.95;
-  letter-spacing: -0.02em;
+  font-size: var(--text-display-md);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
 }
 
-/* Hero headline scale */
+/* Hero headline scale — used on h1 via class */
 .t-hero {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(4rem, 10vw, 8rem);
-  line-height: 0.85;
-  letter-spacing: -0.04em;
-  display: block;
+  font-size: clamp(4rem, 16vw, 10rem);
+  line-height: var(--leading-hero);  /* 0.82 */
+  letter-spacing: var(--tracking-hero); /* -0.05em */
 }
 
 .t-body-lg { font-size: var(--text-body-lg); line-height: var(--leading-body); }
@@ -242,6 +253,7 @@ img, svg { display: block; max-width: 100%; }
     color            var(--duration-base) var(--ease-out-expo);
 }
 
+/* PHILIP KWONG — DM Mono Medium 12px, 0.25em, ALL CAPS */
 .site-nav__wordmark {
   font-family: var(--font-body);
   font-weight: 500;
@@ -278,6 +290,7 @@ img, svg { display: block; max-width: 100%; }
   border-bottom-color: var(--accent);
 }
 
+/* Dark nav state — JS adds .is-dark when scrolled over dark sections */
 .site-nav.is-dark {
   background: rgba(17, 17, 17, 0.85);
   color: #FFFFFF;
@@ -296,10 +309,21 @@ img, svg { display: block; max-width: 100%; }
    ------------------------------------------------------------ */
 .section {
   position: relative;
-  padding-block: var(--space-24);
-  padding-inline: 5vw;
+  padding-block: clamp(6rem, 12vw, 12rem);
+  padding-inline: var(--grid-margin);
   border-top: var(--border-hairline);
   overflow: hidden;
+  /* Scroll animation — JS adds .is-visible via IntersectionObserver */
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity   600ms var(--ease-out-expo),
+    transform 600ms var(--ease-out-expo);
+}
+
+.section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .section-label {
@@ -316,7 +340,7 @@ img, svg { display: block; max-width: 100%; }
 .section-title {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 11px;
+  font-size: var(--text-display-xl);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
   margin-bottom: var(--space-12);
@@ -349,8 +373,27 @@ img, svg { display: block; max-width: 100%; }
    5. KOYO NUMBERS
    ------------------------------------------------------------ */
 .koyo {
-  display: none;
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(16rem, 40vw, 40rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  opacity: var(--opacity-koyo);
+  z-index: var(--z-koyo);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  color: currentColor;
 }
+
+.koyo--top-right    { top: -0.15em;    right: -0.1em;  }
+.koyo--bottom-left  { bottom: -0.15em; left: -0.05em;  }
+.koyo--center-right { top: 50%; right: -0.1em; transform: translateY(-50%); }
+.koyo--bottom-right { bottom: -0.15em; right: -0.05em; }
+
+#industries .koyo,
+#contact .koyo { color: var(--bg-primary); }
 
 /* ------------------------------------------------------------
    6. HERO
@@ -359,23 +402,16 @@ img, svg { display: block; max-width: 100%; }
   position: relative;
   min-height: 100svh;
   padding-block: var(--space-16) var(--space-24);
-  padding-inline: 5vw;
+  padding-inline: var(--grid-margin);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
   border-top: none;
+  /* Hero is always visible — override section animation */
   opacity: 1;
   transform: none;
   transition: none;
-}
-
-.clock-engine {
-  display: flex;
-  flex-direction: row;
-  gap: 4rem;
-  align-items: flex-start;
-  margin-bottom: var(--space-12);
 }
 
 .hero-clock-row {
@@ -395,6 +431,7 @@ img, svg { display: block; max-width: 100%; }
   }
 }
 
+/* Middle dot · — accent orange */
 .hero-clock-separator {
   display: none;
   font-family: var(--font-body);
@@ -403,7 +440,7 @@ img, svg { display: block; max-width: 100%; }
   letter-spacing: var(--tracking-label);
   color: var(--accent);
   align-self: flex-end;
-  padding-bottom: 0.4em;
+  padding-bottom: 0.4em; /* optical alignment to clock baseline */
 }
 
 @media (min-width: 768px) {
@@ -517,6 +554,8 @@ img, svg { display: block; max-width: 100%; }
    ------------------------------------------------------------ */
 #services {
   padding-block: var(--space-24) var(--space-32);
+  padding-left: var(--margin-left);
+  padding-right: var(--margin-right);
 }
 
 .service-list {
@@ -531,7 +570,18 @@ img, svg { display: block; max-width: 100%; }
   border-bottom: var(--border-hairline);
   position: relative;
   z-index: var(--z-content);
-  transition: border-color 300ms;
+  /* Scroll animation */
+  opacity: 0;
+  transform: translateX(-10px);
+  transition:
+    opacity      400ms var(--ease-out-expo),
+    transform    400ms var(--ease-out-expo),
+    border-color 300ms;
+}
+
+.service-item.is-visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .service-item:hover {
@@ -547,10 +597,10 @@ img, svg { display: block; max-width: 100%; }
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 10px;
-  letter-spacing: 0.2em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--accent);
-  min-width: 2rem;
+  min-width: 3rem;
   flex-shrink: 0;
   transition: color 300ms;
 }
@@ -562,10 +612,10 @@ img, svg { display: block; max-width: 100%; }
 
 .service-item__title {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1rem, 2vw, 1.75rem);
-  line-height: 0.95;
-  letter-spacing: -0.02em;
+  font-weight: 800;
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
 }
 
 /* ------------------------------------------------------------
@@ -575,7 +625,7 @@ img, svg { display: block; max-width: 100%; }
   background-color: var(--bg-dark);
   color: var(--bg-primary);
   padding-block: var(--space-24) var(--space-32);
-  padding-inline: 5vw;
+  padding-inline: var(--grid-margin);
   position: relative;
   overflow: hidden;
   border-top: var(--border-hairline-dark);
@@ -620,10 +670,10 @@ img, svg { display: block; max-width: 100%; }
 
 .industry-group__tags {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1rem, 2vw, 1.75rem);
-  line-height: 0.95;
-  letter-spacing: -0.02em;
+  font-weight: 800;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
   color: var(--bg-primary);
   transition: color 300ms;
 }
@@ -643,6 +693,8 @@ img, svg { display: block; max-width: 100%; }
    ------------------------------------------------------------ */
 #work {
   padding-block: var(--space-24) var(--space-32);
+  padding-left: var(--margin-left);
+  padding-right: var(--margin-right);
 }
 
 .work-category {
@@ -661,47 +713,6 @@ img, svg { display: block; max-width: 100%; }
   border-bottom: var(--border-hairline);
 }
 
-/* Subsection headers */
-.work-subsection .section-title {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-main);
-  margin-bottom: var(--space-4);
-  border-bottom: 0.5px solid var(--border-light);
-  padding-bottom: var(--space-4);
-}
-
-/* Work entry — client bold, descriptor below */
-.work-entry {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 0;
-  border-bottom: 0.5px solid var(--border-light);
-}
-
-.work-entry__client {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1rem, 2vw, 1.75rem);
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-  color: var(--text-main);
-}
-
-.work-entry__descriptor {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-top: 0.4rem;
-}
-
-/* Legacy work-item (ledger layout) — kept for backward compat */
 .work-item {
   display: flex;
   align-items: baseline;
@@ -711,8 +722,12 @@ img, svg { display: block; max-width: 100%; }
   border-bottom: var(--border-hairline);
   position: relative;
   z-index: var(--z-content);
-  transition: color 300ms;
+  /* Scroll animation */
+  opacity: 0;
+  transition: opacity 300ms var(--ease-out-expo);
 }
+
+.work-item.is-visible { opacity: 1; }
 
 .work-item__client {
   font-family: var(--font-display);
@@ -743,19 +758,14 @@ img, svg { display: block; max-width: 100%; }
    ------------------------------------------------------------ */
 #about {
   padding-block: var(--space-24) 25vh;
-}
-
-#about .grid {
-  display: grid;
-  grid-template-columns: 40% 60%;
-  gap: var(--grid-gap);
-  align-items: start;
+  padding-left: var(--margin-left);
+  padding-right: var(--margin-right);
 }
 
 .about-body {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.6;
   letter-spacing: var(--tracking-body);
   max-width: 55ch;
@@ -772,7 +782,7 @@ img, svg { display: block; max-width: 100%; }
   background-color: var(--bg-dark);
   color: var(--bg-primary);
   padding-block: var(--space-24) var(--space-32);
-  padding-inline: 5vw;
+  padding-inline: var(--grid-margin);
   position: relative;
   overflow: hidden;
   border-top: var(--border-hairline-dark);
@@ -780,20 +790,14 @@ img, svg { display: block; max-width: 100%; }
 
 #contact .section-label { color: var(--accent); }
 
-#contact .contact-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-16);
-  align-items: start;
-}
-
 .contact-cta {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  line-height: 0.85;
-  letter-spacing: -0.04em;
-  color: #FFFFFF;
+  font-size: var(--text-display-xl);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  color: var(--bg-primary);
+  margin-bottom: var(--space-12);
 }
 
 .contact-form {
@@ -835,6 +839,7 @@ img, svg { display: block; max-width: 100%; }
   padding-block: var(--space-4);
   line-height: var(--leading-body);
   transition: border-color var(--duration-base) var(--ease-out-expo);
+  /* Suppress browser autofill background */
   -webkit-box-shadow: 0 0 0 1000px var(--bg-dark) inset;
   -webkit-text-fill-color: var(--bg-primary);
 }
