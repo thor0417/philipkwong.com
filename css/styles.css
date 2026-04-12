@@ -486,14 +486,11 @@ img, svg { display: block; max-width: 100%; }
 /* ------------------------------------------------------------
    7. CLOCK CLUSTERS
    ------------------------------------------------------------ */
-.clock-cluster {
+#hero .clock-engine {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  transition:
-    background-color var(--duration-base) var(--ease-out-expo),
-    color            var(--duration-base) var(--ease-out-expo),
-    border-color     var(--duration-base) var(--ease-out-expo);
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--space-8);
 }
 
 .clock-cluster__city {
