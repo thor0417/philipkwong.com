@@ -182,7 +182,6 @@ img, svg { display: block; max-width: 100%; }
   gap: var(--grid-gutter);
   padding-inline: var(--grid-margin);
   width: 100%;
-  align-items: end;
 }
 
 /* ------------------------------------------------------------
@@ -220,13 +219,13 @@ img, svg { display: block; max-width: 100%; }
   letter-spacing: var(--tracking-display);
 }
 
-/* Hero headline scale — used on h1 via class */
+/* Hero headline — Dharma Gothic at viewport-commanding scale */
 .t-hero {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(3.5rem, 10vw, 10rem);
-  line-height: var(--leading-hero);  /* 0.82 */
-  letter-spacing: var(--tracking-hero); /* -0.05em */
+  font-size: clamp(4rem, 12vw, 14rem);
+  line-height: var(--leading-hero);
+  letter-spacing: var(--tracking-hero);
 }
 
 .t-body-lg { font-size: var(--text-body-lg); line-height: var(--leading-body); }
@@ -249,7 +248,7 @@ img, svg { display: block; max-width: 100%; }
   font-family: var(--font-body);
   font-weight: 400;
   font-size: 14px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--text-main);
   display: block;
@@ -273,7 +272,7 @@ img, svg { display: block; max-width: 100%; }
   align-items: center;
   justify-content: space-between;
   padding-inline: var(--page-inline);
-  height: 4rem; /* 56px = 8pt × 7 */
+  height: 4rem;
   border-bottom: var(--border-hairline);
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(20px);
@@ -284,7 +283,6 @@ img, svg { display: block; max-width: 100%; }
     color            var(--duration-base) var(--ease-out-expo);
 }
 
-/* PHILIP KWONG — DM Mono Medium 12px, 0.25em, ALL CAPS */
 .site-nav__wordmark {
   font-family: var(--font-body);
   font-weight: 700;
@@ -306,10 +304,10 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .site-nav__link {
-  font-family: var(--font-body);
+  font-family: var(--font-readable);
   font-weight: 500;
-  font-size: 14px;
-  letter-spacing: var(--tracking-label);
+  font-size: 11px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-main);
   border-bottom: 0.5px solid transparent;
@@ -332,7 +330,7 @@ img, svg { display: block; max-width: 100%; }
 .site-nav.is-dark .site-nav__link     { color: #FFFFFF; }
 
 #hero, #services, #industries, #work, #about, #contact {
-  scroll-margin-top: 3.5rem;
+  scroll-margin-top: 4rem;
 }
 
 /* ------------------------------------------------------------
@@ -344,7 +342,6 @@ img, svg { display: block; max-width: 100%; }
   padding-inline: var(--grid-margin);
   border-top: var(--border-hairline);
   overflow: hidden;
-  /* Scroll animation — JS adds .is-visible via IntersectionObserver */
   opacity: 1;
   transform: none;
 }
@@ -426,34 +423,14 @@ img, svg { display: block; max-width: 100%; }
   min-height: 100svh;
   padding-block: var(--space-16) var(--space-24);
   padding-inline: var(--grid-margin);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  /* grid context so .grid-stage inside uses align-content correctly */
+  display: grid;
+  align-content: end;
   overflow: visible;
   border-top: none;
-  /* Hero is always visible — override section animation */
   opacity: 1;
   transform: none;
   transition: none;
-  align-items: stretch;
-}
-
-
-
-/* Middle dot · — accent orange */
-.hero-clock-separator {
-  display: none;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: var(--tracking-label);
-  color: var(--accent);
-  align-self: flex-end;
-  padding-bottom: 0.4em; /* optical alignment to clock baseline */
-}
-
-@media (min-width: 768px) {
-  .hero-clock-separator { display: block; }
 }
 
 .hero-headline {
@@ -462,45 +439,22 @@ img, svg { display: block; max-width: 100%; }
   z-index: var(--z-content);
 }
 
-.hero-subline {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: var(--text-body-lg);
-  line-height: var(--leading-body);
-  letter-spacing: var(--tracking-body);
-  margin-top: var(--space-6);
-  max-width: 55ch;
-  position: relative;
-  z-index: var(--z-content);
-}
-
 .hero-meta {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  margin-top: var(--space-8);
   padding-top: var(--space-6);
   border-top: var(--border-hairline);
   position: relative;
   z-index: var(--z-content);
-  align-self: end;
 }
 
 @media (min-width: 768px) {
   .hero-meta {
     flex-direction: row;
     gap: var(--space-8);
-    align-items: center;
+    align-items: start;
   }
-}
-
-.hero-meta__item {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--accent);
 }
 
 /* ------------------------------------------------------------
@@ -542,7 +496,7 @@ img, svg { display: block; max-width: 100%; }
    8. SERVICES
    ------------------------------------------------------------ */
 #services {
-  padding-block: clamp(6rem, 12vw, 12rem) var(--space-16);
+  padding-block: clamp(6rem, 12vw, 12rem);
   padding-inline: var(--grid-margin);
 }
 
@@ -569,7 +523,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 @media (min-width: 768px) {
-  .service-item { padding-block: var(--space-8); gap: var(--space-8); }
+  .service-item { padding-block: var(--space-8); }
 }
 
 .service-item__number {
@@ -631,6 +585,8 @@ img, svg { display: block; max-width: 100%; }
 .industry-group {
   padding-block: var(--space-4);
   border-bottom: var(--border-hairline-dark);
+  min-width: 0;
+  overflow: hidden;
 }
 
 .industry-group:first-of-type {
@@ -670,8 +626,6 @@ img, svg { display: block; max-width: 100%; }
   color: var(--bg-primary);
 }
 
-
-
 /* ------------------------------------------------------------
    10. SELECTED WORK
    ------------------------------------------------------------ */
@@ -679,13 +633,14 @@ img, svg { display: block; max-width: 100%; }
   padding-block: clamp(6rem, 12vw, 12rem);
   padding-inline: var(--grid-margin);
 }
+
 .work-category-label {
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 16px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #0A0A0A;
+  color: rgba(10, 10, 10, 0.4);
   padding-block: var(--space-4);
   border-bottom: var(--border-hairline);
   margin-bottom: var(--space-4);
@@ -730,84 +685,12 @@ img, svg { display: block; max-width: 100%; }
   margin-bottom: var(--space-12);
 }
 
-.work-category {
-  margin-bottom: var(--space-12);
-}
-
-.work-category__label {
-  display: block;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--accent);
-  padding-bottom: var(--space-4);
-  border-bottom: var(--border-hairline);
-}
-
-.work-item {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-8);
-  padding-block: var(--space-4);
-  border-bottom: var(--border-hairline);
-  position: relative;
-  z-index: var(--z-content);
-  /* Scroll animation */
-  opacity: 1;
-  transition: opacity 300ms var(--ease-out-expo);
-}
-
-.work-item.is-visible { opacity: 1; }
-
-.work-item__client {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  color: var(--text-main);
-  line-height: var(--leading-display);
-  letter-spacing: var(--tracking-display);
-  transition: color 300ms;
-}
-
-.work-item__category {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-main);
-  flex-shrink: 0;
-  text-align: right;
-  transition: color 300ms;
-}
-
 /* ------------------------------------------------------------
    11. ABOUT
    ------------------------------------------------------------ */
 #about {
   padding-block: var(--space-24) 25vh;
   padding-inline: var(--grid-margin);
-}
-
-#about .about-clock {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  padding-top: var(--space-4);
-  border-top: var(--border-hairline);
-}
-
-#about .about-clock__label {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: rgba(10, 10, 10, 0.4);
-  margin-bottom: var(--space-2);
 }
 
 .about-body {
@@ -824,13 +707,11 @@ img, svg { display: block; max-width: 100%; }
 
 .about-body p + p { margin-top: var(--space-6); }
 
-.about-year {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  line-height: 1;
-  letter-spacing: 0.05em;
-  color: var(--text-main);
+.about-locations {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-self: start;
 }
 
 .about-data-row {
@@ -841,14 +722,6 @@ img, svg { display: block; max-width: 100%; }
   border-bottom: var(--border-hairline);
   gap: var(--space-8);
   flex-wrap: nowrap;
-}
-
-.about-locations {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  align-self: start;
-  padding-top: 0.2em;
 }
 
 /* ------------------------------------------------------------
@@ -916,7 +789,6 @@ img, svg { display: block; max-width: 100%; }
   padding-block: var(--space-4);
   line-height: var(--leading-body);
   transition: border-color var(--duration-base) var(--ease-out-expo);
-  /* Suppress browser autofill background */
   -webkit-box-shadow: 0 0 0 1000px var(--bg-dark) inset;
   -webkit-text-fill-color: var(--bg-primary);
 }
@@ -980,12 +852,4 @@ img, svg { display: block; max-width: 100%; }
    ------------------------------------------------------------ */
 @media (min-width: 1280px) {
   .section { padding-block: var(--space-32); }
-
-  .work-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 var(--space-24);
-  }
-
-  .work-grid .work-category { margin-bottom: 0; }
 }
