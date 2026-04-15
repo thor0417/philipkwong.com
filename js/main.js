@@ -61,14 +61,14 @@
     document.head.appendChild(s1);
   });
 
-  /* ─── FALLBACK — if GSAP fails or is slow, make everything visible ───────── */
+  /* ─── FALLBACK ───────────────────────────────────────────────────────────── */
 
   function showAllContent() {
     document.querySelectorAll(
       '.section, .service-item, .work-entry, .section-label, ' +
       '.industry-group, .about-body, .about-locations, ' +
       '.contact-cta, .contact-form__field, .contact-form__submit, ' +
-      '.hero-headline span, #hero .clock-engine, .hero-meta span'
+      '.hero-headline span, #hero .clock-engine, .hero-meta .t-registry'
     ).forEach(el => {
       el.style.opacity = '1';
       el.style.transform = 'none';
@@ -82,7 +82,7 @@
 
     const ease = 'power3.out';
 
-    /* -- HERO: fires on load, no ScrollTrigger -------------------------------- */
+    /* -- HERO ---------------------------------------------------------------- */
 
     const heroClock = document.querySelector('#hero .clock-engine');
     if (heroClock) {
@@ -116,7 +116,7 @@
       });
     }
 
-    /* -- HELPER: ScrollTrigger factory --------------------------------------- */
+    /* -- HELPER -------------------------------------------------------------- */
     const st = (trigger, extraConfig = {}) => ({
       trigger,
       start: 'top 90%',
@@ -194,7 +194,11 @@
         duration: 0.5,
         ease,
         stagger: 0.05,
-        scrollTrigger: st(workCategoryLabels[0]), = gsap.utils.toArray('#work .work-entry');
+        scrollTrigger: st(workCategoryLabels[0]),
+      });
+    }
+
+    const workEntries = gsap.utils.toArray('#work .work-entry');
     if (workEntries.length) {
       gsap.set(workEntries, { x: -20, opacity: 0 });
       gsap.to(workEntries, {
@@ -265,7 +269,7 @@
         duration: 0.65,
         ease,
         stagger: 0.06,
-        scrollTrigger: st('#contact .contact-form__field'),
+        scrollTrigger: st(formFields[0]),
       });
     }
 
@@ -289,7 +293,9 @@
     }
 
     ScrollTrigger.refresh();
-  } ───────────────────────────────────────────────────────────────── */
+  }
+
+  /* ─── INIT ───────────────────────────────────────────────────────────────── */
 
   document.addEventListener("DOMContentLoaded", () => {
     tickClocks();
@@ -300,11 +306,9 @@
         initAnimations();
       })
       .catch(() => {
-        /* GSAP failed to load — show all content immediately */
         showAllContent();
       });
 
-    /* Safety net: if GSAP loads but animations hang, reveal everything after 4s */
     setTimeout(showAllContent, 4000);
   });
 })();
