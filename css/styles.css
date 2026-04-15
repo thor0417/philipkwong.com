@@ -447,8 +447,8 @@ img, svg { display: block; max-width: 100%; }
 
 @media (min-width: 768px) {
   .hero-meta {
-    flex-direction: row;
-    gap: var(--space-8);
+    flex-direction: column;
+    gap: var(--space-2);
     align-items: start;
   }
 }
@@ -837,6 +837,13 @@ img, svg { display: block; max-width: 100%; }
   #industries,
   #contact    { padding-block: var(--space-32); }
   #hero       { padding-block: var(--space-24) var(--space-32); }
+
+  /* Reset any mobile flex overrides on hero grid-stage */
+  #hero .grid-stage {
+    display: grid;
+    grid-template-columns: var(--grid-template);
+    flex-direction: unset;
+  }
 }
 
 /* ------------------------------------------------------------
@@ -845,6 +852,11 @@ img, svg { display: block; max-width: 100%; }
 @media (min-width: 1280px) {
   .section { padding-block: var(--space-32); }
 }
+
+/* Trigger and overlay: hidden on desktop, activated only in mobile block below */
+.site-nav__trigger { display: none; }
+.nav-overlay       { display: none; }
+
 /* ------------------------------------------------------------
    15. MOBILE — max-width: 767px
    Full reinterpretation for vertical stage.
@@ -947,8 +959,9 @@ img, svg { display: block; max-width: 100%; }
      Headline dominates. Clocks and registry tags
      become secondary metadata beneath. */
   #hero {
-    padding-block: 5rem clamp(2.5rem, 8vw, 4rem);
-    align-content: end;
+    min-height: unset;
+    padding-block: 6rem clamp(2.5rem, 8vw, 4rem);
+    align-content: unset;
   }
 
   #hero .grid-stage {
@@ -964,7 +977,6 @@ img, svg { display: block; max-width: 100%; }
     gap: var(--space-8);
     margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
     order: 1;
-    grid-column: unset !important;
   }
 
   .clock-cluster__time {
@@ -977,15 +989,16 @@ img, svg { display: block; max-width: 100%; }
     font-size: clamp(4.5rem, 22vw, 7rem);
     line-height: 0.85;
     margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
-    grid-column: unset !important;
+    grid-column: unset;
   }
 
+  /* Registry tags: below headline, left-aligned dossier stack */
   .hero-meta {
     order: 3;
     flex-direction: column;
     gap: var(--space-1);
     padding-top: var(--space-4);
-    grid-column: unset !important;
+    grid-column: unset;
   }
 
   /* SERVICES */
