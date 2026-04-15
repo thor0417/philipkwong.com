@@ -716,6 +716,17 @@ img, svg { display: block; max-width: 100%; }
   flex-wrap: nowrap;
 }
 
+@media (max-width: 767px) {
+  .about-data-row {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .about-data-row .t-registry {
+    white-space: normal;
+    word-break: break-word;
+  }
+}
+
 /* ------------------------------------------------------------
    12. CONTACT
    ------------------------------------------------------------ */
@@ -929,7 +940,7 @@ img, svg { display: block; max-width: 100%; }
   .nav-overlay__link {
     font-family: var(--font-display);
     font-weight: 900;
-    font-size: clamp(3.5rem, 18vw, 6rem);
+    font-size: clamp(2rem, 10vw, 3.5rem);
     line-height: 0.88;
     letter-spacing: var(--tracking-hero);
     color: var(--text-main);
@@ -1044,7 +1055,9 @@ img, svg { display: block; max-width: 100%; }
   .work-entry__descriptor {
     text-align: left;
     white-space: normal;
-    font-size: 12px;
+    word-break: break-word;
+    font-size: 11px;
+    line-height: 1.5;
   }
 
   /* ABOUT
