@@ -96,10 +96,10 @@
       gsap.to(heroSpans, {
         y: 0,
         opacity: 1,
-        duration: 0.8,
+        duration: 1.2,
         ease,
-        stagger: 0.08,
-        delay: 0.3,
+        stagger: 0.12,
+        delay: 0.4,
       });
     }
 
@@ -109,17 +109,17 @@
       gsap.to(heroMeta, {
         x: 0,
         opacity: 1,
-        duration: 0.7,
+        duration: 1.0,
         ease,
-        stagger: 0.06,
-        delay: 0.6,
+        stagger: 0.1,
+        delay: 0.9,
       });
     }
 
     /* -- HELPER: ScrollTrigger factory --------------------------------------- */
     const st = (trigger, extraConfig = {}) => ({
       trigger,
-      start: 'top 85%',
+      start: 'top 90%',
       once: true,
       ...extraConfig,
     });
@@ -145,7 +145,7 @@
         duration: 0.7,
         ease,
         stagger: 0.06,
-        scrollTrigger: st('#services'),
+        scrollTrigger: st(serviceItems[0]),
       });
     }
 
@@ -170,7 +170,7 @@
         duration: 0.75,
         ease,
         stagger: 0.08,
-        scrollTrigger: st('#industries'),
+        scrollTrigger: st(industryGroups[0]),
       });
     }
 
@@ -194,11 +194,7 @@
         duration: 0.5,
         ease,
         stagger: 0.05,
-        scrollTrigger: st('#work'),
-      });
-    }
-
-    const workEntries = gsap.utils.toArray('#work .work-entry');
+        scrollTrigger: st(workCategoryLabels[0]), = gsap.utils.toArray('#work .work-entry');
     if (workEntries.length) {
       gsap.set(workEntries, { x: -20, opacity: 0 });
       gsap.to(workEntries, {
@@ -207,7 +203,7 @@
         duration: 0.65,
         ease,
         stagger: 0.04,
-        scrollTrigger: st('#work'),
+        scrollTrigger: st(workEntries[0]),
       });
     }
 
@@ -291,9 +287,9 @@
         });
       });
     }
-  }
 
-  /* ─── INIT ───────────────────────────────────────────────────────────────── */
+    ScrollTrigger.refresh();
+  } ───────────────────────────────────────────────────────────────── */
 
   document.addEventListener("DOMContentLoaded", () => {
     tickClocks();
