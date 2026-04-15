@@ -845,3 +845,224 @@ img, svg { display: block; max-width: 100%; }
 @media (min-width: 1280px) {
   .section { padding-block: var(--space-32); }
 }
+/* ------------------------------------------------------------
+   15. MOBILE — max-width: 767px
+   Full reinterpretation for vertical stage.
+   ------------------------------------------------------------ */
+@media (max-width: 767px) {
+
+  /* GRID
+     Collapse to 4-col on mobile. Keeps spatial language
+     without forcing 12-col math on a 375px screen. */
+  :root {
+    --grid-template: repeat(4, 1fr);
+    --grid-margin: 6vw;
+    --grid-gutter: 0.75rem;
+  }
+
+  /* NAV */
+  .site-nav {
+    height: 3.5rem;
+    padding-inline: 6vw;
+  }
+
+  .site-nav__wordmark {
+    font-size: 13px;
+  }
+
+  /* Mobile nav trigger — typographic, no icons */
+  .site-nav__trigger {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: var(--text-main);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .site-nav.is-dark .site-nav__trigger {
+    color: #FFFFFF;
+  }
+
+  /* MOBILE NAV OVERLAY */
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: calc(var(--z-nav) - 1);
+    background: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 6vw;
+    padding-bottom: clamp(3rem, 10vw, 5rem);
+
+    /* Hidden state */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s var(--ease-out-expo);
+  }
+
+  .nav-overlay.is-open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* Overlay links — Dharma Gothic at display scale */
+  .nav-overlay__link {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(3.5rem, 18vw, 6rem);
+    line-height: 0.88;
+    letter-spacing: var(--tracking-hero);
+    color: var(--text-main);
+    display: block;
+    border-top: var(--border-hairline);
+    padding-block: 0.35em;
+    transition: color 0.2s var(--ease-out-expo);
+  }
+
+  .nav-overlay__link:last-of-type {
+    border-bottom: var(--border-hairline);
+  }
+
+  .nav-overlay__link:active {
+    color: rgba(10, 10, 10, 0.35);
+  }
+
+  /* Registry tags at bottom of overlay */
+  .nav-overlay__meta {
+    margin-top: clamp(2rem, 6vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  /* HERO
+     Headline dominates. Clocks and registry tags
+     become secondary metadata beneath. */
+  #hero {
+    padding-block: 5rem clamp(2.5rem, 8vw, 4rem);
+    align-content: end;
+  }
+
+  #hero .grid-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Clocks: horizontal strip, both cities on one line */
+  .clock-engine {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-8);
+    margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
+    order: 1;
+  }
+
+  .clock-cluster__time {
+    font-size: clamp(1.25rem, 5vw, 2rem);
+  }
+
+  /* Headline: full width, maximum scale */
+  .hero-headline {
+    order: 2;
+    font-size: clamp(4.5rem, 22vw, 7rem);
+    line-height: 0.85;
+    margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
+    grid-column: unset;
+  }
+
+  /* Registry tags: below headline, left-aligned dossier stack */
+  .hero-meta {
+    order: 3;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-top: var(--space-4);
+    grid-column: unset;
+  }
+
+  /* SERVICES */
+  .service-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+    padding-block: var(--space-6);
+  }
+
+  .service-item__title {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+    white-space: normal;
+  }
+
+  /* INDUSTRIES — already 1-col, just tighten */
+  #industries {
+    padding-block: clamp(3rem, 8vw, 5rem);
+  }
+
+  .industry-group__tags,
+  .industry-tag {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+  }
+
+  /* WORK
+     Descriptor moves below client name.
+     white-space: nowrap released. */
+  .work-entry {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-block: var(--space-6);
+  }
+
+  .work-entry__client {
+    font-size: clamp(1.75rem, 8vw, 3rem);
+    white-space: normal;
+    text-overflow: unset;
+    overflow: visible;
+  }
+
+  .work-entry__descriptor {
+    text-align: left;
+    white-space: normal;
+    font-size: 12px;
+  }
+
+  /* ABOUT
+     Body full width. Data rows below as dossier block. */
+  #about .grid-stage {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 6vw, 3rem);
+  }
+
+  .about-body {
+    font-size: 16px;
+    max-width: 100%;
+  }
+
+  .about-locations {
+    align-self: unset;
+    border-top: var(--border-hairline);
+    padding-top: var(--space-4);
+  }
+
+  /* CONTACT
+     CTA full width. Form below. */
+  #contact .grid-stage {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 6vw, 3rem);
+  }
+
+  .contact-cta {
+    font-size: clamp(3.5rem, 18vw, 7rem);
+    margin-bottom: 0;
+  }
+}

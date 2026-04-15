@@ -12,7 +12,7 @@
 
   <nav class="site-nav" aria-label="Primary navigation">
     <a class="site-nav__wordmark" href="#hero">Philip Kwong</a>
-    <ul class="site-nav__links" role="list">
+    <button class="site-nav__trigger" aria-expanded="false" aria-controls="nav-overlay" aria-label="Open navigation">[ MENU ]</butt
       <li><a class="site-nav__link" href="#services">Services</a></li>
       <li><a class="site-nav__link" href="#industries">Industries</a></li>
       <li><a class="site-nav__link" href="#work">Work</a></li>
@@ -21,6 +21,20 @@
     </ul>
   </nav>
 
+<div class="nav-overlay" id="nav-overlay" aria-hidden="true" role="dialog" aria-label="Site navigation">
+    <nav aria-label="Mobile navigation">
+      <a class="nav-overlay__link" href="#services">Services</a>
+      <a class="nav-overlay__link" href="#industries">Industries</a>
+      <a class="nav-overlay__link" href="#work">Work</a>
+      <a class="nav-overlay__link" href="#about">About</a>
+      <a class="nav-overlay__link" href="#contact">Contact</a>
+    </nav>
+    <div class="nav-overlay__meta">
+      <span class="t-registry"><strong>[ULC: STRAT]</strong> CORP. STRATEGY</span>
+      <span class="t-registry"><strong>[ISO: VICE]</strong> CONVENER</span>
+      <span class="t-registry"><strong>[REG: 08.YRS]</strong> COMPLIANCE</span>
+    </div>
+  </div>
   <main>
 
     <section id="hero" class="section" aria-labelledby="hero-heading">

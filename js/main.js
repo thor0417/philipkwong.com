@@ -297,9 +297,50 @@
 
   /* ─── INIT ───────────────────────────────────────────────────────────────── */
 
+/* ─── MOBILE NAV OVERLAY ─────────────────────────────────────────────────── */
+
+  function initMobileNav() {
+    const trigger = document.querySelector('.site-nav__trigger');
+    const overlay = document.getElementById('nav-overlay');
+    if (!trigger || !overlay) return;
+
+    const overlayLinks = overlay.querySelectorAll('.nav-overlay__link');
+
+    function openNav() {
+      overlay.classList.add('is-open');
+      overlay.setAttribute('aria-hidden', 'false');
+      trigger.setAttribute('aria-expanded', 'true');
+      trigger.textContent = '[ CLOSE ]';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeNav() {
+      overlay.classList.remove('is-open');
+      overlay.setAttribute('aria-hidden', 'true');
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.textContent = '[ MENU ]';
+      document.body.style.overflow = '';
+    }
+
+    trigger.addEventListener('click', () => {
+      overlay.classList.contains('is-open') ? closeNav() : openNav();
+    });
+
+    overlayLinks.forEach(link => {
+      link.addEventListener('click', closeNav);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeNav();
+    });
+  }
+
+  /* ─── INIT ───────────────────────────────────────────────────────────────── */
+
   document.addEventListener("DOMContentLoaded", () => {
     tickClocks();
     setInterval(tickClocks, 1000);
+    initMobileNav();
 
     loadGSAP()
       .then(() => {
