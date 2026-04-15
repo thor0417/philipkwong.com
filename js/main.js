@@ -46,20 +46,34 @@
 
   /* ─── GSAP LOADER ────────────────────────────────────────────────────────── */
 
-  /* Dynamic load keeps the HTML clean and guarantees ScrollTrigger is
-   * registered only after GSAP core is fully evaluated — race-condition safe. */
-  const loadGSAP = () => new Promise((resolve) => {
+  const loadGSAP = () => new Promise((resolve, reject) => {
     if (window.gsap) { resolve(); return; }
     const s1 = document.createElement('script');
     s1.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js';
+    s1.onerror = reject;
     s1.onload = () => {
       const s2 = document.createElement('script');
       s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js';
+      s2.onerror = reject;
       s2.onload = resolve;
       document.head.appendChild(s2);
     };
     document.head.appendChild(s1);
   });
+
+  /* ─── FALLBACK — if GSAP fails or is slow, make everything visible ───────── */
+
+  function showAllContent() {
+    document.querySelectorAll(
+      '.section, .service-item, .work-entry, .section-label, ' +
+      '.industry-group, .about-body, .about-locations, ' +
+      '.contact-cta, .contact-form__field, .contact-form__submit, ' +
+      '.hero-headline span, #hero .clock-engine, .hero-meta span'
+    ).forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+  }
 
   /* ─── ANIMATIONS ─────────────────────────────────────────────────────────── */
 
@@ -68,8 +82,7 @@
 
     const ease = 'power3.out';
 
-    /* -- HERO: fires on load, no ScrollTrigger -------------------------------
-     * gsap.set() establishes initial states in JS so CSS never fights GSAP. */
+    /* -- HERO: fires on load, no ScrollTrigger -------------------------------- */
 
     const heroClock = document.querySelector('#hero .clock-engine');
     if (heroClock) {
@@ -90,7 +103,7 @@
       });
     }
 
-    const heroMeta = gsap.utils.toArray('.hero-meta span, .hero-meta [class*="meta"]');
+    const heroMeta = gsap.utils.toArray('.hero-meta .t-registry');
     if (heroMeta.length) {
       gsap.set(heroMeta, { x: 30, opacity: 0 });
       gsap.to(heroMeta, {
@@ -103,18 +116,16 @@
       });
     }
 
-    /* -- HELPER: shared ScrollTrigger factory --------------------------------
-     * `once: true` means the observer disconnects after first trigger so
-     * animations never replay on scroll-back — matches the old unobserve() logic. */
+    /* -- HELPER: ScrollTrigger factory --------------------------------------- */
     const st = (trigger, extraConfig = {}) => ({
       trigger,
-      start: 'top 85%', /* 15% of section visible before firing */
+      start: 'top 85%',
       once: true,
       ...extraConfig,
     });
 
     /* -- SERVICES ------------------------------------------------------------ */
-    const servicesLabel = document.querySelector('#services .section-label, #services .meta-tag');
+    const servicesLabel = document.querySelector('#services .section-label');
     if (servicesLabel) {
       gsap.set(servicesLabel, { opacity: 0 });
       gsap.to(servicesLabel, {
@@ -134,12 +145,12 @@
         duration: 0.7,
         ease,
         stagger: 0.06,
-        scrollTrigger: st('#services .service-item'),
+        scrollTrigger: st('#services'),
       });
     }
 
     /* -- INDUSTRIES ---------------------------------------------------------- */
-    const industriesLabel = document.querySelector('#industries .section-label, #industries .meta-tag');
+    const industriesLabel = document.querySelector('#industries .section-label');
     if (industriesLabel) {
       gsap.set(industriesLabel, { opacity: 0 });
       gsap.to(industriesLabel, {
@@ -159,12 +170,12 @@
         duration: 0.75,
         ease,
         stagger: 0.08,
-        scrollTrigger: st('#industries .industry-group'),
+        scrollTrigger: st('#industries'),
       });
     }
 
     /* -- WORK ---------------------------------------------------------------- */
-    const workLabel = document.querySelector('#work .section-label, #work .meta-tag');
+    const workLabel = document.querySelector('#work .section-label');
     if (workLabel) {
       gsap.set(workLabel, { opacity: 0 });
       gsap.to(workLabel, {
@@ -175,11 +186,10 @@
       });
     }
 
-    /* Subsection labels fade before their sibling entries */
-    const workSubLabels = gsap.utils.toArray('#work .subsection-label, #work .work-category');
-    if (workSubLabels.length) {
-      gsap.set(workSubLabels, { opacity: 0 });
-      gsap.to(workSubLabels, {
+    const workCategoryLabels = gsap.utils.toArray('#work .work-category-label');
+    if (workCategoryLabels.length) {
+      gsap.set(workCategoryLabels, { opacity: 0 });
+      gsap.to(workCategoryLabels, {
         opacity: 1,
         duration: 0.5,
         ease,
@@ -197,12 +207,12 @@
         duration: 0.65,
         ease,
         stagger: 0.04,
-        scrollTrigger: st('#work .work-entry'),
+        scrollTrigger: st('#work'),
       });
     }
 
     /* -- ABOUT --------------------------------------------------------------- */
-    const aboutLabel = document.querySelector('#about .section-label, #about .meta-tag');
+    const aboutLabel = document.querySelector('#about .section-label');
     if (aboutLabel) {
       gsap.set(aboutLabel, { opacity: 0 });
       gsap.to(aboutLabel, {
@@ -225,7 +235,6 @@
       });
     }
 
-    /* Opposite direction creates deliberate visual tension against .about-body */
     const aboutLocations = document.querySelector('#about .about-locations');
     if (aboutLocations) {
       gsap.set(aboutLocations, { x: 20, opacity: 0 });
@@ -264,9 +273,7 @@
       });
     }
 
-    /* -- NAV DARK STATE ------------------------------------------------------
-     * Separate ScrollTrigger per section so enter/leave in both scroll
-     * directions toggles the class correctly with no shared state to manage. */
+    /* -- NAV DARK STATE ------------------------------------------------------ */
     const nav = document.querySelector('.site-nav');
     if (nav) {
       ['#industries', '#contact'].forEach((selector) => {
@@ -292,9 +299,16 @@
     tickClocks();
     setInterval(tickClocks, 1000);
 
-    loadGSAP().then(() => {
-      gsap.registerPlugin(ScrollTrigger);
-      initAnimations();
-    });
+    loadGSAP()
+      .then(() => {
+        initAnimations();
+      })
+      .catch(() => {
+        /* GSAP failed to load — show all content immediately */
+        showAllContent();
+      });
+
+    /* Safety net: if GSAP loads but animations hang, reveal everything after 4s */
+    setTimeout(showAllContent, 4000);
   });
 })();
