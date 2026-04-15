@@ -964,6 +964,7 @@ img, svg { display: block; max-width: 100%; }
     gap: var(--space-8);
     margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
     order: 1;
+    grid-column: unset !important;
   }
 
   .clock-cluster__time {
@@ -976,16 +977,15 @@ img, svg { display: block; max-width: 100%; }
     font-size: clamp(4.5rem, 22vw, 7rem);
     line-height: 0.85;
     margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
-    grid-column: unset;
+    grid-column: unset !important;
   }
 
-  /* Registry tags: below headline, left-aligned dossier stack */
   .hero-meta {
     order: 3;
     flex-direction: column;
     gap: var(--space-1);
     padding-top: var(--space-4);
-    grid-column: unset;
+    grid-column: unset !important;
   }
 
   /* SERVICES */
