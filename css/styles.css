@@ -587,7 +587,7 @@ img, svg { display: block; max-width: 100%; }
 .industry-group__label {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 14px;
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.5);
@@ -598,9 +598,9 @@ img, svg { display: block; max-width: 100%; }
 .industry-group__tags {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
-  line-height: var(--leading-display);
-  letter-spacing: var(--tracking-display);
+  font-size: 14px;
+  line-height: 1.8;
+  letter-spacing: var(--tracking-body);
   color: var(--bg-primary);
   overflow-wrap: break-word;
   word-break: break-word;
@@ -611,9 +611,9 @@ img, svg { display: block; max-width: 100%; }
   display: block;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
-  line-height: var(--leading-display);
-  letter-spacing: var(--tracking-display);
+  font-size: 14px;
+  line-height: 1.8;
+  letter-spacing: var(--tracking-body);
   color: var(--bg-primary);
 }
 
@@ -646,6 +646,16 @@ img, svg { display: block; max-width: 100%; }
   padding-block: var(--space-6);
   border-bottom: var(--border-hairline);
   min-width: 0;
+  transition: border-color 300ms;
+}
+
+.work-entry:hover {
+  border-bottom-color: rgba(10, 10, 10, 0.5);
+}
+
+.work-entry:hover .work-entry__descriptor {
+  color: rgba(10, 10, 10, 0.7);
+  transition: color 300ms;
 }
 
 .work-entry__client {
