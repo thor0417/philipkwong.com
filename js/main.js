@@ -119,7 +119,7 @@
     /* -- HELPER -------------------------------------------------------------- */
     const st = (trigger, extraConfig = {}) => ({
       trigger,
-      start: 'top 90%',
+      start: 'top 65%',
       once: true,
       ...extraConfig,
     });
@@ -130,7 +130,7 @@
       gsap.set(servicesLabel, { opacity: 0 });
       gsap.to(servicesLabel, {
         opacity: 1,
-        duration: 0.6,
+        duration: 1.0,
         ease,
         scrollTrigger: st(servicesLabel),
       });
@@ -142,9 +142,9 @@
       gsap.to(serviceItems, {
         x: 0,
         opacity: 1,
-        duration: 0.7,
+        duration: 1.1,
         ease,
-        stagger: 0.06,
+        stagger: 0.1,
         scrollTrigger: st(serviceItems[0]),
       });
     }
@@ -155,7 +155,7 @@
       gsap.set(industriesLabel, { opacity: 0 });
       gsap.to(industriesLabel, {
         opacity: 1,
-        duration: 0.6,
+        duration: 1.0,
         ease,
         scrollTrigger: st(industriesLabel),
       });
@@ -167,9 +167,9 @@
       gsap.to(industryGroups, {
         y: 0,
         opacity: 1,
-        duration: 0.75,
+        duration: 1.1,
         ease,
-        stagger: 0.08,
+        stagger: 0.12,
         scrollTrigger: st(industryGroups[0]),
       });
     }
@@ -180,7 +180,7 @@
       gsap.set(workLabel, { opacity: 0 });
       gsap.to(workLabel, {
         opacity: 1,
-        duration: 0.6,
+        duration: 1.0,
         ease,
         scrollTrigger: st(workLabel),
       });
@@ -191,9 +191,9 @@
       gsap.set(workCategoryLabels, { opacity: 0 });
       gsap.to(workCategoryLabels, {
         opacity: 1,
-        duration: 0.5,
+        duration: 1.0,
         ease,
-        stagger: 0.05,
+        stagger: 0.1,
         scrollTrigger: st(workCategoryLabels[0]),
       });
     }
@@ -204,9 +204,9 @@
       gsap.to(workEntries, {
         x: 0,
         opacity: 1,
-        duration: 0.65,
+        duration: 1.0,
         ease,
-        stagger: 0.04,
+        stagger: 0.08,
         scrollTrigger: st(workEntries[0]),
       });
     }
@@ -217,7 +217,7 @@
       gsap.set(aboutLabel, { opacity: 0 });
       gsap.to(aboutLabel, {
         opacity: 1,
-        duration: 0.6,
+        duration: 1.0,
         ease,
         scrollTrigger: st(aboutLabel),
       });
@@ -229,7 +229,7 @@
       gsap.to(aboutBody, {
         x: 0,
         opacity: 1,
-        duration: 0.75,
+        duration: 1.1,
         ease,
         scrollTrigger: st(aboutBody),
       });
@@ -241,7 +241,7 @@
       gsap.to(aboutLocations, {
         x: 0,
         opacity: 1,
-        duration: 0.75,
+        duration: 1.1,
         ease,
         scrollTrigger: st(aboutLocations),
       });
@@ -254,7 +254,7 @@
       gsap.to(contactCta, {
         y: 0,
         opacity: 1,
-        duration: 0.7,
+        duration: 1.1,
         ease,
         scrollTrigger: st(contactCta),
       });
@@ -266,9 +266,9 @@
       gsap.to(formFields, {
         y: 0,
         opacity: 1,
-        duration: 0.65,
+        duration: 1.0,
         ease,
-        stagger: 0.06,
+        stagger: 0.1,
         scrollTrigger: st(formFields[0]),
       });
     }
