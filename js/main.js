@@ -117,10 +117,13 @@
     }
 
     /* -- HELPER -------------------------------------------------------------- */
+    // scrub: 1.5 = animation lags scroll by 1.5s for a weighted, cinematic feel
+    // end offset controls how much scroll distance the animation plays over
     const st = (trigger, extraConfig = {}) => ({
       trigger,
-      start: 'top 65%',
-      once: true,
+      start: 'top 85%',
+      end: 'top 40%',
+      scrub: 1.5,
       ...extraConfig,
     });
 
@@ -130,8 +133,7 @@
       gsap.set(servicesLabel, { opacity: 0 });
       gsap.to(servicesLabel, {
         opacity: 1,
-        duration: 1.0,
-        ease,
+        ease: 'none',
         scrollTrigger: st(servicesLabel),
       });
     }
@@ -142,10 +144,9 @@
       gsap.to(serviceItems, {
         x: 0,
         opacity: 1,
-        duration: 1.1,
-        ease,
-        stagger: 0.1,
-        scrollTrigger: st(serviceItems[0]),
+        ease: 'none',
+        stagger: { each: 0.12, from: 'start' },
+        scrollTrigger: st(serviceItems[0], { end: 'top 20%' }),
       });
     }
 
@@ -155,8 +156,7 @@
       gsap.set(industriesLabel, { opacity: 0 });
       gsap.to(industriesLabel, {
         opacity: 1,
-        duration: 1.0,
-        ease,
+        ease: 'none',
         scrollTrigger: st(industriesLabel),
       });
     }
@@ -167,10 +167,9 @@
       gsap.to(industryGroups, {
         y: 0,
         opacity: 1,
-        duration: 1.1,
-        ease,
-        stagger: 0.12,
-        scrollTrigger: st(industryGroups[0]),
+        ease: 'none',
+        stagger: { each: 0.15, from: 'start' },
+        scrollTrigger: st(industryGroups[0], { end: 'top 20%' }),
       });
     }
 
@@ -180,8 +179,7 @@
       gsap.set(workLabel, { opacity: 0 });
       gsap.to(workLabel, {
         opacity: 1,
-        duration: 1.0,
-        ease,
+        ease: 'none',
         scrollTrigger: st(workLabel),
       });
     }
@@ -191,9 +189,8 @@
       gsap.set(workCategoryLabels, { opacity: 0 });
       gsap.to(workCategoryLabels, {
         opacity: 1,
-        duration: 1.0,
-        ease,
-        stagger: 0.1,
+        ease: 'none',
+        stagger: { each: 0.1, from: 'start' },
         scrollTrigger: st(workCategoryLabels[0]),
       });
     }
@@ -204,10 +201,9 @@
       gsap.to(workEntries, {
         x: 0,
         opacity: 1,
-        duration: 1.0,
-        ease,
-        stagger: 0.08,
-        scrollTrigger: st(workEntries[0]),
+        ease: 'none',
+        stagger: { each: 0.08, from: 'start' },
+        scrollTrigger: st(workEntries[0], { end: 'top 10%' }),
       });
     }
 
@@ -217,8 +213,7 @@
       gsap.set(aboutLabel, { opacity: 0 });
       gsap.to(aboutLabel, {
         opacity: 1,
-        duration: 1.0,
-        ease,
+        ease: 'none',
         scrollTrigger: st(aboutLabel),
       });
     }
@@ -229,8 +224,7 @@
       gsap.to(aboutBody, {
         x: 0,
         opacity: 1,
-        duration: 1.1,
-        ease,
+        ease: 'none',
         scrollTrigger: st(aboutBody),
       });
     }
@@ -241,8 +235,7 @@
       gsap.to(aboutLocations, {
         x: 0,
         opacity: 1,
-        duration: 1.1,
-        ease,
+        ease: 'none',
         scrollTrigger: st(aboutLocations),
       });
     }
@@ -254,8 +247,7 @@
       gsap.to(contactCta, {
         y: 0,
         opacity: 1,
-        duration: 1.1,
-        ease,
+        ease: 'none',
         scrollTrigger: st(contactCta),
       });
     }
@@ -266,9 +258,8 @@
       gsap.to(formFields, {
         y: 0,
         opacity: 1,
-        duration: 1.0,
-        ease,
-        stagger: 0.1,
+        ease: 'none',
+        stagger: { each: 0.1, from: 'start' },
         scrollTrigger: st(formFields[0]),
       });
     }
