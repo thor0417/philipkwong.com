@@ -585,8 +585,8 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .industry-group__label {
-  font-family: var(--font-body);
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-weight: 800;
   font-size: 14px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
@@ -596,10 +596,10 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .industry-group__tags {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(0.875rem, 1.5vw, 1.25rem);
-  line-height: 1.2;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+  line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
   color: var(--bg-primary);
   overflow-wrap: break-word;
@@ -609,10 +609,10 @@ img, svg { display: block; max-width: 100%; }
 
 .industry-tag {
   display: block;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(0.875rem, 1.5vw, 1.25rem);
-  line-height: 1.2;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+  line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
   color: var(--bg-primary);
 }
