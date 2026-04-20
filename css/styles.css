@@ -607,7 +607,7 @@ img, svg { display: block; max-width: 100%; }
   font-size: clamp(1rem, 1.5vw, 1.5rem);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+  color: color: #FFFFFF;
   margin-bottom: var(--space-2);
   transition: color 300ms;
 }
