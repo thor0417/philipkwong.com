@@ -157,7 +157,24 @@ body {
   letter-spacing: var(--tracking-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
+}
+
+/* GPU compositing — crisp subpixel rendering on all display text */
+.hero-headline,
+.t-hero,
+.t-display-2xl,
+.t-display-xl,
+.t-display-lg,
+.t-display-md,
+.service-item__title,
+.work-entry__client,
+.contact-cta,
+.industry-group__label {
+  will-change: transform;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body::before {
@@ -878,6 +895,27 @@ img, svg { display: block; max-width: 100%; }
 .site-nav__trigger { display: none; }
 .nav-overlay       { display: none; }
 
+/* On touch/mobile: guarantee all content is visible regardless of GSAP state.
+   Prevents the animation-before-scroll lag on small screens. */
+@media (max-width: 767px) {
+  .section,
+  .service-item,
+  .work-entry,
+  .section-label,
+  .industry-group,
+  .about-body,
+  .about-locations,
+  .contact-cta,
+  .contact-form__field,
+  .contact-form__submit,
+  .hero-headline span,
+  #hero .clock-engine,
+  .hero-meta .t-registry {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* ------------------------------------------------------------
    15. MOBILE — max-width: 767px
    Full reinterpretation for vertical stage.
@@ -1040,9 +1078,15 @@ img, svg { display: block; max-width: 100%; }
     padding-block: clamp(3rem, 8vw, 5rem);
   }
 
+  /* Headers: Dharma at readable mobile display size */
+  .industry-group__label {
+    font-size: clamp(1.1rem, 4vw, 1.4rem);
+  }
+
+  /* Tags: DM Mono stays at body size — no override needed */
   .industry-group__tags,
   .industry-tag {
-    font-size: clamp(1.25rem, 5vw, 1.75rem);
+    font-size: 14px;
   }
 
   /* WORK
