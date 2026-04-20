@@ -11,7 +11,6 @@
   const clockNodes = CLOCKS.map(({ clusterId, tz }) => {
     const cluster = document.getElementById(clusterId);
     if (!cluster) return null;
-
     return {
       tz,
       cluster,
@@ -44,263 +43,50 @@
     }
   }
 
-  /* ─── GSAP LOADER ────────────────────────────────────────────────────────── */
+  /* ─── CLIP-PATH REVEAL — IntersectionObserver, zero opacity flicker ──────── */
+  // No GSAP opacity. Text is always opaque behind overflow:hidden clip.
+  // .is-visible added once → inner .reveal__inner slides up into view via CSS.
 
-  const loadGSAP = () => new Promise((resolve, reject) => {
-    if (window.gsap) { resolve(); return; }
-    const s1 = document.createElement('script');
-    s1.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js';
-    s1.onerror = reject;
-    s1.onload = () => {
-      const s2 = document.createElement('script');
-      s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js';
-      s2.onerror = reject;
-      s2.onload = resolve;
-      document.head.appendChild(s2);
-    };
-    document.head.appendChild(s1);
-  });
+  function initReveal() {
+    const reveals = document.querySelectorAll('.reveal');
+    if (!reveals.length) return;
 
-  /* ─── FALLBACK ───────────────────────────────────────────────────────────── */
-
-  function showAllContent() {
-    document.querySelectorAll(
-      '.section, .service-item, .work-entry, .section-label, ' +
-      '.industry-group, .about-body, .about-locations, ' +
-      '.contact-cta, .contact-form__field, .contact-form__submit, ' +
-      '.hero-headline span, #hero .clock-engine, .hero-meta .t-registry'
-    ).forEach(el => {
-      el.style.opacity = '1';
-      el.style.transform = 'none';
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -8% 0px',
     });
+
+    reveals.forEach(el => observer.observe(el));
   }
 
-  /* ─── ANIMATIONS ─────────────────────────────────────────────────────────── */
+  /* ─── NAV DARK STATE — IntersectionObserver, no GSAP dependency ─────────── */
 
-  function initAnimations() {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ease = 'power3.out';
-
-    /* -- HERO ---------------------------------------------------------------- */
-
-    const heroClock = document.querySelector('#hero .clock-engine');
-    if (heroClock) {
-      gsap.set(heroClock, { opacity: 0 });
-      gsap.to(heroClock, { opacity: 1, duration: 0.6, delay: 0.2, ease });
-    }
-
-    const heroSpans = gsap.utils.toArray('.hero-headline span');
-    if (heroSpans.length) {
-      gsap.set(heroSpans, { y: 40, opacity: 0 });
-      gsap.to(heroSpans, {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        ease,
-        stagger: 0.12,
-        delay: 0.4,
-      });
-    }
-
-    const heroMeta = gsap.utils.toArray('.hero-meta .t-registry');
-    if (heroMeta.length) {
-      gsap.set(heroMeta, { x: 30, opacity: 0 });
-      gsap.to(heroMeta, {
-        x: 0,
-        opacity: 1,
-        duration: 1.0,
-        ease,
-        stagger: 0.1,
-        delay: 0.9,
-      });
-    }
-
-    /* -- HELPER -------------------------------------------------------------- */
-    // start: 'top 55%' = element must be nearly centered in viewport before firing
-    // duration 1.2-1.4s = slow enough to feel intentional, not instant
-    // stagger spread wide so groups cascade visibly across the section
-    const st = (trigger, extraConfig = {}) => ({
-      trigger,
-      start: 'top 55%',
-      once: true,
-      ...extraConfig,
-    });
-
-    /* -- SERVICES ------------------------------------------------------------ */
-    const servicesLabel = document.querySelector('#services .section-label');
-    if (servicesLabel) {
-      gsap.set(servicesLabel, { opacity: 0 });
-      gsap.to(servicesLabel, {
-        opacity: 1,
-        duration: 1.2,
-        ease,
-        scrollTrigger: st(servicesLabel),
-      });
-    }
-
-    const serviceItems = gsap.utils.toArray('#services .service-item');
-    if (serviceItems.length) {
-      gsap.set(serviceItems, { x: -20, opacity: 0 });
-      gsap.to(serviceItems, {
-        x: 0,
-        opacity: 1,
-        duration: 1.2,
-        ease,
-        stagger: 0.15,
-        scrollTrigger: st(serviceItems[0]),
-      });
-    }
-
-    /* -- INDUSTRIES ---------------------------------------------------------- */
-    const industriesLabel = document.querySelector('#industries .section-label');
-    if (industriesLabel) {
-      gsap.set(industriesLabel, { opacity: 0 });
-      gsap.to(industriesLabel, {
-        opacity: 1,
-        duration: 1.2,
-        ease,
-        scrollTrigger: st(industriesLabel),
-      });
-    }
-
-    const industryGroups = gsap.utils.toArray('#industries .industry-group');
-    if (industryGroups.length) {
-      gsap.set(industryGroups, { y: 24, opacity: 0 });
-      gsap.to(industryGroups, {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        ease,
-        stagger: 0.18,
-        scrollTrigger: st(industryGroups[0]),
-      });
-    }
-
-    /* -- WORK ---------------------------------------------------------------- */
-    const workLabel = document.querySelector('#work .section-label');
-    if (workLabel) {
-      gsap.set(workLabel, { opacity: 0 });
-      gsap.to(workLabel, {
-        opacity: 1,
-        duration: 1.2,
-        ease,
-        scrollTrigger: st(workLabel),
-      });
-    }
-
-    const workCategoryLabels = gsap.utils.toArray('#work .work-category-label');
-    if (workCategoryLabels.length) {
-      gsap.set(workCategoryLabels, { opacity: 0 });
-      gsap.to(workCategoryLabels, {
-        opacity: 1,
-        duration: 1.2,
-        ease,
-        stagger: 0.15,
-        scrollTrigger: st(workCategoryLabels[0]),
-      });
-    }
-
-    const workEntries = gsap.utils.toArray('#work .work-entry');
-    if (workEntries.length) {
-      gsap.set(workEntries, { x: -20, opacity: 0 });
-      gsap.to(workEntries, {
-        x: 0,
-        opacity: 1,
-        duration: 1.1,
-        ease,
-        stagger: 0.1,
-        scrollTrigger: st(workEntries[0]),
-      });
-    }
-
-    /* -- ABOUT --------------------------------------------------------------- */
-    const aboutLabel = document.querySelector('#about .section-label');
-    if (aboutLabel) {
-      gsap.set(aboutLabel, { opacity: 0 });
-      gsap.to(aboutLabel, {
-        opacity: 1,
-        duration: 1.2,
-        ease,
-        scrollTrigger: st(aboutLabel),
-      });
-    }
-
-    const aboutBody = document.querySelector('#about .about-body');
-    if (aboutBody) {
-      gsap.set(aboutBody, { x: -20, opacity: 0 });
-      gsap.to(aboutBody, {
-        x: 0,
-        opacity: 1,
-        duration: 1.2,
-        ease,
-        scrollTrigger: st(aboutBody),
-      });
-    }
-
-    const aboutLocations = document.querySelector('#about .about-locations');
-    if (aboutLocations) {
-      gsap.set(aboutLocations, { x: 20, opacity: 0 });
-      gsap.to(aboutLocations, {
-        x: 0,
-        opacity: 1,
-        duration: 1.2,
-        ease,
-        scrollTrigger: st(aboutLocations),
-      });
-    }
-
-    /* -- CONTACT ------------------------------------------------------------- */
-    const contactCta = document.querySelector('#contact .contact-cta');
-    if (contactCta) {
-      gsap.set(contactCta, { y: 24, opacity: 0 });
-      gsap.to(contactCta, {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        ease,
-        scrollTrigger: st(contactCta),
-      });
-    }
-
-    const formFields = gsap.utils.toArray('#contact .contact-form__field, #contact .contact-form__submit');
-    if (formFields.length) {
-      gsap.set(formFields, { y: 20, opacity: 0 });
-      gsap.to(formFields, {
-        y: 0,
-        opacity: 1,
-        duration: 1.1,
-        ease,
-        stagger: 0.12,
-        scrollTrigger: st(formFields[0]),
-      });
-    }
-
-    /* -- NAV DARK STATE ------------------------------------------------------ */
+  function initNavDark() {
     const nav = document.querySelector('.site-nav');
-    if (nav) {
-      ['#industries', '#contact'].forEach((selector) => {
-        const section = document.querySelector(selector);
-        if (!section) return;
+    if (!nav) return;
 
-        ScrollTrigger.create({
-          trigger: section,
-          start: 'top 10%',
-          end: 'bottom 10%',
-          onEnter:      () => nav.classList.add('is-dark'),
-          onLeave:      () => nav.classList.remove('is-dark'),
-          onEnterBack:  () => nav.classList.add('is-dark'),
-          onLeaveBack:  () => nav.classList.remove('is-dark'),
-        });
+    const darkSections = document.querySelectorAll('#industries, #contact');
+    if (!darkSections.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        entry.target.classList.toggle('in-view', entry.isIntersecting);
       });
-    }
+      const anyDark = [...darkSections].some(s => s.classList.contains('in-view'));
+      nav.classList.toggle('is-dark', anyDark);
+    }, { threshold: 0.1 });
 
-    ScrollTrigger.refresh();
+    darkSections.forEach(s => observer.observe(s));
   }
 
-  /* ─── INIT ───────────────────────────────────────────────────────────────── */
-
-/* ─── MOBILE NAV OVERLAY ─────────────────────────────────────────────────── */
+  /* ─── MOBILE NAV OVERLAY ─────────────────────────────────────────────────── */
 
   function initMobileNav() {
     const trigger = document.querySelector('.site-nav__trigger');
@@ -344,15 +130,8 @@
     tickClocks();
     setInterval(tickClocks, 1000);
     initMobileNav();
-
-    loadGSAP()
-      .then(() => {
-        initAnimations();
-      })
-      .catch(() => {
-        showAllContent();
-      });
-
-    setTimeout(showAllContent, 4000);
+    initReveal();
+    initNavDark();
   });
+
 })();

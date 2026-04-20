@@ -895,25 +895,37 @@ img, svg { display: block; max-width: 100%; }
 .site-nav__trigger { display: none; }
 .nav-overlay       { display: none; }
 
-/* On touch/mobile: guarantee all content is visible regardless of GSAP state.
-   Prevents the animation-before-scroll lag on small screens. */
-@media (max-width: 767px) {
-  .section,
-  .service-item,
-  .work-entry,
-  .section-label,
-  .industry-group,
-  .about-body,
-  .about-locations,
-  .contact-cta,
-  .contact-form__field,
-  .contact-form__submit,
-  .hero-headline span,
-  #hero .clock-engine,
-  .hero-meta .t-registry {
-    opacity: 1 !important;
-    transform: none !important;
-  }
+/* ─── CLIP-PATH REVEAL SYSTEM ────────────────────────────────────────────────
+   .reveal        = overflow:hidden mask. Never invisible — clips the inner.
+   .reveal__inner = the actual text. Starts below the mask, slides up on trigger.
+   Stagger via --reveal-delay CSS custom property on each element.
+   ──────────────────────────────────────────────────────────────────────────── */
+.reveal {
+  overflow: hidden;
+  display: block;
+}
+
+.reveal__inner {
+  display: block;
+  transform: translateY(105%);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.reveal.is-visible .reveal__inner {
+  transform: translateY(0);
+}
+
+/* Section labels and small text: fade in instead of clip */
+.reveal--fade .reveal__inner {
+  transform: none;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.reveal--fade.is-visible .reveal__inner {
+  opacity: 1;
 }
 
 /* ------------------------------------------------------------
