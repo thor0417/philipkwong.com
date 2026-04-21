@@ -29,7 +29,6 @@
 
   // Hero parallax — data-scroll-speed drives the multiplier
   document.querySelectorAll('[data-scroll-speed]').forEach((el) => {
-    if (window.innerWidth < 768) return;
     const speed = parseFloat(el.getAttribute('data-scroll-speed'));
     gsap.to(el, {
       y: () => (1 - speed) * ScrollTrigger.maxScroll(window) * 0.12,
