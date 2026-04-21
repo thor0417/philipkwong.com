@@ -1,6 +1,47 @@
 (function () {
   "use strict";
 
+  /* ─── LENIS + GSAP SCROLLTRIGGER ────────────────────────────────────────── */
+
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smooth: true,
+  });
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Manual ScrollTrigger proxy — replaces v4's built-in integration
+  ScrollTrigger.scrollerProxy(document.body, {
+    scrollTop(value) {
+      if (arguments.length) lenis.scrollTo(value, { immediate: true });
+      return lenis.scroll;
+    },
+    getBoundingClientRect() {
+      return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+    },
+  });
+
+  lenis.on('scroll', ScrollTrigger.update);
+
+  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  // Hero parallax — data-scroll-speed drives the multiplier
+  document.querySelectorAll('[data-scroll-speed]').forEach((el) => {
+    const speed = parseFloat(el.getAttribute('data-scroll-speed'));
+    gsap.to(el, {
+      y: () => (1 - speed) * ScrollTrigger.maxScroll(window) * 0.3,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+      },
+    });
+  });
+
   /* ─── CLOCK CONFIG ───────────────────────────────────────────────────────── */
 
   const CLOCKS = [

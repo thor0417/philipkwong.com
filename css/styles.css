@@ -144,7 +144,7 @@
 html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth removed — Lenis owns scroll */
 }
 
 body {
