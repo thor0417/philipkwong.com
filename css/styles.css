@@ -736,7 +736,7 @@ img, svg { display: block; max-width: 100%; }
 
 .about-data-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: baseline;
   padding-block: var(--space-4);
   border-bottom: var(--border-hairline);
@@ -1121,8 +1121,9 @@ img, svg { display: block; max-width: 100%; }
 
   .work-entry__descriptor {
     text-align: left;
-    white-space: normal;
-    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 11px;
     line-height: 1.5;
   }
