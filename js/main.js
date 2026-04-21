@@ -42,6 +42,57 @@
     });
   });
 
+/* ─── SECTION ENTRANCES ─────────────────────────────────────────────────── */
+  // Philosophy: one property per element, small offsets, scrubbed to scroll.
+  // No opacity + transform combos. No large distances. Weight, not drama.
+
+  function initEntrances() {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
+
+    const scrub = 1.2;
+    const ease  = 'none';
+
+    // Section labels — fade only, fast
+    gsap.utils.toArray('.section-label').forEach((el) => {
+      gsap.fromTo(el,
+        { opacity: 0 },
+        { opacity: 1, ease, scrub,
+          scrollTrigger: { trigger: el, start: 'top 90%', end: 'top 65%', scrub } }
+      );
+    });
+
+    // Service items — slide from left, 10px only
+    gsap.utils.toArray('.service-item').forEach((el, i) => {
+      gsap.fromTo(el,
+        { x: -10, opacity: 0 },
+        { x: 0, opacity: 1, ease, delay: i * 0.04,
+          scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 60%', scrub } }
+      );
+    });
+
+    // Work entries — same logic as services
+    gsap.utils.toArray('.work-entry').forEach((el, i) => {
+      gsap.fromTo(el,
+        { x: -10, opacity: 0 },
+        { x: 0, opacity: 1, ease, delay: i * 0.03,
+          scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 60%', scrub } }
+      );
+    });
+
+    // Contact CTA — y only, 8px, no opacity
+    const cta = document.querySelector('.contact-cta');
+    if (cta) {
+      gsap.fromTo(cta,
+        { y: 8 },
+        { y: 0, ease,
+          scrollTrigger: { trigger: cta, start: 'top 85%', end: 'top 55%', scrub } }
+      );
+    }
+  }
+
+  initEntrances();
+
   /* ─── CLOCK CONFIG ───────────────────────────────────────────────────────── */
 
   const CLOCKS = [
