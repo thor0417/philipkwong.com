@@ -1122,10 +1122,11 @@ img, svg { display: block; max-width: 100%; }
   .work-entry__descriptor {
     text-align: left;
     white-space: normal;
-    word-break: keep-all;
-    overflow-wrap: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
     font-size: 11px;
     line-height: 1.5;
+    max-width: 100%;
   }
 
   /* ABOUT
