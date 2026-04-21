@@ -1121,9 +1121,9 @@ img, svg { display: block; max-width: 100%; }
 
   .work-entry__descriptor {
     text-align: left;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
     font-size: 11px;
     line-height: 1.5;
   }

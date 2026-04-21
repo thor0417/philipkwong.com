@@ -48,7 +48,8 @@
 
   function initEntrances() {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) return;
+    const mobile = window.innerWidth < 768;
+    if (reduced || mobile) return;
 
     const scrub = 1.2;
     const ease  = 'none';
