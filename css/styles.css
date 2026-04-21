@@ -460,6 +460,7 @@ img, svg { display: block; max-width: 100%; }
   border-top: var(--border-hairline);
   position: relative;
   z-index: var(--z-content);
+  align-self: center;
 }
 
 @media (min-width: 768px) {
@@ -745,12 +746,12 @@ img, svg { display: block; max-width: 100%; }
 
 @media (max-width: 767px) {
   .about-data-row {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: var(--space-2);
   }
   .about-data-row .t-registry {
-    white-space: normal;
-    word-break: break-word;
+    white-space: nowrap;
+    word-break: keep-all;
   }
 }
 
@@ -1121,7 +1122,7 @@ img, svg { display: block; max-width: 100%; }
   .work-entry__descriptor {
     text-align: left;
     white-space: normal;
-    word-break: break-word;
+    word-break: keep-all;
     font-size: 11px;
     line-height: 1.5;
   }
