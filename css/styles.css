@@ -1031,15 +1031,20 @@ img, svg { display: block; max-width: 100%; }
      Headline dominates. Clocks and registry tags
      become secondary metadata beneath. */
   #hero {
-    min-height: unset;
+    min-height: 100svh;
     padding-block: 6rem clamp(2.5rem, 8vw, 4rem);
     align-content: unset;
+    overflow: hidden;
   }
 
   #hero .grid-stage {
     display: flex;
     flex-direction: column;
     gap: 0;
+  }
+
+  #hero .section-label {
+    order: 0;
   }
 
   /* Clocks: horizontal strip, both cities on one line */
