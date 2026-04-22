@@ -1106,8 +1106,8 @@ img, svg { display: block; max-width: 100%; }
      Descriptor moves below client name.
      white-space: nowrap released. */
   .work-entry {
-    display: flex;
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: column !important;
     gap: var(--space-1);
     padding-block: var(--space-6);
   }
@@ -1117,16 +1117,17 @@ img, svg { display: block; max-width: 100%; }
     white-space: normal;
     text-overflow: unset;
     overflow: visible;
+    width: 100%;
   }
 
   .work-entry__descriptor {
     text-align: left;
     white-space: normal;
-    word-break: break-word;
-    overflow-wrap: anywhere;
+    word-break: normal;
+    overflow-wrap: break-word;
     font-size: 11px;
-    line-height: 1.5;
-    max-width: 100%;
+    line-height: 1.6;
+    width: 100%;
   }
 
   /* ABOUT

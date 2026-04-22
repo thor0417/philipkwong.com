@@ -27,20 +27,22 @@
   gsap.ticker.add((time) => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
 
-  // Hero parallax — data-scroll-speed drives the multiplier
-  document.querySelectorAll('[data-scroll-speed]').forEach((el) => {
-    const speed = parseFloat(el.getAttribute('data-scroll-speed'));
-    gsap.to(el, {
-      y: () => (1 - speed) * ScrollTrigger.maxScroll(window) * 0.12,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-      },
+    // Hero parallax — desktop only
+  if (window.innerWidth >= 768) {
+    document.querySelectorAll('[data-scroll-speed]').forEach((el) => {
+      const speed = parseFloat(el.getAttribute('data-scroll-speed'));
+      gsap.to(el, {
+        y: () => (1 - speed) * ScrollTrigger.maxScroll(window) * 0.12,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
     });
-  });
+  }
 
 /* ─── SECTION ENTRANCES ─────────────────────────────────────────────────── */
   // Philosophy: one property per element, small offsets, scrubbed to scroll.
