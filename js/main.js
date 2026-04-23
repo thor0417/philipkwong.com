@@ -186,6 +186,50 @@
     initNavDark();
     initMobileNav();
 
+    /* ─── CONTACT FORM ────────────────────────────────────────────────────── */
+    const submitBtn = document.getElementById('contact-submit');
+    if (submitBtn) {
+      submitBtn.addEventListener('click', async () => {
+        const name    = document.getElementById('field-name').value.trim();
+        const company = document.getElementById('field-company').value.trim();
+        const message = document.getElementById('field-message').value.trim();
+
+        if (!name || !message) {
+          submitBtn.textContent = 'Name + message required';
+          setTimeout(() => submitBtn.textContent = 'Send', 3000);
+          return;
+        }
+
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
+
+        try {
+          const res = await fetch('https://formspree.io/f/xdaypbrk', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ name, company, message }),
+          });
+
+          if (res.ok) {
+            submitBtn.textContent = 'Sent.';
+            document.getElementById('field-name').value = '';
+            document.getElementById('field-company').value = '';
+            document.getElementById('field-message').value = '';
+          } else {
+            submitBtn.textContent = 'Error — try again';
+            submitBtn.disabled = false;
+          }
+        } catch {
+          submitBtn.textContent = 'Error — try again';
+          submitBtn.disabled = false;
+        }
+
+        setTimeout(() => {
+          submitBtn.textContent = 'Send';
+          submitBtn.disabled = false;
+        }, 4000);
+      });
+    }
   });
 
 })();
