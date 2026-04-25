@@ -1230,16 +1230,27 @@ img, svg { display: block; max-width: 100%; }
     padding-top: var(--space-4);
   }
 
-  /* CONTACT
+/* CONTACT
      CTA full width. Form below. */
   #contact .grid-stage {
     display: flex;
     flex-direction: column;
     gap: clamp(2rem, 6vw, 3rem);
   }
-
   .contact-cta {
     font-size: clamp(3.5rem, 18vw, 7rem);
     margin-bottom: 0;
   }
+
+  .contact-form__submit {
+    -webkit-tap-highlight-color: transparent;
+    background: transparent;
+  }
+
+  .contact-form__submit:active {
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+    background: transparent;
+  }
+}
 }
