@@ -158,8 +158,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
 }
+
+/* Prevent stray horizontal overflow site-wide, but exempt the work scroll track */
+main { overflow-x: hidden; }
+#work { overflow-x: visible; }
 
 /* GPU compositing — crisp subpixel rendering on all display text */
 .hero-headline,
@@ -1135,42 +1138,48 @@ img, svg { display: block; max-width: 100%; }
     font-size: 14px;
   }
 
-  /* WORK
-     Horizontal ledger tape. Entries scroll sideways, full snap.
-     Descriptor stays visible below each client name in the card. */
+  /* WORK — horizontal ledger tape
+     Category label: block above the track.
+     Entries scroll inside .work-entries-track. */
   #work {
     padding-inline: 0;
-    overflow: hidden;
   }
 
   #work .grid-stage {
     padding-inline: 0;
   }
 
-  #work .section-label,
-  #work .work-category-label {
+  #work .section-label {
     padding-inline: 6vw;
   }
 
+  .work-category-label {
+    padding-inline: 6vw;
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
   .work-subsection {
-    overflow-x: auto;
-    overflow-y: visible;
+    display: block;
+    overflow: visible;
+    padding-inline: 0;
+    margin-bottom: var(--space-12);
+  }
+
+  .work-entries-track {
     display: flex;
     flex-direction: row;
-    gap: 0;
+    overflow-x: auto;
+    overflow-y: visible;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     cursor: grab;
     padding-inline: 6vw;
-    /* Bleed indicator — shadow shows there's more content */
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 88%, transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0%, black 4%, black 88%, transparent 100%);
   }
 
-  .work-subsection::-webkit-scrollbar { display: none; }
-
-  .work-subsection.is-dragging { cursor: grabbing; }
+  .work-entries-track::-webkit-scrollbar { display: none; }
+  .work-entries-track.is-dragging { cursor: grabbing; }
 
   .work-entry {
     display: flex !important;
@@ -1178,7 +1187,7 @@ img, svg { display: block; max-width: 100%; }
     justify-content: flex-end;
     gap: var(--space-2);
     padding-block: var(--space-6);
-    padding-inline: var(--space-6);
+    padding-inline: 0 var(--space-6);
     min-width: 72vw;
     max-width: 72vw;
     flex-shrink: 0;
@@ -1187,8 +1196,7 @@ img, svg { display: block; max-width: 100%; }
     border-right: var(--border-hairline);
   }
 
-  .work-entry:last-child { border-right: none; }
-
+  .work-entry:last-child { border-right: none; padding-inline: 0; }
   .work-entry:hover { border-bottom: none; }
 
   .work-entry__client {

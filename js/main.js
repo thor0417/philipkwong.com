@@ -96,7 +96,7 @@
 
     /* ─── HORIZONTAL WORK SCROLL — drag handler, mobile only ─────────────── */
     if (isMobile) {
-      document.querySelectorAll('.work-subsection').forEach((track) => {
+      document.querySelectorAll('.work-entries-track').forEach((track) => {
         let startX = 0;
         let scrollLeft = 0;
         let isDragging = false;
