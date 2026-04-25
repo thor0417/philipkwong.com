@@ -158,11 +158,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
-
-/* Prevent stray horizontal overflow site-wide, but exempt the work scroll track */
-main { overflow-x: hidden; }
-#work { overflow-x: visible; }
 
 /* GPU compositing — crisp subpixel rendering on all display text */
 .hero-headline,
@@ -1138,69 +1135,17 @@ img, svg { display: block; max-width: 100%; }
     font-size: 14px;
   }
 
-  /* WORK — horizontal ledger tape
-     Category label: block above the track.
-     Entries scroll inside .work-entries-track. */
-  #work {
-    padding-inline: 0;
-  }
-
-  #work .grid-stage {
-    padding-inline: 0;
-  }
-
-  #work .section-label {
-    padding-inline: 6vw;
-  }
-
-  .work-category-label {
-    padding-inline: 6vw;
-    display: block;
-    margin-bottom: var(--space-2);
-  }
-
-  .work-subsection {
-    display: block;
-    overflow: visible;
-    padding-inline: 0;
-    margin-bottom: var(--space-12);
-  }
-
-  .work-entries-track {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: visible;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    cursor: grab;
-    padding-inline: 6vw;
-  }
-
-  .work-entries-track::-webkit-scrollbar { display: none; }
-  .work-entries-track.is-dragging { cursor: grabbing; }
-
+  /* WORK — vertical list, mirrors services */
   .work-entry {
     display: flex !important;
     flex-direction: column !important;
-    justify-content: flex-end;
-    gap: var(--space-2);
+    align-items: flex-start;
+    gap: var(--space-1);
     padding-block: var(--space-6);
-    padding-inline: 0 var(--space-6);
-    min-width: 72vw;
-    max-width: 72vw;
-    flex-shrink: 0;
-    scroll-snap-align: start;
-    border-bottom: none;
-    border-right: var(--border-hairline);
   }
 
-  .work-entry:last-child { border-right: none; padding-inline: 0; }
-  .work-entry:hover { border-bottom: none; }
-
   .work-entry__client {
-    font-size: clamp(1.75rem, 7vw, 3rem);
+    font-size: clamp(1.75rem, 8vw, 3rem);
     white-space: normal;
     text-overflow: unset;
     overflow: visible;
@@ -1216,8 +1161,6 @@ img, svg { display: block; max-width: 100%; }
     line-height: 1.6;
     width: 100%;
   }
-
-  .divider { margin-inline: 6vw; }
 
   /* ABOUT
      Body full width. Data rows below as dossier block. */
