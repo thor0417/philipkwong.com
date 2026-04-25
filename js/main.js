@@ -3,10 +3,13 @@
 
   document.addEventListener("DOMContentLoaded", () => {
 
-    /* ─── LENIS ───────────────────────────────────────────────────────────── */
+    /* ─── LENIS — all devices ─────────────────────────────────────────────── */
+    const isMobile = window.innerWidth < 768;
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: isMobile ? 0.9 : 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      touchMultiplier: 2,
+      infinite: false,
     });
 
     gsap.registerPlugin(ScrollTrigger);
@@ -26,7 +29,7 @@
     gsap.ticker.lagSmoothing(0);
 
     /* ─── HERO PARALLAX — desktop only ───────────────────────────────────── */
-    if (window.innerWidth >= 768) {
+    if (!isMobile) {
       document.querySelectorAll('[data-scroll-speed]').forEach((el) => {
         const speed = parseFloat(el.getAttribute('data-scroll-speed'));
         gsap.to(el, {
@@ -42,40 +45,86 @@
       });
     }
 
-    /* ─── SECTION ENTRANCES — desktop only ───────────────────────────────── */
+    /* ─── SECTION ENTRANCES ───────────────────────────────────────────────── */
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!reduced && window.innerWidth >= 768) {
+    if (!reduced) {
       const scrub = 1.2;
       const ease = 'none';
 
-      gsap.utils.toArray('.section-label').forEach((el) => {
-        gsap.fromTo(el,
-          { opacity: 0 },
-          { opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 90%', end: 'top 65%', scrub } }
-        );
-      });
+      if (!isMobile) {
+        /* Desktop: existing entrances */
+        gsap.utils.toArray('.section-label').forEach((el) => {
+          gsap.fromTo(el,
+            { opacity: 0 },
+            { opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 90%', end: 'top 65%', scrub } }
+          );
+        });
 
-      gsap.utils.toArray('.service-item').forEach((el, i) => {
-        gsap.fromTo(el,
-          { x: -10, opacity: 0 },
-          { x: 0, opacity: 1, ease, delay: i * 0.04, scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 60%', scrub } }
-        );
-      });
+        gsap.utils.toArray('.service-item').forEach((el, i) => {
+          gsap.fromTo(el,
+            { x: -10, opacity: 0 },
+            { x: 0, opacity: 1, ease, delay: i * 0.04, scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 60%', scrub } }
+          );
+        });
 
-      gsap.utils.toArray('.work-entry').forEach((el, i) => {
-        gsap.fromTo(el,
-          { x: -10, opacity: 0 },
-          { x: 0, opacity: 1, ease, delay: i * 0.03, scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 60%', scrub } }
-        );
-      });
+        gsap.utils.toArray('.work-entry').forEach((el, i) => {
+          gsap.fromTo(el,
+            { x: -10, opacity: 0 },
+            { x: 0, opacity: 1, ease, delay: i * 0.03, scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 60%', scrub } }
+          );
+        });
 
-      const cta = document.querySelector('.contact-cta');
-      if (cta) {
-        gsap.fromTo(cta,
-          { y: 8 },
-          { y: 0, ease, scrollTrigger: { trigger: cta, start: 'top 85%', end: 'top 55%', scrub } }
-        );
+        const cta = document.querySelector('.contact-cta');
+        if (cta) {
+          gsap.fromTo(cta,
+            { y: 8 },
+            { y: 0, ease, scrollTrigger: { trigger: cta, start: 'top 85%', end: 'top 55%', scrub } }
+          );
+        }
+      } else {
+        /* Mobile: subtle upward scrub on key sections */
+        ['#services', '#industries', '#about', '#contact'].forEach((sel) => {
+          const el = document.querySelector(sel);
+          if (!el) return;
+          gsap.fromTo(el,
+            { y: 16, opacity: 0 },
+            { y: 0, opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 70%', scrub: 0.8 } }
+          );
+        });
       }
+    }
+
+    /* ─── HORIZONTAL WORK SCROLL — drag handler, mobile only ─────────────── */
+    if (isMobile) {
+      document.querySelectorAll('.work-subsection').forEach((track) => {
+        let startX = 0;
+        let scrollLeft = 0;
+        let isDragging = false;
+
+        track.addEventListener('pointerdown', (e) => {
+          isDragging = true;
+          startX = e.clientX;
+          scrollLeft = track.scrollLeft;
+          track.classList.add('is-dragging');
+          track.setPointerCapture(e.pointerId);
+          lenis.stop();
+        });
+
+        track.addEventListener('pointermove', (e) => {
+          if (!isDragging) return;
+          track.scrollLeft = scrollLeft - (e.clientX - startX);
+        });
+
+        const endDrag = () => {
+          if (!isDragging) return;
+          isDragging = false;
+          track.classList.remove('is-dragging');
+          lenis.start();
+        };
+
+        track.addEventListener('pointerup', endDrag);
+        track.addEventListener('pointercancel', endDrag);
+      });
     }
 
     /* ─── CLOCKS ──────────────────────────────────────────────────────────── */

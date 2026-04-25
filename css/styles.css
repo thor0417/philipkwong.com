@@ -929,6 +929,34 @@ img, svg { display: block; max-width: 100%; }
   opacity: 1;
 }
 
+/* Mobile: softer reveal — small translateY only, no mask clip drama */
+@media (max-width: 767px) {
+  .reveal__inner {
+    transform: translateY(6px);
+    opacity: 0;
+    transition:
+      transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity   0.8s ease;
+    transition-delay: var(--reveal-delay, 0s);
+  }
+
+  .reveal.is-visible .reveal__inner {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .reveal--fade .reveal__inner {
+    transform: none;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    transition-delay: var(--reveal-delay, 0s);
+  }
+
+  .reveal--fade.is-visible .reveal__inner {
+    opacity: 1;
+  }
+}
+
 /* ------------------------------------------------------------
    15. MOBILE — max-width: 767px
    Full reinterpretation for vertical stage.
@@ -1032,7 +1060,7 @@ img, svg { display: block; max-width: 100%; }
      become secondary metadata beneath. */
   #hero {
     min-height: 100svh;
-    padding-block: 6rem clamp(2.5rem, 8vw, 4rem);
+    padding-block: 6rem clamp(1.5rem, 4vw, 2.5rem);
     align-content: unset;
     overflow: hidden;
   }
@@ -1063,9 +1091,9 @@ img, svg { display: block; max-width: 100%; }
   /* Headline: full width, maximum scale */
   .hero-headline {
     order: 2;
-    font-size: clamp(4.5rem, 22vw, 7rem);
+    font-size: clamp(4.5rem, 26vw, 7rem);
     line-height: 0.85;
-    margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
+    margin-bottom: clamp(1rem, 4vw, 2rem);
     grid-column: unset;
   }
 
@@ -1108,17 +1136,63 @@ img, svg { display: block; max-width: 100%; }
   }
 
   /* WORK
-     Descriptor moves below client name.
-     white-space: nowrap released. */
+     Horizontal ledger tape. Entries scroll sideways, full snap.
+     Descriptor stays visible below each client name in the card. */
+  #work {
+    padding-inline: 0;
+    overflow: hidden;
+  }
+
+  #work .grid-stage {
+    padding-inline: 0;
+  }
+
+  #work .section-label,
+  #work .work-category-label {
+    padding-inline: 6vw;
+  }
+
+  .work-subsection {
+    overflow-x: auto;
+    overflow-y: visible;
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    cursor: grab;
+    padding-inline: 6vw;
+    /* Bleed indicator — shadow shows there's more content */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 88%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 4%, black 88%, transparent 100%);
+  }
+
+  .work-subsection::-webkit-scrollbar { display: none; }
+
+  .work-subsection.is-dragging { cursor: grabbing; }
+
   .work-entry {
     display: flex !important;
     flex-direction: column !important;
-    gap: var(--space-1);
+    justify-content: flex-end;
+    gap: var(--space-2);
     padding-block: var(--space-6);
+    padding-inline: var(--space-6);
+    min-width: 72vw;
+    max-width: 72vw;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    border-bottom: none;
+    border-right: var(--border-hairline);
   }
 
+  .work-entry:last-child { border-right: none; }
+
+  .work-entry:hover { border-bottom: none; }
+
   .work-entry__client {
-    font-size: clamp(1.75rem, 8vw, 3rem);
+    font-size: clamp(1.75rem, 7vw, 3rem);
     white-space: normal;
     text-overflow: unset;
     overflow: visible;
@@ -1134,6 +1208,8 @@ img, svg { display: block; max-width: 100%; }
     line-height: 1.6;
     width: 100%;
   }
+
+  .divider { margin-inline: 6vw; }
 
   /* ABOUT
      Body full width. Data rows below as dossier block. */
