@@ -859,8 +859,8 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .contact-form__submit:hover {
-  border-color: var(--text-main);
-  color: var(--text-main);
+  border-color: #FFFFFF;
+  color: #FFFFFF;
 }
 
 .contact-form__submit:focus-visible {
