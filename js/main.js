@@ -45,41 +45,7 @@
       });
     }
 
-    /* ─── SECTION ENTRANCES — desktop only ───────────────────────────────── */
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!reduced && !isMobile) {
-      const scrub = 1.2;
-      const ease = 'none';
-
-      gsap.utils.toArray('.section-label').forEach((el) => {
-        gsap.fromTo(el,
-          { opacity: 0 },
-          { opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 100%', end: 'top 65%', scrub } }
-        );
-      });
-
-      gsap.utils.toArray('.service-item').forEach((el, i) => {
-        gsap.fromTo(el,
-          { x: -10, opacity: 0 },
-          { x: 0, opacity: 1, ease, delay: i * 0.04, scrollTrigger: { trigger: el, start: 'top 100%', end: 'top 60%', scrub } }
-        );
-      });
-
-      gsap.utils.toArray('.work-entry').forEach((el, i) => {
-        gsap.fromTo(el,
-          { x: -10, opacity: 0 },
-          { x: 0, opacity: 1, ease, delay: i * 0.03, scrollTrigger: { trigger: el, start: 'top 100%', end: 'top 60%', scrub } }
-        );
-      });
-
-      const cta = document.querySelector('.contact-cta');
-      if (cta) {
-        gsap.fromTo(cta,
-          { y: 8 },
-          { y: 0, ease, scrollTrigger: { trigger: cta, start: 'top 85%', end: 'top 55%', scrub } }
-        );
-      }
-    }
+    /* ─── SECTION ENTRANCES — handled by IntersectionObserver reveal system ── */
 
     /* ─── CLOCKS ──────────────────────────────────────────────────────────── */
     const CLOCKS = [
