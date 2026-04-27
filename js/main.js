@@ -47,6 +47,11 @@
 
     /* ─── SECTION ENTRANCES — handled by IntersectionObserver reveal system ── */
 
+    /* Force hero reveals visible immediately on load — no scroll needed */
+    document.querySelectorAll('#hero .reveal').forEach(el => {
+      el.classList.add('is-visible');
+    });
+
     /* ─── CLOCKS ──────────────────────────────────────────────────────────── */
     const CLOCKS = [
       { clusterId: "clock-van", tz: "America/Vancouver" },
