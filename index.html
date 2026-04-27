@@ -13,10 +13,9 @@
   <nav class="site-nav" aria-label="Primary navigation">
     <a class="site-nav__wordmark" href="#hero">Philip Kwong</a>
     <ul class="site-nav__links" role="list">
-      <li><a class="site-nav__link" href="#services">Services</a></li>
-      <li><a class="site-nav__link" href="#industries">Industries</a></li>
-      <li><a class="site-nav__link" href="#work">Work</a></li>
       <li><a class="site-nav__link" href="#about">About</a></li>
+      <li><a class="site-nav__link" href="#services">Services</a></li>
+      <li><a class="site-nav__link" href="#work">Work</a></li>
       <li><a class="site-nav__link" href="#contact">Contact</a></li>
     </ul>
     <button class="site-nav__trigger" aria-expanded="false" aria-controls="nav-overlay" aria-label="Open navigation">[ MENU ]</button>
@@ -24,10 +23,9 @@
 
   <div class="nav-overlay" id="nav-overlay" aria-hidden="true" role="dialog" aria-label="Site navigation">
     <nav aria-label="Mobile navigation">
-      <a class="nav-overlay__link" href="#services">Services</a>
-      <a class="nav-overlay__link" href="#industries">Industries</a>
-      <a class="nav-overlay__link" href="#work">Work</a>
       <a class="nav-overlay__link" href="#about">About</a>
+      <a class="nav-overlay__link" href="#services">Services</a>
+      <a class="nav-overlay__link" href="#work">Work</a>
       <a class="nav-overlay__link" href="#contact">Contact</a>
     </nav>
     <div class="nav-overlay__meta">
@@ -73,11 +71,32 @@
     </section>
 
     <!-- ================================================================
-         02 — SERVICES
+         02 — ABOUT
+         ================================================================ -->
+    <section id="about" class="section" aria-labelledby="about-heading">
+      <h2 id="about-heading" class="sr-only">About</h2>
+      <span class="section-label">02 — ABOUT</span>
+      <div class="about-container">
+        <div class="about-body">
+          <p>I work with founders, operators, and leadership teams to build businesses that perform in complex environments.</p>
+          <p>The work ranges from market entry and corporate strategy through to building the operations that make execution possible.</p>
+        </div>
+        <div class="about-gutter"></div>
+        <div class="about-meta">
+          <span class="t-registry"><strong>[STATUS: ACTIVE]</strong></span>
+          <span class="t-registry"><strong>[YEARS: 08]</strong></span>
+          <span class="t-registry"><strong>[BASE: VANCOUVER, CA]</strong></span>
+          <span class="t-registry"><strong>[OPS: BANGKOK, TH]</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         03 — SERVICES
          ================================================================ -->
     <section id="services" class="section" aria-labelledby="services-heading">
       <div class="grid-stage">
-        <p class="section-label reveal reveal--fade" style="grid-column: 1 / -1"><span class="reveal__inner">02 — WHAT I DO</span></p>
+        <p class="section-label reveal reveal--fade" style="grid-column: 1 / -1"><span class="reveal__inner">03 — WHAT I DO</span></p>
         <h2 id="services-heading" class="sr-only">Services</h2>
         <ol class="service-list" style="grid-column: 1 / -1" role="list">
           <li class="service-item">
@@ -101,49 +120,6 @@
             <span class="service-item__title reveal" style="--reveal-delay: 0.32s"><span class="reveal__inner">Documentation &amp; Commercialization</span></span>
           </li>
         </ol>
-      </div>
-    </section>
-
-    <!-- ================================================================
-         03 — INDUSTRIES
-         ================================================================ -->
-    <section id="industries" class="section" data-theme="dark" aria-labelledby="industries-heading">
-      <div class="grid-stage">
-        <p class="section-label reveal reveal--fade" style="grid-column: 1 / -1"><span class="reveal__inner">03 — INDUSTRIES</span></p>
-        <h2 id="industries-heading" class="sr-only">Industries</h2>
-        <div class="industry-grid" style="grid-column: 1 / -1">
-          <div class="industry-group">
-            <p class="industry-group__label reveal"><span class="reveal__inner">Standards &amp; Corporate Strategy</span></p>
-            <div class="industry-group__tags">
-              <span class="industry-tag reveal" style="--reveal-delay: 0.1s"><span class="reveal__inner">Corporate Strategy</span></span>
-              <span class="industry-tag reveal" style="--reveal-delay: 0.18s"><span class="reveal__inner">Vice Convener</span></span>
-              <span class="industry-tag reveal" style="--reveal-delay: 0.26s"><span class="reveal__inner">Chair</span></span>
-              <span class="industry-tag reveal" style="--reveal-delay: 0.34s"><span class="reveal__inner">Technical Writing</span></span>
-            </div>
-          </div>
-          <div class="industry-group">
-            <p class="industry-group__label reveal" style="--reveal-delay: 0.1s"><span class="reveal__inner">Emerging Regulated Markets</span></p>
-            <div class="industry-group__tags">
-              <span class="industry-tag reveal" style="--reveal-delay: 0.2s"><span class="reveal__inner">Compliance</span></span>
-              <span class="industry-tag reveal" style="--reveal-delay: 0.28s"><span class="reveal__inner">Operations</span></span>
-              <span class="industry-tag reveal" style="--reveal-delay: 0.36s"><span class="reveal__inner">Documentation</span></span>
-            </div>
-          </div>
-          <div class="industry-group">
-            <p class="industry-group__label reveal" style="--reveal-delay: 0.2s"><span class="reveal__inner">Mining &amp; Public Markets</span></p>
-            <div class="industry-group__tags">
-              <span class="industry-tag reveal" style="--reveal-delay: 0.3s"><span class="reveal__inner">Advisory</span></span>
-              <span class="industry-tag reveal" style="--reveal-delay: 0.38s"><span class="reveal__inner">Operations</span></span>
-            </div>
-          </div>
-          <div class="industry-group">
-            <p class="industry-group__label reveal" style="--reveal-delay: 0.3s"><span class="reveal__inner">Technology &amp; Platforms</span></p>
-            <div class="industry-group__tags">
-              <span class="industry-tag reveal" style="--reveal-delay: 0.4s"><span class="reveal__inner">Product Development</span></span>
-              <span class="industry-tag reveal" style="--reveal-delay: 0.48s"><span class="reveal__inner">Go-to-Market</span></span>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -213,41 +189,11 @@
     </section>
 
     <!-- ================================================================
-         05 — ABOUT
-         ================================================================ -->
-    <section id="about" class="section" aria-labelledby="about-heading">
-      <div class="grid-stage">
-        <p class="section-label reveal reveal--fade" style="grid-column: 1 / -1"><span class="reveal__inner">05 — ABOUT</span></p>
-        <h2 id="about-heading" class="sr-only">About</h2>
-
-        <div class="about-body" style="grid-column: 1 / 7">
-          <p>I run a consulting practice with operations in Bangkok. I work with founders, operators, and leadership teams across private and public companies to enter new markets, build compliant operations, and execute effectively.</p>
-          <p>The focus is straightforward: clear strategy and work that gets implemented.</p>
-          <p>Work spans regulatory frameworks through to go-to-market execution. I remain hands-on from the first conversation through to the final deliverable.</p>
-        </div>
-
-        <div class="about-locations" style="grid-column: 7 / 13; align-self: start;">
-          <div class="about-data-row">
-            <span class="t-registry"><strong>[STATUS:]</strong> Active</span>
-          </div>
-          <div class="about-data-row">
-            <span class="t-registry"><strong>[CURRENT LOCATIONS]</strong></span>
-          </div>
-          <div class="about-data-row">
-            <span class="t-registry"><strong>[BASE:]</strong> Vancouver, CA</span>
-	    <span class="t-registry"><strong>[OPS:]</strong> Bangkok, TH</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ================================================================
-         06 — CONTACT
+         05 — CONTACT
          ================================================================ -->
     <section id="contact" class="section" data-theme="dark" aria-labelledby="contact-heading">
       <div class="grid-stage">
-        <p class="section-label reveal reveal--fade" style="grid-column: 1 / -1"><span class="reveal__inner">06 — CONTACT</span></p>
+        <p class="section-label reveal reveal--fade" style="grid-column: 1 / -1"><span class="reveal__inner">05 — CONTACT</span></p>
         <h2 id="contact-heading" class="contact-cta reveal" style="grid-column: 1 / 6"><span class="reveal__inner">Let's talk.</span></h2>
         <div class="contact-form" style="grid-column: 7 / 13">
           <div class="contact-form__field">
