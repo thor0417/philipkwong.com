@@ -171,11 +171,6 @@ body {
 .service-item__title,
 .work-entry__client,
 .contact-cta,
-.industry-group__label {
-  will-change: transform;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
 body::before {
   content: '';
@@ -343,10 +338,6 @@ img, svg { display: block; max-width: 100%; }
 .site-nav.is-dark .site-nav__wordmark { color: #FFFFFF; }
 .site-nav.is-dark .site-nav__link     { color: #FFFFFF; }
 
-#hero, #services, #industries, #work, #about, #contact {
-  scroll-margin-top: 4rem;
-}
-
 /* ------------------------------------------------------------
    4. SHARED SECTION SHELL
    NOTE: No opacity or transform set here.
@@ -426,7 +417,6 @@ img, svg { display: block; max-width: 100%; }
 .koyo--center-right { top: 50%; right: -0.1em; transform: translateY(-50%); }
 .koyo--bottom-right { bottom: -0.15em; right: -0.05em; }
 
-#industries .koyo,
 #contact .koyo { color: var(--bg-primary); }
 
 /* ------------------------------------------------------------
@@ -564,75 +554,13 @@ img, svg { display: block; max-width: 100%; }
 /* ------------------------------------------------------------
    9. INDUSTRIES
    ------------------------------------------------------------ */
-#industries {
-  background-color: var(--bg-dark);
-  color: var(--bg-primary);
-  padding-block: var(--space-24) var(--space-32);
-  padding-inline: var(--grid-margin);
-  position: relative;
-  overflow: hidden;
-  border-top: var(--border-hairline-dark);
-}
-
-#industries .section-label { color: rgba(249, 249, 249, 0.4); }
-#industries .section-title { color: var(--bg-primary); }
-
-.industry-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0 clamp(2rem, 4vw, 4rem);
-}
 
 @media (min-width: 768px) {
-  .industry-grid { grid-template-columns: repeat(2, 1fr); }
+
 }
 
 @media (min-width: 1280px) {
-  .industry-grid { grid-template-columns: repeat(4, 1fr); }
-}
 
-.industry-group {
-  padding-block: var(--space-4);
-  border-bottom: var(--border-hairline-dark);
-  min-width: 0;
-  overflow: hidden;
-}
-
-.industry-group:first-of-type {
-  border-top: var(--border-hairline-dark);
-}
-
-.industry-group__label {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(1rem, 1.5vw, 1.5rem);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: color: #FFFFFF;
-  margin-bottom: var(--space-2);
-  transition: color 300ms;
-}
-
-.industry-group__tags {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.8;
-  letter-spacing: var(--tracking-body);
-  color: var(--bg-primary);
-  overflow-wrap: break-word;
-  word-break: break-word;
-  transition: color 300ms;
-}
-
-.industry-tag {
-  display: block;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.8;
-  letter-spacing: var(--tracking-body);
-  color: var(--bg-primary);
 }
 
 /* ------------------------------------------------------------
@@ -873,8 +801,7 @@ img, svg { display: block; max-width: 100%; }
    ------------------------------------------------------------ */
 @media (min-width: 768px) {
   .section    { padding-block: var(--space-32); }
-  #industries,
-  #contact    { padding-block: var(--space-32); }
+  #contact { padding-block: var(--space-32); }
   #hero       { padding-block: var(--space-24) var(--space-32); }
 
   /* Reset any mobile flex overrides on hero grid-stage */
@@ -1092,20 +1019,8 @@ img, svg { display: block; max-width: 100%; }
   }
 
   /* INDUSTRIES — already 1-col, just tighten */
-  #industries {
-    padding-block: clamp(3rem, 8vw, 5rem);
-  }
 
   /* Headers: Dharma at readable mobile display size */
-  .industry-group__label {
-    font-size: clamp(1.1rem, 4vw, 1.4rem);
-  }
-
-  /* Tags: DM Mono stays at body size — no override needed */
-  .industry-group__tags,
-  .industry-tag {
-    font-size: 14px;
-  }
 
   /* WORK
      Descriptor moves below client name.
@@ -1137,7 +1052,7 @@ img, svg { display: block; max-width: 100%; }
 
   /* ABOUT
      Body full width. Data rows below as dossier block. */
-  #about .about-container {
+  #about .grid-stage {
     display: flex;
     flex-direction: column;
     gap: clamp(2rem, 6vw, 3rem);
@@ -1148,11 +1063,10 @@ img, svg { display: block; max-width: 100%; }
     max-width: 100%;
   }
 
-  .about-meta {
+  .about-locations {
     align-self: unset;
     border-top: var(--border-hairline);
     padding-top: var(--space-4);
-    grid-column: unset;
   }
 
 /* CONTACT
