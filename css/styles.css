@@ -822,7 +822,7 @@ img, svg { display: block; max-width: 100%; }
    14. RESPONSIVE — 1280px
    ------------------------------------------------------------ */
 @media (min-width: 1280px) {
-  .section { padding-block: var(--space-32); }
+  .section { padding-block: clamp(6rem, 12vw, 12rem); }
 }
 
 /* Trigger and overlay: hidden on desktop, activated only in mobile block below */
@@ -859,6 +859,14 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .reveal--fade.is-visible .reveal__inner {
+  opacity: 1;
+}
+
+#hero .reveal__inner {
+  transform: translateY(0);
+}
+
+#hero .reveal--fade .reveal__inner {
   opacity: 1;
 }
 
