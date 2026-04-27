@@ -54,21 +54,21 @@
       gsap.utils.toArray('.section-label').forEach((el) => {
         gsap.fromTo(el,
           { opacity: 0 },
-          { opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 90%', end: 'top 65%', scrub } }
+          { opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 100%', end: 'top 65%', scrub } }
         );
       });
 
       gsap.utils.toArray('.service-item').forEach((el, i) => {
         gsap.fromTo(el,
           { x: -10, opacity: 0 },
-          { x: 0, opacity: 1, ease, delay: i * 0.04, scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 60%', scrub } }
+          { x: 0, opacity: 1, ease, delay: i * 0.04, scrollTrigger: { trigger: el, start: 'top 100%', end: 'top 60%', scrub } }
         );
       });
 
       gsap.utils.toArray('.work-entry').forEach((el, i) => {
         gsap.fromTo(el,
           { x: -10, opacity: 0 },
-          { x: 0, opacity: 1, ease, delay: i * 0.03, scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 60%', scrub } }
+          { x: 0, opacity: 1, ease, delay: i * 0.03, scrollTrigger: { trigger: el, start: 'top 100%', end: 'top 60%', scrub } }
         );
       });
 
@@ -141,7 +141,7 @@
     function initNavDark() {
       const nav = document.querySelector('.site-nav');
       if (!nav) return;
-      const darkSections = document.querySelectorAll('#industries, #contact');
+      const darkSections = document.querySelectorAll('#contact');
       if (!darkSections.length) return;
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
