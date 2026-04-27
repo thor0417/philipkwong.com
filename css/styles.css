@@ -123,7 +123,7 @@
   --z-koyo:       0;
   --z-content:    1;
   --z-nav:        10;
-  --z-grain:      9999;
+  --z-grain:      -1;
 
   --duration-base: 300ms;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
