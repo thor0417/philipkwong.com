@@ -523,9 +523,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .service-item {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: var(--grid-gutter);
+  display: flex;
   align-items: baseline;
   padding-block: var(--space-6);
   border-bottom: var(--border-hairline);
@@ -547,7 +545,8 @@ img, svg { display: block; max-width: 100%; }
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: rgba(10, 10, 10, 0.35);
-  grid-column: 1 / 2;
+  flex-shrink: 0;
+  width: 3rem;
   transition: color 300ms;
 }
 
@@ -562,7 +561,7 @@ img, svg { display: block; max-width: 100%; }
   color: var(--text-main);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
-  grid-column: 7 / 13;
+  margin-left: auto;
   text-align: right;
 }
 
@@ -1134,12 +1133,8 @@ img, svg { display: block; max-width: 100%; }
     padding-block: var(--space-6);
   }
 
-  .service-item__number {
-    grid-column: unset;
-  }
-
   .service-item__title {
-    grid-column: unset;
+    margin-left: 0;
     text-align: left;
     font-size: clamp(1.75rem, 8vw, 2.5rem);
     white-space: normal;
