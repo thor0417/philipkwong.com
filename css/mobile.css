@@ -365,15 +365,17 @@
     width: 100%;
   }
 
-  /* Descriptor: left-aligned, wraps at word boundary */
+  /* Descriptor: left-aligned, wraps at word boundary.
+     white-space must override desktop nowrap explicitly. */
   .work-entry__descriptor {
     text-align: left;
-    white-space: normal;
-    word-break: normal;
+    white-space: normal !important;
+    word-break: break-word;
     overflow-wrap: break-word;
     font-size: 11px;
     line-height: 1.6;
     width: 100%;
+    flex-shrink: 1;
   }
 
 
