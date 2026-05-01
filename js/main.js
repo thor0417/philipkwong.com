@@ -82,49 +82,8 @@
           );
         }
       } else {
-        /* Mobile: subtle upward scrub on key sections */
-        ['#services', '#about', '#contact'].forEach((sel) => {
-          const el = document.querySelector(sel);
-          if (!el) return;
-          gsap.fromTo(el,
-            { y: 16, opacity: 0 },
-            { y: 0, opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 70%', scrub: 0.8 } }
-          );
-        });
+        /* Mobile: no GSAP on sections — reveal system handles all entrances */
       }
-    }
-
-    /* ─── HORIZONTAL WORK SCROLL — drag handler, mobile only ─────────────── */
-    if (isMobile) {
-      document.querySelectorAll('.work-entries-track').forEach((track) => {
-        let startX = 0;
-        let scrollLeft = 0;
-        let isDragging = false;
-
-        track.addEventListener('pointerdown', (e) => {
-          isDragging = true;
-          startX = e.clientX;
-          scrollLeft = track.scrollLeft;
-          track.classList.add('is-dragging');
-          track.setPointerCapture(e.pointerId);
-          lenis.stop();
-        });
-
-        track.addEventListener('pointermove', (e) => {
-          if (!isDragging) return;
-          track.scrollLeft = scrollLeft - (e.clientX - startX);
-        });
-
-        const endDrag = () => {
-          if (!isDragging) return;
-          isDragging = false;
-          track.classList.remove('is-dragging');
-          lenis.start();
-        };
-
-        track.addEventListener('pointerup', endDrag);
-        track.addEventListener('pointercancel', endDrag);
-      });
     }
 
     /* ─── CLOCKS ──────────────────────────────────────────────────────────── */
