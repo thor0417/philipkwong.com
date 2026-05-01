@@ -83,7 +83,7 @@
         }
       } else {
         /* Mobile: subtle upward scrub on key sections */
-        ['#services', '#industries', '#about', '#contact'].forEach((sel) => {
+        ['#services', '#about', '#contact'].forEach((sel) => {
           const el = document.querySelector(sel);
           if (!el) return;
           gsap.fromTo(el,
@@ -187,7 +187,7 @@
     function initNavDark() {
       const nav = document.querySelector('.site-nav');
       if (!nav) return;
-      const darkSections = document.querySelectorAll('#industries, #contact');
+      const darkSections = document.querySelectorAll('#contact');
       if (!darkSections.length) return;
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
