@@ -1,0 +1,541 @@
+/* ============================================================
+   PHILIP KWONG — THE DIGITAL ARTIFACT
+   css/mobile.css — Mobile System v1.0
+   Scope: max-width 767px — all mobile sizes from 320px up.
+   Load order: after styles.css. Overrides only. No resets here.
+
+   Breakpoints covered:
+   - 320px  iPhone SE / small Android (base of this file)
+   - 375px  iPhone 13 mini / older iPhones
+   - 390px  iPhone 14 / 15
+   - 412px  Pixel 8 Pro (primary design target)
+   - 430px  iPhone 14 Pro Max / 15 Plus
+   - 480px  Large Android phablets
+   - 767px  Upper bound — tablet breakpoint takes over in styles.css
+   ============================================================ */
+
+@media (max-width: 767px) {
+
+  /* ----------------------------------------------------------
+     TOKENS — Mobile overrides
+     Collapse to 4-column grid. Tighten margin to 5vw so the
+     5vw page-inline token stays consistent with the nav rail.
+     ---------------------------------------------------------- */
+  :root {
+    --grid-template: repeat(4, 1fr);
+    --grid-margin:   5vw;
+    --grid-gutter:   0.75rem;
+
+    /* Tighten section rhythm for vertical scroll */
+    --section-block: clamp(3.5rem, 10vw, 5rem);
+  }
+
+
+  /* ----------------------------------------------------------
+     NAVIGATION
+     ---------------------------------------------------------- */
+  .site-nav {
+    height: 3.5rem;
+    /* Align exactly with --grid-margin so wordmark sits on the same
+       left rail as every section heading below it */
+    padding-inline: 5vw;
+  }
+
+  /* Hide desktop links — replaced by overlay */
+  .site-nav__links { display: none; }
+
+  .site-nav__wordmark {
+    font-size: 13px;
+    letter-spacing: 0.2em;
+  }
+
+  /* [ MENU ] trigger — typographic, no icons, no box */
+  .site-nav__trigger {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-main);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .site-nav.is-dark .site-nav__trigger { color: #FFFFFF; }
+
+  /* Scroll margin compensates for the shorter mobile nav */
+  #hero, #services, #work, #about, #contact {
+    scroll-margin-top: 3.5rem;
+  }
+
+
+  /* ----------------------------------------------------------
+     MOBILE NAV OVERLAY
+     Full-screen takeover. Links at display scale.
+     Registry tags as dossier footer.
+     ---------------------------------------------------------- */
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: calc(var(--z-nav) - 1);
+    background: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 5vw;
+    padding-bottom: clamp(2.5rem, 8vw, 4rem);
+
+    /* Hidden state */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s var(--ease-out-expo);
+  }
+
+  .nav-overlay.is-open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* Large Dharma Gothic links — same visual language as hero headline */
+  .nav-overlay__link {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(2.25rem, 11vw, 3.5rem);
+    line-height: 0.88;
+    letter-spacing: var(--tracking-hero);
+    color: var(--text-main);
+    display: block;
+    border-top: var(--border-hairline);
+    padding-block: 0.35em;
+    transition: color 0.2s var(--ease-out-expo);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .nav-overlay__link:last-of-type { border-bottom: var(--border-hairline); }
+
+  .nav-overlay__link:active { color: rgba(10, 10, 10, 0.35); }
+
+  /* Registry tag cluster at bottom of overlay */
+  .nav-overlay__meta {
+    margin-top: clamp(1.5rem, 5vw, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+
+  /* ----------------------------------------------------------
+     SHARED SECTION SHELL
+     Tighter vertical rhythm on mobile.
+     ---------------------------------------------------------- */
+  .section {
+    padding-block: var(--section-block);
+    /* Inherit padding-inline from --grid-margin token */
+    padding-inline: 5vw;
+    overflow: hidden;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    margin-bottom: var(--space-6);
+  }
+
+  .divider {
+    margin-block: var(--space-6);
+  }
+
+
+  /* ----------------------------------------------------------
+     01 — HERO
+     Vertical stack. Headline dominates full width.
+     Clocks become a horizontal metadata strip.
+     Registry tags shift below headline as a dossier block.
+     ---------------------------------------------------------- */
+  #hero {
+    min-height: 100svh;
+    /* Top padding clears the fixed nav (3.5rem) plus breathing room */
+    padding-block: 5rem clamp(1.5rem, 5vw, 2.5rem);
+    padding-inline: 5vw;
+    align-content: unset;
+    overflow: hidden;
+  }
+
+  /* Collapse the 12-col grid to a flex column for simple stacking */
+  #hero .grid-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Section label sits at top */
+  #hero .section-label {
+    order: 0;
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  /* Clocks: horizontal strip, side by side */
+  .clock-engine {
+    order: 1;
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-8);
+    margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
+  }
+
+  .clock-cluster__city {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+  }
+
+  .clock-cluster__time {
+    font-size: clamp(1.25rem, 5.5vw, 1.75rem);
+    letter-spacing: 0.01em;
+  }
+
+  /* Hero headline: full width, maximum mobile scale.
+     26vw fluid keeps it locked relative to viewport — no overflow. */
+  .hero-headline {
+    order: 2;
+    font-size: clamp(4.5rem, 26vw, 7rem);
+    line-height: 0.85;
+    letter-spacing: -0.01em;
+    margin-bottom: clamp(1rem, 4vw, 2rem);
+    /* Override desktop grid-column inline style */
+    grid-column: unset;
+  }
+
+  /* Registry tags: below headline as a left-aligned dossier stack.
+     Border-top creates the visual break from headline block. */
+  .hero-meta {
+    order: 3;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-top: var(--space-4);
+    border-top: var(--border-hairline);
+    grid-column: unset;
+  }
+
+
+  /* ----------------------------------------------------------
+     02 — ABOUT
+     Body copy full width. Data rows become a bordered dossier
+     block below, separated by a hairline.
+     ---------------------------------------------------------- */
+  #about {
+    padding-block: var(--section-block);
+    padding-inline: 5vw;
+    /* About has a large bottom padding on desktop (25vh) — reset it */
+    padding-bottom: var(--section-block);
+  }
+
+  #about .grid-stage {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 6vw, 3rem);
+  }
+
+  .about-body {
+    font-size: clamp(1rem, 4.5vw, 1.125rem);
+    line-height: 1.6;
+    max-width: 100%;
+  }
+
+  /* Hide the decorative vertical gutter line — irrelevant on mobile */
+  .about-gutter { display: none; }
+
+  .about-locations {
+    align-self: unset;
+    border-top: var(--border-hairline);
+    padding-top: var(--space-4);
+  }
+
+  .about-data-row {
+    flex-wrap: nowrap;
+    gap: var(--space-2);
+    padding-block: var(--space-3, 0.75rem);
+  }
+
+  .about-data-row .t-registry {
+    font-size: 12px;
+    white-space: nowrap;
+    word-break: keep-all;
+    margin-bottom: 0;
+  }
+
+
+  /* ----------------------------------------------------------
+     03 — SERVICES
+     Flip service items to a stacked layout.
+     Number sits above title, left-aligned — not opposing ends.
+     ---------------------------------------------------------- */
+  #services {
+    padding-block: var(--section-block);
+    padding-inline: 5vw;
+  }
+
+  .service-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+    padding-block: var(--space-6);
+  }
+
+  /* Number stays left on its own line */
+  .service-item__number {
+    width: auto;
+  }
+
+  /* Title: left-aligned, fluid mobile scale, wraps naturally */
+  .service-item__title {
+    margin-left: 0;
+    text-align: left;
+    font-size: clamp(1.75rem, 8.5vw, 2.5rem);
+    line-height: 0.92;
+    white-space: normal;
+  }
+
+
+  /* ----------------------------------------------------------
+     04 — SELECTED WORK
+     Horizontal scroll ledger collapses to a vertical list.
+     Each entry stacks client above descriptor.
+     ---------------------------------------------------------- */
+  #work {
+    padding-block: var(--section-block);
+    padding-inline: 5vw;
+    overflow-x: visible;
+  }
+
+  .work-subsection {
+    margin-bottom: var(--space-8);
+  }
+
+  .work-category-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    padding-block: var(--space-3, 0.75rem);
+    margin-bottom: var(--space-2);
+  }
+
+  /* Disable any horizontal scroll track */
+  .work-entries-track {
+    display: block;
+    overflow-x: visible;
+    /* Remove any scroll-snap behaviour from desktop */
+    scroll-snap-type: none;
+  }
+
+  .work-entry {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start;
+    gap: var(--space-1);
+    padding-block: var(--space-5, 1.25rem);
+    padding-inline: 0;
+    border-bottom: var(--border-hairline);
+    border-right: none;
+
+    /* Cancel desktop grid overrides */
+    min-width: unset;
+    max-width: unset;
+    width: 100%;
+    flex-shrink: unset;
+    scroll-snap-align: unset;
+  }
+
+  .work-entry:first-child { border-top: var(--border-hairline); }
+  .work-entry:last-child  { border-bottom: var(--border-hairline); }
+  .work-entry:hover       { border-bottom: var(--border-hairline); }
+
+  /* Client name: large Dharma, wraps naturally */
+  .work-entry__client {
+    font-size: clamp(1.75rem, 8.5vw, 3rem);
+    white-space: normal;
+    text-overflow: unset;
+    overflow: visible;
+    width: 100%;
+  }
+
+  /* Descriptor: left-aligned, wraps at word boundary */
+  .work-entry__descriptor {
+    text-align: left;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+    font-size: 11px;
+    line-height: 1.6;
+    width: 100%;
+  }
+
+
+  /* ----------------------------------------------------------
+     05 — CONTACT
+     CTA full width. Form stacks below.
+     ---------------------------------------------------------- */
+  #contact {
+    padding-block: var(--section-block);
+    padding-inline: 5vw;
+  }
+
+  #contact .grid-stage {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 6vw, 3rem);
+  }
+
+  /* "Let's talk." — large but contained. 18vw fluid tracks the viewport. */
+  .contact-cta {
+    font-size: clamp(3.5rem, 18vw, 6rem);
+    line-height: 0.88;
+    margin-bottom: 0;
+    /* Override desktop grid-column inline style */
+    grid-column: unset;
+  }
+
+  .contact-form {
+    max-width: 100%;
+    /* Override desktop grid-column inline style */
+    grid-column: unset;
+  }
+
+  .contact-form__label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+  }
+
+  .contact-form__input,
+  .contact-form__textarea {
+    font-size: 16px; /* 16px prevents iOS zoom-on-focus */
+  }
+
+  /* Full-width submit on mobile — easier tap target */
+  .contact-form__submit {
+    align-self: stretch;
+    text-align: center;
+    padding-block: var(--space-4);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .contact-form__submit:active {
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+    background: transparent;
+  }
+
+
+  /* ----------------------------------------------------------
+     REVEAL ANIMATION
+     Same clip-reveal system as desktop.
+     No override needed for the mechanism itself.
+     The transition timing is slightly faster on mobile
+     to feel snappy rather than slow on smaller screens.
+     ---------------------------------------------------------- */
+  .reveal__inner {
+    transition-duration: 0.75s;
+  }
+
+} /* end @media (max-width: 767px) */
+
+
+/* ----------------------------------------------------------
+   FINE-TUNING — Very small screens (max-width: 359px)
+   iPhone SE (1st gen), older Android, 320px devices.
+   Only touches the elements that break below 360px.
+   ---------------------------------------------------------- */
+@media (max-width: 359px) {
+
+  :root {
+    --grid-margin: 4vw;
+  }
+
+  .site-nav {
+    padding-inline: 4vw;
+  }
+
+  #hero {
+    padding-inline: 4vw;
+  }
+
+  /* At 320px, 26vw would give ~83px — fine. But clamp floor
+     catches it at 4.5rem (72px). No override needed for headline. */
+
+  /* Clock times: reduce slightly so both cities sit on one line */
+  .clock-cluster__time {
+    font-size: 1.125rem;
+  }
+
+  /* Nav overlay: tighter padding on very small screens */
+  .nav-overlay {
+    padding: 4vw;
+    padding-bottom: 2rem;
+  }
+
+  .nav-overlay__link {
+    font-size: clamp(1.75rem, 10vw, 2.25rem);
+  }
+
+  /* Service and work client names: pull back the fluid size slightly */
+  .service-item__title {
+    font-size: clamp(1.5rem, 8vw, 2rem);
+  }
+
+  .work-entry__client {
+    font-size: clamp(1.5rem, 8vw, 2.25rem);
+  }
+
+  /* Contact CTA */
+  .contact-cta {
+    font-size: clamp(3rem, 18vw, 4rem);
+  }
+
+} /* end @media (max-width: 359px) */
+
+
+/* ----------------------------------------------------------
+   FINE-TUNING — Larger mobile / small tablet (480px–767px)
+   Pixel 8a (412px) through Galaxy S23 Ultra (480px) edge.
+   Hero headline gets more room. Service items use 
+   a hybrid flex layout — number left, title right.
+   ---------------------------------------------------------- */
+@media (min-width: 480px) and (max-width: 767px) {
+
+  /* Headline has more room — let it breathe */
+  .hero-headline {
+    font-size: clamp(5rem, 22vw, 7rem);
+  }
+
+  /* Service items: restore number-left, title-right layout
+     since there's enough horizontal room at ~480px+ */
+  .service-item {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .service-item__number {
+    width: 3rem;
+    flex-shrink: 0;
+  }
+
+  .service-item__title {
+    text-align: right;
+    margin-left: auto;
+    font-size: clamp(1.75rem, 5.5vw, 2.5rem);
+  }
+
+  /* Work entries: still vertical stack but slightly larger client names */
+  .work-entry__client {
+    font-size: clamp(2rem, 7vw, 3rem);
+  }
+
+} /* end @media (min-width: 480px) and (max-width: 767px) */
