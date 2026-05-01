@@ -39,47 +39,15 @@
             trigger: '#hero',
             start: 'top top',
             end: 'bottom top',
-            scrub: 0.5,
+            scrub: true,
           },
         });
       });
     }
 
     /* ─── SECTION ENTRANCES ───────────────────────────────────────────────── */
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!reduced && !isMobile) {
-      const scrub = 0.4;
-      const ease = 'none';
-
-      gsap.utils.toArray('.section-label').forEach((el) => {
-        gsap.fromTo(el,
-          { opacity: 0 },
-          { opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 92%', end: 'top 65%', scrub } }
-        );
-      });
-
-      gsap.utils.toArray('.service-item').forEach((el, i) => {
-        gsap.fromTo(el,
-          { opacity: 0 },
-          { opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 92%', end: 'top 65%', scrub } }
-        );
-      });
-
-      gsap.utils.toArray('.work-entry').forEach((el, i) => {
-        gsap.fromTo(el,
-          { opacity: 0 },
-          { opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 92%', end: 'top 65%', scrub } }
-        );
-      });
-
-      const cta = document.querySelector('.contact-cta');
-      if (cta) {
-        gsap.fromTo(cta,
-          { opacity: 0 },
-          { opacity: 1, ease, scrollTrigger: { trigger: cta, start: 'top 88%', end: 'top 60%', scrub } }
-        );
-      }
-    }
+    /* Reveal system via IntersectionObserver handles all section entrances.
+       GSAP scrub removed — was conflicting with Lenis on every scroll tick. */
 
     /* ─── CLOCKS ──────────────────────────────────────────────────────────── */
     const CLOCKS = [
@@ -125,11 +93,14 @@
     /* ─── REVEAL ──────────────────────────────────────────────────────────── */
     /* ScrollTrigger-based reveal — IntersectionObserver cannot track Lenis
        scroll position since Lenis owns the scroll loop, not the browser.
-       ScrollTrigger is already synced to Lenis via scrollerProxy above. */
+       ScrollTrigger is already synced to Lenis via scrollerProxy above.
+       overflow:hidden is set inline so parent flex/grid containers in
+       sections 4 and 5 cannot collapse the clip on .reveal__inner. */
     function initReveal() {
       const reveals = document.querySelectorAll('.reveal');
       if (!reveals.length) return;
       reveals.forEach(el => {
+        el.style.overflow = 'hidden';
         ScrollTrigger.create({
           trigger: el,
           start: 'top 92%',
