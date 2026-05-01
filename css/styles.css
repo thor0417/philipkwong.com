@@ -346,7 +346,7 @@ img, svg { display: block; max-width: 100%; }
 .site-nav.is-dark .site-nav__wordmark { color: #FFFFFF; }
 .site-nav.is-dark .site-nav__link     { color: #FFFFFF; }
 
-#hero, #services, #industries, #work, #about, #contact {
+#hero, #services, #work, #about, #contact {
   scroll-margin-top: 4rem;
 }
 
@@ -718,9 +718,9 @@ img, svg { display: block; max-width: 100%; }
 
 .about-body {
   font-family: var(--font-readable);
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.7;
+  font-weight: 500;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1.45;
   letter-spacing: 0.01em;
   color: var(--text-main);
   max-width: 48ch;
@@ -729,6 +729,20 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .about-body p + p { margin-top: var(--space-6); }
+
+.about-gutter {
+  position: relative;
+}
+
+.about-gutter::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 0.5px;
+  background: rgba(10, 10, 10, 0.15);
+}
 
 .about-locations {
   display: flex;
