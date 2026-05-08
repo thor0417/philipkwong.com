@@ -48,17 +48,25 @@
 }
 
 @font-face {
-  font-family: 'Inter Tight';
-  src: url('../assets/font/InterTight-Regular.ttf') format('truetype');
+  font-family: 'PPNeueMontreal';
+  src: url('../assets/font/PPNeueMontreal-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Inter Tight';
-  src: url('../assets/font/InterTight-Medium.ttf') format('truetype');
-  font-weight: 500;
+  font-family: 'PPNeueMontreal';
+  src: url('../assets/font/PPNeueMontreal-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PPNeueMontrealText';
+  src: url('../assets/font/PPNeueMontrealText-Book.otf') format('opentype');
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -79,7 +87,7 @@
 
   --font-display: 'Dharma Gothic E', sans-serif;
   --font-body:    'DM Mono', monospace;
-  --font-readable: 'Inter Tight', sans-serif;
+  --font-readable: 'PPNeueMontreal', sans-serif;
 
   --text-display-2xl: clamp(5rem, 15vw, 20rem);
   --text-display-xl:  clamp(3.5rem, 10vw, 14rem);
@@ -302,10 +310,10 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .site-nav__wordmark {
-  font-family: var(--font-body);
-  font-weight: 700;
+  font-family: 'PPNeueMontreal', sans-serif;
+  font-weight: 600;
   font-size: 15px;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   line-height: 1;
   color: var(--text-main);
