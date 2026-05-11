@@ -103,7 +103,7 @@
         el.style.overflow = 'hidden';
         ScrollTrigger.create({
           trigger: el,
-          start: 'top 92%',
+          start: 'top 100%',
           once: true,
           onEnter: () => el.classList.add('is-visible'),
         });
