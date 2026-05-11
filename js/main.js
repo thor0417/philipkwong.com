@@ -46,8 +46,40 @@
     }
 
     /* ─── SECTION ENTRANCES ───────────────────────────────────────────────── */
-    /* Reveal system via IntersectionObserver handles all section entrances.
-       GSAP scrub removed — was conflicting with Lenis on every scroll tick. */
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const ease = 'none';
+
+      gsap.utils.toArray('.section-label').forEach((el) => {
+        gsap.fromTo(el,
+          { opacity: 0 },
+          { opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 90%', end: 'top 60%', scrub: 1 } }
+        );
+      });
+
+      if (!isMobile) {
+        gsap.utils.toArray('.service-item').forEach((el, i) => {
+          gsap.fromTo(el,
+            { x: -10, opacity: 0 },
+            { x: 0, opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 60%', scrub: 1 } }
+          );
+        });
+
+        gsap.utils.toArray('.work-entry').forEach((el) => {
+          gsap.fromTo(el,
+            { x: -10, opacity: 0 },
+            { x: 0, opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 60%', scrub: 1 } }
+          );
+        });
+
+        const cta = document.querySelector('.contact-cta');
+        if (cta) {
+          gsap.fromTo(cta,
+            { y: 8 },
+            { y: 0, ease, scrollTrigger: { trigger: cta, start: 'top 85%', end: 'top 55%', scrub: 1 } }
+          );
+        }
+      }
+    }
 
     /* ─── CLOCKS ──────────────────────────────────────────────────────────── */
     const CLOCKS = [
