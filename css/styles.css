@@ -183,7 +183,6 @@ main { overflow-x: hidden; }
 .work-entry__client,
 .contact-cta,
 .industry-group__label {
-  will-change: transform;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -369,7 +368,6 @@ img, svg { display: block; max-width: 100%; }
   padding-block: clamp(6rem, 12vw, 12rem);
   padding-inline: var(--grid-margin);
   border-top: var(--border-hairline);
-  overflow: hidden;
 }
 
 .section-label {
