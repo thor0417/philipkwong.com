@@ -320,17 +320,15 @@
         gsap.set([topBarEl, contentEl, footerEl], { opacity: 0 });
 
         const duration = isMobile ? 0.4 : 0.6;
+        gsap.set(overlay, { y: '100%' });
         activeTl = gsap.timeline()
-          .fromTo(overlay,
-            { clipPath: 'inset(0 0 100% 0)' },
-            { clipPath: 'inset(0 0 0% 0)', duration, ease: 'expo.out' }
-          )
+          .to(overlay, { y: '0%', duration, ease: 'expo.out' })
           .to([topBarEl, contentEl, footerEl], {
             opacity: 1,
             duration: 0.35,
             stagger: 0.1,
             ease: 'power2.out'
-          });
+          }, '-=0.2');
       }
 
       function closeCase() {
@@ -348,7 +346,7 @@
             ease: 'power2.in'
           })
           .to(overlay, {
-            clipPath: 'inset(0 0 100% 0)',
+            y: '100%',
             duration,
             ease: 'expo.in',
             onComplete: () => {
