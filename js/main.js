@@ -371,6 +371,125 @@
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen) closeCase(); });
     }
 
+    /* ─── WEBGL DISTORTION — desktop only ───────────────────────────────── */
+    function initWebGL() {
+      if (isMobile) return;
+      const canvas = document.getElementById('hero-canvas');
+      if (!canvas) return;
+      let gl;
+      try { gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl'); } catch (e) {}
+      if (!gl) return;
+
+      const VS = `
+        attribute vec2 aPosition;
+        void main() {
+          gl_Position = vec4(aPosition, 0.0, 1.0);
+        }
+      `;
+
+      const FS = `
+        precision mediump float;
+        uniform float uTime;
+        uniform vec2  uMouse;
+        uniform vec2  uResolution;
+
+        float hash(vec2 p) {
+          p = fract(p * vec2(234.34, 435.345));
+          p += dot(p, p + 34.23);
+          return fract(p.x * p.y);
+        }
+
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          f = f * f * (3.0 - 2.0 * f);
+          float a = hash(i);
+          float b = hash(i + vec2(1.0, 0.0));
+          float c = hash(i + vec2(0.0, 1.0));
+          float d = hash(i + vec2(1.0, 1.0));
+          return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+        }
+
+        float fbm(vec2 p) {
+          float v = 0.0; float a = 0.5;
+          for (int i = 0; i < 4; i++) { v += a * noise(p); p *= 2.0; a *= 0.5; }
+          return v;
+        }
+
+        void main() {
+          vec2 uv   = gl_FragCoord.xy / uResolution;
+          vec2 mUV  = vec2(uMouse.x / uResolution.x, 1.0 - uMouse.y / uResolution.y);
+          float mDist = length(uv - mUV);
+          float mInfl = smoothstep(0.45, 0.0, mDist);
+          float t  = uTime * 0.06;
+          float n1 = fbm(uv * 3.0 + t);
+          float n2 = fbm(uv * 2.5 - t * 0.7 + 7.3);
+          float str = 0.006 + 0.014 * mInfl;
+          float cn  = fbm(uv + vec2(n1 - 0.5, n2 - 0.5) * str + t * 0.25);
+          vec3 bg   = vec3(0.9765, 0.9765, 0.9765);
+          float shift = (cn - 0.5) * str * 7.0;
+          gl_FragColor = vec4(clamp(bg + shift, 0.0, 1.0), 1.0);
+        }
+      `;
+
+      function mkShader(type, src) {
+        const s = gl.createShader(type);
+        gl.shaderSource(s, src);
+        gl.compileShader(s);
+        return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null;
+      }
+
+      const vs = mkShader(gl.VERTEX_SHADER, VS);
+      const fs = mkShader(gl.FRAGMENT_SHADER, FS);
+      if (!vs || !fs) return;
+
+      const prog = gl.createProgram();
+      gl.attachShader(prog, vs);
+      gl.attachShader(prog, fs);
+      gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+      gl.useProgram(prog);
+
+      const quad = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+      const vbuf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, vbuf);
+      gl.bufferData(gl.ARRAY_BUFFER, quad, gl.STATIC_DRAW);
+
+      const aPos = gl.getAttribLocation(prog, 'aPosition');
+      gl.enableVertexAttribArray(aPos);
+      gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+      const locT = gl.getUniformLocation(prog, 'uTime');
+      const locM = gl.getUniformLocation(prog, 'uMouse');
+      const locR = gl.getUniformLocation(prog, 'uResolution');
+
+      let tMX = -1000, tMY = -1000, cMX = -1000, cMY = -1000;
+
+      const heroEl = document.getElementById('hero');
+      if (heroEl) {
+        heroEl.addEventListener('mousemove', (e) => { tMX = e.clientX; tMY = e.clientY; });
+        heroEl.addEventListener('mouseleave', () => { tMX = -1000; tMY = -1000; });
+      }
+
+      function resize() {
+        canvas.width  = canvas.offsetWidth  || window.innerWidth;
+        canvas.height = canvas.offsetHeight || window.innerHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      gsap.ticker.add((time) => {
+        cMX += (tMX - cMX) * 0.05;
+        cMY += (tMY - cMY) * 0.05;
+        gl.uniform1f(locT, time);
+        gl.uniform2f(locM, cMX, cMY);
+        gl.uniform2f(locR, canvas.width, canvas.height);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      });
+    }
+
+    initWebGL();
     initReveal();
     initNavDark();
     initMobileNav();
