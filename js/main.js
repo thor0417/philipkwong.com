@@ -393,42 +393,25 @@
         uniform vec2  uMouse;
         uniform vec2  uResolution;
 
-        float hash(vec2 p) {
-          p = fract(p * vec2(234.34, 435.345));
-          p += dot(p, p + 34.23);
-          return fract(p.x * p.y);
-        }
-
-        float noise(vec2 p) {
-          vec2 i = floor(p);
-          vec2 f = fract(p);
-          f = f * f * (3.0 - 2.0 * f);
-          float a = hash(i);
-          float b = hash(i + vec2(1.0, 0.0));
-          float c = hash(i + vec2(0.0, 1.0));
-          float d = hash(i + vec2(1.0, 1.0));
-          return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
-        }
-
-        float fbm(vec2 p) {
-          float v = 0.0; float a = 0.5;
-          for (int i = 0; i < 4; i++) { v += a * noise(p); p *= 2.0; a *= 0.5; }
-          return v;
-        }
-
         void main() {
-          vec2 uv   = gl_FragCoord.xy / uResolution;
-          vec2 mUV  = vec2(uMouse.x / uResolution.x, 1.0 - uMouse.y / uResolution.y);
+          vec2 uv     = gl_FragCoord.xy / uResolution;
+          vec2 center = vec2(0.5, 0.5);
+
+          vec2 mUV   = vec2(uMouse.x / uResolution.x, 1.0 - uMouse.y / uResolution.y);
           float mDist = length(uv - mUV);
-          float mInfl = smoothstep(0.45, 0.0, mDist);
-          float t  = uTime * 0.06;
-          float n1 = fbm(uv * 3.0 + t);
-          float n2 = fbm(uv * 2.5 - t * 0.7 + 7.3);
-          float str = 0.018 + 0.030 * mInfl;
-          float cn  = fbm(uv + vec2(n1 - 0.5, n2 - 0.5) * str + t * 0.25);
-          vec3 bg   = vec3(0.9765, 0.9765, 0.9765);
-          float shift = (cn - 0.5) * str * 20.0;
-          gl_FragColor = vec4(clamp(bg + shift, 0.0, 1.0), 1.0);
+          float mInfl = smoothstep(0.5, 0.0, mDist) * 0.3;
+
+          float breath1 = sin(uTime * 0.4  + uv.x * 2.0) * 0.5 + 0.5;
+          float breath2 = sin(uTime * 0.25 + uv.y * 1.5 + 1.2) * 0.5 + 0.5;
+          float breath  = mix(breath1, breath2, 0.5);
+
+          float vignette = 1.0 - smoothstep(0.3, 1.2, length(uv - center) * 1.4);
+
+          vec3  bg  = vec3(0.976, 0.976, 0.976);
+          float lum = vignette * 0.04 + breath * 0.02 + mInfl * 0.06;
+          vec3  col = bg - vec3(lum * 0.6, lum * 0.55, lum * 0.4);
+
+          gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
         }
       `;
 
@@ -470,10 +453,18 @@
       let tMX = -1000, tMY = -1000, cMX = -1000, cMY = -1000;
 
       const heroEl = document.getElementById('hero');
-      if (heroEl) {
-        heroEl.addEventListener('mousemove', (e) => { tMX = e.clientX; tMY = e.clientY; });
-        heroEl.addEventListener('mouseleave', () => { tMX = -1000; tMY = -1000; });
-      }
+      document.addEventListener('mousemove', (e) => {
+        if (!heroEl) return;
+        const rect = heroEl.getBoundingClientRect();
+        if (e.clientX >= rect.left && e.clientX <= rect.right &&
+            e.clientY >= rect.top  && e.clientY <= rect.bottom) {
+          tMX = e.clientX;
+          tMY = e.clientY;
+        } else {
+          tMX = -1000;
+          tMY = -1000;
+        }
+      });
 
       function resize() {
         canvas.width  = canvas.offsetWidth  || window.innerWidth;
@@ -483,7 +474,10 @@
       resize();
       window.addEventListener('resize', resize);
 
+      let frame = 0;
       gsap.ticker.add((time) => {
+        frame++;
+        if (frame % 2 !== 0) return;
         cMX += (tMX - cMX) * 0.05;
         cMY += (tMY - cMY) * 0.05;
         gl.uniform1f(locT, time);
