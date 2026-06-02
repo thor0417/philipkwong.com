@@ -8,7 +8,7 @@
     const lenis = new Lenis({
       duration: isMobile ? 0.9 : 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      touchMultiplier: 2,
+      touchMultiplier: 2.5,
       infinite: false,
     });
 
@@ -54,15 +54,15 @@
       gsap.utils.toArray('.section-label').forEach((el) => {
         gsap.fromTo(el,
           { opacity: 0 },
-          { opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 90%', end: 'top 60%', scrub: 0.8 } }
+          { opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 90%', end: 'top 65%', scrub: 0.8 } }
         );
       });
 
       if (!isMobile) {
-        gsap.utils.toArray('.service-item').forEach((el, i) => {
+        gsap.utils.toArray('.service-item').forEach((el) => {
           gsap.fromTo(el,
             { x: -10, opacity: 0 },
-            { x: 0, opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 60%', scrub: 0.8 } }
+            { x: 0, opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 62%', scrub: 0.8 } }
           );
         });
 
