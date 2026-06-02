@@ -30,10 +30,12 @@
 
     /* ─── HERO PARALLAX — desktop only ───────────────────────────────────── */
     if (!isMobile) {
+      let maxScroll = ScrollTrigger.maxScroll(window);
+      window.addEventListener('resize', () => { maxScroll = ScrollTrigger.maxScroll(window); });
       document.querySelectorAll('[data-scroll-speed]').forEach((el) => {
         const speed = parseFloat(el.getAttribute('data-scroll-speed'));
         gsap.to(el, {
-          y: () => (1 - speed) * ScrollTrigger.maxScroll(window) * 0.12,
+          y: () => (1 - speed) * maxScroll * 0.12,
           ease: 'none',
           scrollTrigger: {
             trigger: '#hero',
@@ -52,7 +54,7 @@
       gsap.utils.toArray('.section-label').forEach((el) => {
         gsap.fromTo(el,
           { opacity: 0 },
-          { opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 90%', end: 'top 60%', scrub: 1 } }
+          { opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 90%', end: 'top 60%', scrub: 0.8 } }
         );
       });
 
@@ -60,14 +62,16 @@
         gsap.utils.toArray('.service-item').forEach((el, i) => {
           gsap.fromTo(el,
             { x: -10, opacity: 0 },
-            { x: 0, opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 60%', scrub: 1 } }
+            { x: 0, opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 60%', scrub: 0.8 } }
           );
         });
 
         gsap.utils.toArray('.work-entry').forEach((el) => {
           gsap.fromTo(el,
-            { x: -10, opacity: 0 },
-            { x: 0, opacity: 1, ease, scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 60%', scrub: 1 } }
+            { x: -6, opacity: 0 },
+            { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out',
+              scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+            }
           );
         });
 
@@ -75,13 +79,15 @@
         if (cta) {
           gsap.fromTo(cta,
             { y: 8 },
-            { y: 0, ease, scrollTrigger: { trigger: cta, start: 'top 85%', end: 'top 55%', scrub: 1 } }
+            { y: 0, ease, scrollTrigger: { trigger: cta, start: 'top 85%', end: 'top 55%', scrub: 0.8 } }
           );
         }
       }
     }
 
     /* ─── CLOCKS ──────────────────────────────────────────────────────────── */
+    const fmtVan = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Vancouver', hour: '2-digit', minute: '2-digit' });
+    const fmtBkk = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Bangkok',     hour: '2-digit', minute: '2-digit' });
     const CLOCKS = [
       { clusterId: "clock-van", tz: "America/Vancouver" },
       { clusterId: "clock-bkk", tz: "Asia/Bangkok" },
@@ -99,8 +105,8 @@
 
     function tickClocks() {
       const now = new Date();
-      const vanTime = now.toLocaleTimeString('en-GB', { timeZone: 'America/Vancouver', hour: '2-digit', minute: '2-digit' });
-      const bkkTime = now.toLocaleTimeString('en-GB', { timeZone: 'Asia/Bangkok', hour: '2-digit', minute: '2-digit' });
+      const vanTime = fmtVan.format(now);
+      const bkkTime = fmtBkk.format(now);
       const vanHour = parseInt(vanTime.slice(0, 2), 10);
       const bkkHour = parseInt(bkkTime.slice(0, 2), 10);
 
