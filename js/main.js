@@ -210,7 +210,7 @@
           subsection: 'STRATEGY & STANDARDS',
           type: 'STANDARDS',
           descriptors: 'Quality Management System · Regulatory Compliance · Documentation',
-          editorial: 'QMS architecture built to the new provincial framework before implementation guidance was finalized.'
+          editorial: 'Architected the first end-to-end Quality Management System and Standard Operating Procedures suite for British Columbia community pharmacies under the new Health Professions and Occupations Act framework. The 97-document suite covers governance, CIRCL incident reporting, narcotics and controlled substances, dispensing, staff training, records, privacy, and pharmacy operations. Every procedure is anchored to a specific bylaw section and structured under ISO 9001:2015 as a document architecture overlay, built to address three regulatory deadlines: HPOA and PODSA Bylaws (April 1, 2026), CIRCL (June 1, 2026), and SOR/2025-242 (October 1, 2026).'
         },
         'ul-canada': {
           client: 'UL Canada',
@@ -224,21 +224,21 @@
           subsection: 'STRATEGY & STANDARDS',
           type: 'STANDARDS',
           descriptors: 'Chair',
-          editorial: 'Chaired the technical committee responsible for the 4400-2 standard.'
+          editorial: 'Chaired the technical guide committee responsible for ULC TG-44002, the first Canadian safety guide covering cannabis oil extraction processes including hydrocarbon, alcohol, CO2, post-processing refinement, and distillation. The guide established best practices that became the foundation for extraction facility compliance across Canada.'
         },
         'iso-iwa': {
           client: 'ISO IWA 37-1',
           subsection: 'STRATEGY & STANDARDS',
           type: 'STANDARDS',
           descriptors: 'Vice Convener',
-          editorial: 'Vice Convener. Drove consensus across more than twenty member nations on international framework adoption.'
+          editorial: 'Vice Convener of Working Group 1 within ISO\'s first international workshop on cannabis safety, security, and sustainability. The workshop drew over 200 participants from 22 countries. The resulting three-part IWA 37 series became the global blueprint for countries building legal cannabis market infrastructure.'
         },
         'ul-ulc': {
           client: 'UL/ULC/ANSI/CAN/1389',
           subsection: 'STRATEGY & STANDARDS',
           type: 'STANDARDS',
           descriptors: 'STP Member',
-          editorial: 'STP Member. Standards technical panel for North American harmonization.'
+          editorial: 'STP member on the standards technical panel that developed the first bi-national safety standard for plant oil extraction equipment across the US and Canada. The standard addressed fire, explosion, and injury risks that had sent workers to hospital and created regulatory uncertainty across North America. Referenced in NFPA 1 and the International Fire Code.'
         },
         'grant-leisure': {
           client: 'Grant Leisure International',
