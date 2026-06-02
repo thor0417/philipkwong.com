@@ -314,7 +314,7 @@
         overlay.setAttribute('aria-hidden', 'false');
         overlay.classList.add('is-open');
         isOpen = true;
-        lenis.stop();
+        document.body.style.overflow = 'hidden';
 
         if (activeTl) activeTl.kill();
         gsap.set([topBarEl, contentEl, footerEl], { opacity: 0 });
@@ -354,7 +354,7 @@
             onComplete: () => {
               overlay.classList.remove('is-open');
               overlay.setAttribute('aria-hidden', 'true');
-              lenis.start();
+              document.body.style.overflow = '';
             }
           }, '-=0.05');
       }

@@ -1007,6 +1007,98 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* ------------------------------------------------------------
+   13-B. WRITING PAGE
+   ------------------------------------------------------------ */
+.writing-hero {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(3rem, 8vw, 10rem);
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  color: var(--text-main);
+  margin-bottom: clamp(3rem, 6vw, 6rem);
+}
+
+.writing-list {
+  border-top: var(--border-hairline);
+}
+
+.writing-entry {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-8);
+  align-items: baseline;
+  padding-block: var(--space-6);
+  border-bottom: var(--border-hairline);
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 300ms;
+}
+
+.writing-entry:hover {
+  border-bottom-color: rgba(10, 10, 10, 0.5);
+}
+
+.writing-entry__left {
+  min-width: 0;
+}
+
+.writing-entry__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 3.5rem);
+  line-height: 0.92;
+  letter-spacing: var(--tracking-display);
+  color: var(--text-main);
+}
+
+.writing-entry__description {
+  font-family: var(--font-readable);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(10, 10, 10, 0.6);
+  margin-top: 0.5rem;
+}
+
+.writing-entry__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.writing-entry__date {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: rgba(10, 10, 10, 0.4);
+  white-space: nowrap;
+}
+
+.writing-entry .t-registry {
+  margin-bottom: 0;
+  text-align: right;
+}
+
+/* Nav active state — writing.html only */
+.site-nav.is-writing-page .site-nav__link {
+  color: rgba(10, 10, 10, 0.4);
+}
+
+.site-nav.is-writing-page .site-nav__link[aria-current="page"] {
+  color: var(--text-main);
+  border-bottom-color: var(--text-main);
+}
+
+#writing {
+  scroll-margin-top: 4rem;
+}
+
+/* ------------------------------------------------------------
    14. RESPONSIVE — 768px
    ------------------------------------------------------------ */
 @media (min-width: 768px) {

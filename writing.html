@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writing — Philip Kwong</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+
+  <div class="grain-layer" aria-hidden="true"></div>
+
+  <nav class="site-nav is-writing-page" aria-label="Primary navigation">
+    <a class="site-nav__wordmark" href="index.html">Philip Kwong</a>
+    <ul class="site-nav__links" role="list">
+      <li><a class="site-nav__link" href="index.html#about">About</a></li>
+      <li><a class="site-nav__link" href="index.html#services">Services</a></li>
+      <li><a class="site-nav__link" href="index.html#work">Work</a></li>
+      <li><a class="site-nav__link" href="writing.html" aria-current="page">Writing</a></li>
+      <li><a class="site-nav__link" href="index.html#contact">Contact</a></li>
+    </ul>
+    <button class="site-nav__trigger" aria-expanded="false" aria-controls="nav-overlay" aria-label="Open navigation">[ MENU ]</button>
+  </nav>
+
+  <div class="nav-overlay" id="nav-overlay" aria-hidden="true" role="dialog" aria-label="Site navigation">
+    <nav aria-label="Mobile navigation">
+      <a class="nav-overlay__link" href="index.html#about">About</a>
+      <a class="nav-overlay__link" href="index.html#services">Services</a>
+      <a class="nav-overlay__link" href="index.html#work">Work</a>
+      <a class="nav-overlay__link" href="writing.html">Writing</a>
+      <a class="nav-overlay__link" href="index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-overlay__meta">
+      <span class="t-registry"><strong>[ULC: STRAT]</strong> CORP STRATEGY</span>
+      <span class="t-registry"><strong>[ISO: VICE]</strong> CONVENER</span>
+      <span class="t-registry"><strong>[REG: 08.YRS]</strong> COMPLIANCE</span>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ================================================================
+         05 — WRITING
+         ================================================================ -->
+    <section id="writing" class="section" aria-labelledby="writing-heading">
+      <div class="grid-stage">
+
+        <p class="section-label" style="grid-column: 1 / -1">05 — WRITING</p>
+
+        <h1 id="writing-heading" class="writing-hero" style="grid-column: 1 / -1">Writing</h1>
+
+        <div class="writing-list" style="grid-column: 1 / -1">
+
+          <a class="writing-entry" href="#" aria-label="Market Entry in Regulated Southeast Asian Markets">
+            <div class="writing-entry__left">
+              <h2 class="writing-entry__title">Market Entry in Regulated Southeast Asian Markets</h2>
+              <p class="writing-entry__description">What founders get wrong when expanding into Thailand, Vietnam, and the Philippines.</p>
+            </div>
+            <div class="writing-entry__right">
+              <span class="writing-entry__date">2026</span>
+              <span class="t-registry"><strong>[READ:]</strong> 5 MIN</span>
+            </div>
+          </a>
+
+          <a class="writing-entry" href="#" aria-label="Why Compliance Work Requires Strategy, Not Just Process">
+            <div class="writing-entry__left">
+              <h2 class="writing-entry__title">Why Compliance Work Requires Strategy, Not Just Process</h2>
+              <p class="writing-entry__description">The difference between companies that get licensed and companies that scale.</p>
+            </div>
+            <div class="writing-entry__right">
+              <span class="writing-entry__date">2026</span>
+              <span class="t-registry"><strong>[READ:]</strong> 5 MIN</span>
+            </div>
+          </a>
+
+          <a class="writing-entry" href="#" aria-label="QMS Architecture for Emerging Regulatory Frameworks">
+            <div class="writing-entry__left">
+              <h2 class="writing-entry__title">QMS Architecture for Emerging Regulatory Frameworks</h2>
+              <p class="writing-entry__description">Building quality management systems before the rules are finalized.</p>
+            </div>
+            <div class="writing-entry__right">
+              <span class="writing-entry__date">2026</span>
+              <span class="t-registry"><strong>[READ:]</strong> 5 MIN</span>
+            </div>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
