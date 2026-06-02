@@ -48,7 +48,7 @@
     }
 
     /* ─── SECTION ENTRANCES ───────────────────────────────────────────────── */
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && !isMobile) {
       const ease = 'none';
 
       gsap.utils.toArray('.section-label').forEach((el) => {
