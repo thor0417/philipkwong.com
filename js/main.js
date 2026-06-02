@@ -427,7 +427,7 @@
           float str = 0.018 + 0.030 * mInfl;
           float cn  = fbm(uv + vec2(n1 - 0.5, n2 - 0.5) * str + t * 0.25);
           vec3 bg   = vec3(0.9765, 0.9765, 0.9765);
-          float shift = (cn - 0.5) * str * 7.0;
+          float shift = (cn - 0.5) * str * 20.0;
           gl_FragColor = vec4(clamp(bg + shift, 0.0, 1.0), 1.0);
         }
       `;
@@ -436,7 +436,11 @@
         const s = gl.createShader(type);
         gl.shaderSource(s, src);
         gl.compileShader(s);
-        return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null;
+        if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+          console.error('Shader compile error:', gl.getShaderInfoLog(s));
+          return null;
+        }
+        return s;
       }
 
       const vs = mkShader(gl.VERTEX_SHADER, VS);
@@ -479,17 +483,14 @@
       resize();
       window.addEventListener('resize', resize);
 
-      let rafId;
-      function renderLoop(time) {
+      gsap.ticker.add((time) => {
         cMX += (tMX - cMX) * 0.05;
         cMY += (tMY - cMY) * 0.05;
-        gl.uniform1f(locT, time * 0.001);
+        gl.uniform1f(locT, time);
         gl.uniform2f(locM, cMX, cMY);
         gl.uniform2f(locR, canvas.width, canvas.height);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-        rafId = requestAnimationFrame(renderLoop);
-      }
-      rafId = requestAnimationFrame(renderLoop);
+      });
     }
 
     initWebGL();
