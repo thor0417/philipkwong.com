@@ -424,7 +424,7 @@
           float t  = uTime * 0.06;
           float n1 = fbm(uv * 3.0 + t);
           float n2 = fbm(uv * 2.5 - t * 0.7 + 7.3);
-          float str = 0.006 + 0.014 * mInfl;
+          float str = 0.018 + 0.030 * mInfl;
           float cn  = fbm(uv + vec2(n1 - 0.5, n2 - 0.5) * str + t * 0.25);
           vec3 bg   = vec3(0.9765, 0.9765, 0.9765);
           float shift = (cn - 0.5) * str * 7.0;
@@ -479,14 +479,17 @@
       resize();
       window.addEventListener('resize', resize);
 
-      gsap.ticker.add((time) => {
+      let rafId;
+      function renderLoop(time) {
         cMX += (tMX - cMX) * 0.05;
         cMY += (tMY - cMY) * 0.05;
-        gl.uniform1f(locT, time);
+        gl.uniform1f(locT, time * 0.001);
         gl.uniform2f(locM, cMX, cMY);
         gl.uniform2f(locR, canvas.width, canvas.height);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      });
+        rafId = requestAnimationFrame(renderLoop);
+      }
+      rafId = requestAnimationFrame(renderLoop);
     }
 
     initWebGL();
