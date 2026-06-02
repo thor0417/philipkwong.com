@@ -190,9 +190,191 @@
       });
     }
 
+    /* ─── CASE STUDY OVERLAY ─────────────────────────────────────────────── */
+    function initCaseOverlay() {
+      const overlay      = document.getElementById('case-overlay');
+      if (!overlay) return;
+      const subsectionEl  = document.getElementById('case-subsection');
+      const closeBtn      = document.getElementById('case-close');
+      const contentEl     = document.getElementById('case-content');
+      const footerEl      = document.getElementById('case-footer');
+      const topBarEl      = overlay.querySelector('.case-overlay__top-bar');
+      const clientEl      = document.getElementById('case-client');
+      const editorialEl   = document.getElementById('case-editorial');
+      const descriptorsEl = document.getElementById('case-descriptors');
+      const typeTagEl     = document.getElementById('case-type-tag');
+
+      const CASES = {
+        'bc-pharmacy': {
+          client: 'BC Pharmacy Regulation',
+          subsection: 'STRATEGY & STANDARDS',
+          type: 'STANDARDS',
+          descriptors: 'Quality Management System · Regulatory Compliance · Documentation',
+          editorial: 'QMS architecture built to the new provincial framework before implementation guidance was finalized.'
+        },
+        'ul-canada': {
+          client: 'UL Canada',
+          subsection: 'STRATEGY & STANDARDS',
+          type: 'STANDARDS',
+          descriptors: 'Corporate Strategy Development',
+          editorial: 'Corporate strategy development for the Canadian national standards body.'
+        },
+        'ul-canada-tg': {
+          client: 'UL Canada TG 4400-2',
+          subsection: 'STRATEGY & STANDARDS',
+          type: 'STANDARDS',
+          descriptors: 'Chair',
+          editorial: 'Chaired the technical committee responsible for the 4400-2 standard.'
+        },
+        'iso-iwa': {
+          client: 'ISO IWA 37-1',
+          subsection: 'STRATEGY & STANDARDS',
+          type: 'STANDARDS',
+          descriptors: 'Vice Convener',
+          editorial: 'Vice Convener. Drove consensus across more than twenty member nations on international framework adoption.'
+        },
+        'ul-ulc': {
+          client: 'UL/ULC/ANSI/CAN/1389',
+          subsection: 'STRATEGY & STANDARDS',
+          type: 'STANDARDS',
+          descriptors: 'STP Member',
+          editorial: 'STP Member. Standards technical panel for North American harmonization.'
+        },
+        'grant-leisure': {
+          client: 'Grant Leisure International',
+          subsection: 'ENGAGEMENTS',
+          type: 'OPERATIONAL',
+          descriptors: 'Brand Identity · Visual Systems · Digital Presence',
+          editorial: 'Comprehensive brand and digital rebuild for a global leisure consultancy. Visual identity, asset architecture, and digital presence redesigned and delivered across the full engagement.'
+        },
+        'aurora': {
+          client: 'Aurora Cannabis',
+          subsection: 'ENGAGEMENTS',
+          type: 'OPERATIONAL',
+          descriptors: 'SOP · Product Development · Regulatory Compliance · Operational Planning',
+          editorial: "Embedded across product development and compliance for one of Canada's largest licensed producers. SOP development, extraction facility design, health and safety frameworks, and staff training programs across a three-year engagement."
+        },
+        'organigram': {
+          client: 'Organigram',
+          subsection: 'ENGAGEMENTS',
+          type: 'OPERATIONAL',
+          descriptors: 'Regulatory Compliance · Operational Planning · Facility Development',
+          editorial: 'Extraction facility design, equipment sourcing, and health and safety compliance for a publicly traded national licensed producer.'
+        },
+        'valens': {
+          client: 'The Valens Company',
+          subsection: 'ENGAGEMENTS',
+          type: 'OPERATIONAL',
+          descriptors: 'Operational Planning · Facility Development',
+          editorial: 'Equipment sourcing, extraction floorplan design, installation, and operational training for a cannabis manufacturing company operating across Canada.'
+        },
+        'adastra': {
+          client: 'Adastra Labs',
+          subsection: 'ENGAGEMENTS',
+          type: 'OPERATIONAL',
+          descriptors: 'Regulatory Compliance · Operational Planning · Strategy Development',
+          editorial: 'Feasibility strategy, facility design, rezoning assistance, and compliance architecture for an extraction-focused licensed producer in British Columbia.'
+        },
+        'ets': {
+          client: 'ExtractionTek Stainless',
+          subsection: 'ENGAGEMENTS',
+          type: 'OPERATIONAL',
+          descriptors: 'Market Entry · Regulatory Affairs · Government Relations',
+          editorial: 'Built the Canadian market entry for a Colorado-based industrial equipment manufacturer. Regulatory affairs, government relations, and full Canadian sales division established.'
+        },
+        'veritas': {
+          client: 'Veritas Pharma',
+          subsection: 'ENGAGEMENTS',
+          type: 'OPERATIONAL',
+          descriptors: 'Strategy · Go-to-Market Development · Project Management',
+          editorial: 'Consulting engagement supporting Cannevert Therapeutics Ltd., the UBC-based cannabis research subsidiary of publicly traded Veritas Pharma Inc. Cannevert operates as an academic incubator staffed by emeritus professors of pharmacology and anaesthesiology from the University of British Columbia. Work focused on extraction strategy, operational setup, and project management in support of Cannevert\'s clinical research program.'
+        },
+        'embark': {
+          client: 'Embark Health',
+          subsection: 'ENGAGEMENTS',
+          type: 'OPERATIONAL',
+          descriptors: 'Regulatory Compliance · Operational Planning · Strategy Development',
+          editorial: 'Municipal compliance, rezoning, building and fire code, and facility design for an extraction producer serving Canadian and global medical and recreational markets.'
+        }
+      };
+
+      let isOpen = false;
+      let activeTl = null;
+
+      function openCase(id) {
+        const data = CASES[id];
+        if (!data || isOpen) return;
+
+        subsectionEl.textContent  = data.subsection;
+        clientEl.textContent      = data.client;
+        editorialEl.textContent   = data.editorial;
+        descriptorsEl.textContent = data.descriptors;
+        typeTagEl.innerHTML       = `<strong>[TYPE:]</strong> ${data.type}`;
+
+        overlay.setAttribute('aria-hidden', 'false');
+        overlay.classList.add('is-open');
+        isOpen = true;
+        lenis.stop();
+
+        if (activeTl) activeTl.kill();
+        gsap.set([topBarEl, contentEl, footerEl], { opacity: 0 });
+
+        const duration = isMobile ? 0.4 : 0.6;
+        activeTl = gsap.timeline()
+          .fromTo(overlay,
+            { clipPath: 'inset(0 0 100% 0)' },
+            { clipPath: 'inset(0 0 0% 0)', duration, ease: 'expo.out' }
+          )
+          .to([topBarEl, contentEl, footerEl], {
+            opacity: 1,
+            duration: 0.35,
+            stagger: 0.1,
+            ease: 'power2.out'
+          });
+      }
+
+      function closeCase() {
+        if (!isOpen) return;
+        isOpen = false;
+
+        if (activeTl) activeTl.kill();
+        const duration = isMobile ? 0.35 : 0.5;
+
+        activeTl = gsap.timeline()
+          .to([footerEl, contentEl, topBarEl], {
+            opacity: 0,
+            duration: 0.2,
+            stagger: 0.05,
+            ease: 'power2.in'
+          })
+          .to(overlay, {
+            clipPath: 'inset(0 0 100% 0)',
+            duration,
+            ease: 'expo.in',
+            onComplete: () => {
+              overlay.classList.remove('is-open');
+              overlay.setAttribute('aria-hidden', 'true');
+              lenis.start();
+            }
+          }, '-=0.05');
+      }
+
+      document.querySelectorAll('.work-entry[data-case-id]').forEach(entry => {
+        entry.addEventListener('click', () => openCase(entry.dataset.caseId));
+        entry.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCase(entry.dataset.caseId); }
+        });
+      });
+
+      closeBtn.addEventListener('click', closeCase);
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) closeCase(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen) closeCase(); });
+    }
+
     initReveal();
     initNavDark();
     initMobileNav();
+    initCaseOverlay();
 
     /* ─── CONTACT FORM ────────────────────────────────────────────────────── */
     const submitBtn = document.getElementById('contact-submit');

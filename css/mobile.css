@@ -456,6 +456,23 @@
     transition-duration: 0.75s;
   }
 
+  /* ----------------------------------------------------------
+     CASE STUDY OVERLAY — Mobile
+     Full screen, tighter typography.
+     ---------------------------------------------------------- */
+  .case-overlay__client {
+    font-size: clamp(2.5rem, 12vw, 5rem);
+  }
+
+  .case-overlay__editorial {
+    font-size: 16px;
+    max-width: 100%;
+  }
+
+  .case-overlay__close {
+    font-size: 11px;
+  }
+
 } /* end @media (max-width: 767px) */
 
 
