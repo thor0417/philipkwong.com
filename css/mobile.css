@@ -389,6 +389,68 @@
     flex-shrink: 1;
   }
 
+  /* -- WORK REGISTRY INDEX — list fallback --
+     Collapses table to client + scope stack.
+     Mirrors the .work-entry mobile layout exactly. */
+  .work-index {
+    display: block;
+    border-top: var(--border-hairline);
+  }
+
+  .work-index__divider {
+    display: block;
+    padding-block: var(--space-3, 0.75rem) var(--space-2);
+    border-bottom: var(--border-hairline);
+  }
+
+  .work-index__divider-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(10, 10, 10, 0.4);
+  }
+
+  .work-index__row {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start;
+    gap: var(--space-1);
+    padding-block: var(--space-5, 1.25rem);
+    padding-inline: 0;
+    margin-inline: 0;
+    border-bottom: var(--border-hairline);
+    cursor: pointer;
+  }
+
+  .work-index__no {
+    display: none;
+  }
+
+  .work-index__client {
+    font-size: clamp(1.75rem, 8.5vw, 3rem);
+    white-space: normal;
+    text-overflow: unset;
+    overflow: visible;
+    width: 100%;
+    color: var(--text-main);
+  }
+
+  .work-index__scope {
+    text-align: left;
+    white-space: normal;
+    word-break: break-word;
+    font-size: 11px;
+    line-height: 1.6;
+    width: 100%;
+    color: rgba(10, 10, 10, 0.4);
+  }
+
+  .work-index__role {
+    display: none;
+  }
+
 
   /* ----------------------------------------------------------
      05 — CONTACT

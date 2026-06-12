@@ -718,6 +718,106 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* ------------------------------------------------------------
+   10-B. WORK REGISTRY INDEX
+   Desktop table layout gated at min-width: 768px.
+   Mobile fallback in mobile.css.
+   ------------------------------------------------------------ */
+@media (min-width: 768px) {
+  .work-index {
+    width: 100%;
+    border-top: 0.5px solid var(--border-light);
+  }
+
+  .work-index__row,
+  .work-index__divider {
+    display: grid;
+    grid-template-columns: 6% 54% 28% 12%;
+    align-items: center;
+    border-bottom: 0.5px solid var(--border-light);
+  }
+
+  .work-index__divider {
+    padding-block: 2.5rem 0.9rem;
+  }
+
+  .work-index__divider-label {
+    grid-column: 2 / -1;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(10, 10, 10, 0.4);
+  }
+
+  .work-index__row {
+    padding-block: 1.1rem;
+    padding-inline: 1rem;
+    margin-inline: -1rem;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+  }
+
+  .work-index__row:hover {
+    background-color: #0A0A0A;
+  }
+
+  .work-index__no {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: rgba(10, 10, 10, 0.35);
+    transition: color 0.25s ease;
+  }
+
+  .work-index__client {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.4rem, 1.8vw, 1.75rem);
+    line-height: 1;
+    color: #0A0A0A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: color 0.25s ease;
+  }
+
+  .work-index__scope {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(10, 10, 10, 0.4);
+    transition: color 0.25s ease;
+  }
+
+  .work-index__role {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #0A0A0A;
+    text-align: right;
+    transition: color 0.25s ease;
+  }
+
+  .work-index__row:hover .work-index__no,
+  .work-index__row:hover .work-index__scope {
+    color: rgba(249, 249, 249, 0.5);
+  }
+
+  .work-index__row:hover .work-index__client,
+  .work-index__row:hover .work-index__role {
+    color: #F9F9F9;
+  }
+}
+
+/* ------------------------------------------------------------
    11. ABOUT
    ------------------------------------------------------------ */
 #about {

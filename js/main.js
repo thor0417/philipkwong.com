@@ -65,14 +65,15 @@
         );
       });
 
-      gsap.utils.toArray('.work-entry').forEach((el) => {
-        gsap.fromTo(el,
-          { x: -6, opacity: 0 },
-          { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out',
-            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+      const workIndex = document.querySelector('.work-index');
+      if (workIndex) {
+        gsap.fromTo(workIndex,
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
+            scrollTrigger: { trigger: workIndex, start: 'top 85%', toggleActions: 'play none none none' }
           }
         );
-      });
+      }
 
       const cta = document.querySelector('.contact-cta');
       if (cta) {
@@ -356,7 +357,7 @@
           }, '-=0.05');
       }
 
-      document.querySelectorAll('.work-entry[data-case-id]').forEach(entry => {
+      document.querySelectorAll('.work-index__row[data-case-id]').forEach(entry => {
         entry.addEventListener('click', () => openCase(entry.dataset.caseId));
         entry.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCase(entry.dataset.caseId); }
